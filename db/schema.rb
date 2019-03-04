@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2019_03_04_081845) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +30,17 @@ ActiveRecord::Schema.define(version: 2019_03_04_081845) do
     t.bigint "user_id"
     t.bigint "document_id"
     t.string "title"
+
     t.string "doc_type"
+
     t.string "photo"
     t.string "state"
     t.date "due_date"
     t.integer "remaining_balance"
     t.integer "current_due_amount"
+
     t.date "reminder_date"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_user_documents_on_document_id"
@@ -49,6 +55,11 @@ ActiveRecord::Schema.define(version: 2019_03_04_081845) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
