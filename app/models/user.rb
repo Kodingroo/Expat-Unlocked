@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :user_documents
+  # mount_uploader :photo, PhotoUploader
+
 end

@@ -1,0 +1,30 @@
+// COLORS
+$primary: rgb(142,45,226);
+$secondary: #6d83ff;
+
+$white: #eeeeee;
+$black: #282929;
+
+$btn-color: #9BA2FF;
+
+// FONTS
+$default-font-size: 18px;
+$heading-font-size: 48px;
+$title-font: '', cursive;
+$body-font: 'Nunito', sans-serif;
+$box-shadow: 0 2px 10px rgb(201, 201, 201);
+// AVATAR
+
+body {
+  font-family: $body-font;
+  font-size: $default-font-size;
+  background: $white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
+}
