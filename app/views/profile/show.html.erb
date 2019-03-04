@@ -1,0 +1,12 @@
+<div class = "container">
+  <div class = "row">
+    <div class="col-sm-4 col-sm-offset-4">
+
+      <h1>Profile#show</h1>
+      <p><%= current_user.username %></p>
+      <p><%= current_user.address %></p>
+      <%= image_tag current_user.photo.url(:bright_face) %>
+
+    </div>
+  </div>
+</div>
