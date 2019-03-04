@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_043820) do
+ActiveRecord::Schema.define(version: 2019_03_04_081845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "documents", force: :cascade do |t|
+    t.string "doc_name"
+    t.string "company_name"
+    t.string "payment_type"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_documents", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "document_id"
+    t.string "title"
+    t.string "doc_type"
+    t.string "photo"
+    t.string "state"
+    t.date "due_date"
+    t.integer "remaining_balance"
+    t.integer "current_due_amount"
+    t.date "reminder_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_user_documents_on_document_id"
+    t.index ["user_id"], name: "index_user_documents_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +53,5 @@ ActiveRecord::Schema.define(version: 2019_03_04_043820) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "user_documents", "users"
 end
