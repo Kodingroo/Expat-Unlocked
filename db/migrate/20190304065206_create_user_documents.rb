@@ -4,13 +4,17 @@ class CreateUserDocuments < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.references :document
       t.string :title
-      t.string :type
+
+      t.string :doc_type
+
       t.string :photo
       t.string :state
       t.date :due_date
       t.integer :remaining_balance
       t.integer :current_due_amount
-      t.date :remainder_date
+
+      t.date :reminder_date
+
 
       t.timestamps
     end
