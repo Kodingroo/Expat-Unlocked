@@ -13,7 +13,9 @@ class VisionApi
 
     parsed_data = JSON.parse(response.body)
 
-    puts JSON.pretty_generate(parsed_data)
+    words = parsed_data["responses"][0]["textAnnotations"].map { |text| text["description"]}
+
+    puts JSON.pretty_generate(words)
   end
 
   # send the image to the api and detect the text
