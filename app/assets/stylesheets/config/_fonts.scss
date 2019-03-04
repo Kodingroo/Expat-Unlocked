@@ -3,8 +3,11 @@
 
 
 // Define fonts for body and headers
-$body-font: "Open Sans", 'sans-serif';
-$headers-font: "Hind", "sans-serif";
+$body-font: "Open Sans", sans-serif;
+$default-font-size: 18px;
+$heading-font-size: 48px;
+$headers-font: "Hind", sans-serif;
+
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
