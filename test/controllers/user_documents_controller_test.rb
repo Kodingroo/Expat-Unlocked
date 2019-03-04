@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class UserDocumentsControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
   test "should get index" do
     get user_documents_index_url
     assert_response :success
@@ -20,5 +23,4 @@ class UserDocumentsControllerTest < ActionDispatch::IntegrationTest
     get user_documents_update_url
     assert_response :success
   end
-
 end
