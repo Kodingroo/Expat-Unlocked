@@ -1,33 +1,39 @@
-require 'httparty'
 require 'json'
 
-DATA = {
-  'requests': [
-    {
-      'image': {
-        'source': {
-          'imageUri': 'https://resources.realestate.co.jp/wp-content/uploads/2018/09/Tenshutsu-Todoke-Notice-of-Moving-Out-Japan.png',
-        }
-      },
-      'features': [
-        {
-          'type': 'DOCUMENT_TEXT_DETECTION'
-        }
-      ]
-    }
-  ]
-}
-
 class VisionApi
-  def fetch_document_data
+  include HTTParty
+  
+  # Hi the api and get the data
+  def self.fetch_data(api_body)
     url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['VISION_API_KEY']}"
 
-    data_json = DATA.to_json
+    data_json = api_body.to_json
 
     response = HTTParty.post(url, body: data_json, headers: {'Content-Type' => 'application/json'})
 
     parsed_data = JSON.parse(response.body)
 
     puts JSON.pretty_generate(parsed_data)
+  end
+
+  # send the image to the api and detect the text
+  def self.detect_user_image(image)
+    data = {
+      'requests': [
+        {
+          'image': {
+            'source': {
+              'imageUri': image
+            }
+          },
+          'features': [
+            {
+              'type': 'DOCUMENT_TEXT_DETECTION'
+            }
+          ]
+        }
+      ]
+    }
+    fetch_data(data)
   end
 end

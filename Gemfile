@@ -17,10 +17,8 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
-gem 'better_errors'
-gem 'binding_of_caller'
 gem 'faker'
-
+gem 'httparty', '~> 0.13.7'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

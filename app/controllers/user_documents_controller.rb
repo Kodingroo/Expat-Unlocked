@@ -1,11 +1,13 @@
 class UserDocumentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :create]
+  skip_before_action :authenticate_user!, only: [:create, :index]
 
   def index
-    VisionApi.new
   end
 
   def create
-    VisionApi.new
+    # The user image will be passed through this method
+    # The method will hit the api and get the required data
+    # TODO: Get all japanese text. Translate text.
+    # VisionApi.detect_user_image(image)
   end
 end
