@@ -9,9 +9,49 @@ require 'faker'
 require 'date'
 
 puts 'Cleaning database...'
-UserDocument.destroy_all
-Document.destroy_all
-User.destroy_all
+UserDocument.destroy_all if Rails.env.development?
+Document.destroy_all if Rails.env.development?
+User.destroy_all if Rails.env.development?
+
+#USERS
+puts 'Creating Users...'
+user_attributes = [
+  {
+    first_name: 'Isaac',
+    last_name: 'Hayward',
+    address: 'Ojima, Tokyo',
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: 'password'
+  },
+    {
+    first_name:'Jack',
+    last_name: 'Wuersch',
+    address: 'Meguro, Tokyo',
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: 'password'
+  },
+    {
+    first_name: 'Sherly',
+    last_name: 'Hartono',
+    address: 'Shibuya, Tokyo',
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: 'password'
+  },
+    {
+    first_name: 'Ivan',
+    last_name: 'Garcia',
+    address: 'Shinjuku, tokyo',
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: 'password'
+  },
+]
+
+User.create!(user_attributes)
+puts 'Finished Users!'
 
 #DOCUMENTS
 puts 'Creating Documents...'
@@ -43,6 +83,8 @@ puts 'Finished Documents!'
 puts 'Creating User Documents...'
 user_document_attributes = [
   {
+    user_id: User.all.sample.id,
+    document_id: Document.all.sample.id,
     title: 'Water',
     doc_type: 'Bill',
     photo: Faker::Internet.url,
@@ -53,6 +95,8 @@ user_document_attributes = [
     reminder_date: Date.today.to_s(:short)
   },
   {
+    user_id: User.all.sample.id,
+    document_id: Document.all.sample.id,
     title: 'Gas',
     doc_type: 'Tokyo Gas',
     photo: Faker::Internet.url,
@@ -63,6 +107,8 @@ user_document_attributes = [
     reminder_date: Date.today.to_s(:short)
   },
   {
+    user_id: User.all.sample.id,
+    document_id: Document.all.sample.id,
     title: 'Electricity',
     doc_type: 'Tokyo Electricity',
     photo: Faker::Internet.url,
