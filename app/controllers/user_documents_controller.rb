@@ -10,6 +10,11 @@ class UserDocumentsController < ApplicationController
     # The method will hit the api and get the required data
     # TODO: Get all japanese text. Translate text.
     # VisionApi.detect_user_image(image)
+
+
+    # FOR REMINDER EMAILS
+    # @user = current_user.build(user_params)
+    # UserDocumentMailer.reminder(@user).deliver_now
   end
 
   def show
@@ -17,4 +22,5 @@ class UserDocumentsController < ApplicationController
 
   def update
   end
+
 end
