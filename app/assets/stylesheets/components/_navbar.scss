@@ -22,15 +22,13 @@ section
 
 
 
-/***********************************************************************
-*  OPAQUE NAVBAR SECTION
-***********************************************************************/
 .opaque-navbar {
-    background-color: rgba(0,0,0,0.5);
-  /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
+    background-color: rgba(0,0,0,0.3);
     height: 60px;
     border-bottom: 0px;
     transition: background-color .5s ease 0s;
+    position: absolute;
+    width: 100%;
 }
 
 .opaque-navbar.opaque {
