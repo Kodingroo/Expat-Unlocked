@@ -35,3 +35,10 @@
       </div>
     </div>
 </section>
+
+<%= simple_form_for(@user_document) do |f| %>
+  <!-- [...] -->
+  <%= f.input :photo %>
+  <%= f.input :photo_cache, as: :hidden %>
+  <%= f.submit %>
+<% end %>
