@@ -57,19 +57,19 @@ puts 'Finished Users!'
 puts 'Creating Documents...'
 document_attributes = [
   {
-    doc_name: 'Water',
+    doc_name: '水道',
     company_name: 'Tokyo Water',
     payment_type: 'Convenience Store',
     description: Faker::TvShows::GameOfThrones.quote
   },
   {
-    doc_name: 'Gas',
+    doc_name: 'ガス',
     company_name: 'Tokyo Gas',
     payment_type: 'Convenience Store',
     description: Faker::TvShows::GameOfThrones.quote
   },
   {
-    doc_name: 'Electricity',
+    doc_name: '電気',
     company_name: 'Tokyo Electricity',
     payment_type: 'Convenience Store',
     description: Faker::TvShows::GameOfThrones.quote

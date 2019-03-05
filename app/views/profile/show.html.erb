@@ -1,0 +1,13 @@
+<div class = "container">
+  <div class = "row">
+    <div class="col-sm-4 col-sm-offset-4">
+
+      <h1>Profile#show</h1>
+      <%= cl_image_tag current_user.photo, height: 300, width: 300, crop: :fill %>
+      <p><%= current_user.username %></p>
+      <p><%= current_user.address %></p>
+      <p>Your nearest city hall is: </p>
+
+    </div>
+  </div>
+</div>
