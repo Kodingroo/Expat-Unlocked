@@ -1,6 +1,6 @@
 // COLORS
 $primary: #6927ff;
-$secondary: rgb(248, 140, 51);
+$secondary: #f88c33;
 
 //other colors?
 $blue: #837dff;
@@ -47,4 +47,8 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#is-marginless {
+  margin: 0;
 }
