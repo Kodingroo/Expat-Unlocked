@@ -12,3 +12,22 @@
 .button:hover {
   opacity: 0.8;
 }
+
+.is-small {
+  height: 40px;
+}
+
+.is-big {
+  display: block;
+  border-radius: 0;
+  height: 70px;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.scroll-button {
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
