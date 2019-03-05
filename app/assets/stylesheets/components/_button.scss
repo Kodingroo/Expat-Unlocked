@@ -9,6 +9,12 @@
   transition: opacity 0.2s ease-in-out;
 }
 
+.is-inverted {
+  background: #fff;
+  border: 2px solid rgb(48, 48, 48);
+  color: $primary;
+}
+
 .button:hover {
   opacity: 0.8;
 }

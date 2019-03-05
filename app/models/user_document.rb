@@ -5,6 +5,5 @@ class UserDocument < ApplicationRecord
 
   # validates :title, presence: true
   # validates :doc_type, presence: true
-  validates :photo, presence: true
   mount_uploader :photo, PhotoUploader
 end

@@ -1,5 +1,5 @@
 // COLORS
-$primary: rgb(142,45,226);
+$primary: rgb(142, 45, 226);
 $secondary: rgb(248, 140, 51);
 
 $btn-color: #6d83ff;
@@ -10,10 +10,9 @@ $black: black;
 // FONTS
 $default-font-size: 18px;
 $heading-font-size: 48px;
-$title-font: "Hind", sans-serif;
-$body-font: "Open Sans", sans-serif;
-$box-shadow: 0 2px 10px rgb(201, 201, 201);
-// AVATAR
+$title-font: 'Hind', sans-serif;
+$body-font: 'Open Sans', sans-serif;
+$box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 
 body {
   font-family: $body-font;
@@ -33,4 +32,8 @@ a:focus {
   background: white;
 }
 
-
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
