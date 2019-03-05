@@ -1,8 +1,13 @@
 // COLORS
-$primary: rgb(142, 45, 226);
-$secondary: rgb(248, 140, 51);
 
-$btn-color: #6d83ff;
+$primary: #6927ff;
+$secondary: #f88c33;
+
+
+//other colors?
+$blue: #837dff;
+$pink: #bf81ff;
+$yellow: #ffd581;
 
 $white: white;
 $black: black;
@@ -32,11 +37,25 @@ a:focus {
   background: white;
 }
 
+
+.white {
+  background-color: white;
+  & p {
+    color: $primary;
+  }
+}
+
+
 .center-content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+
+#is-marginless {
+  margin: 0;
+
 
 .primary-wrapper {
   background: $primary;
@@ -47,4 +66,5 @@ a:focus {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 5px;
+
 }

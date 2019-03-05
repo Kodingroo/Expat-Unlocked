@@ -1,44 +1,30 @@
 <% content_for(:navbar_class, "navbar-home")%>
 <div class="wrapper">
   <div class="banner">
-    <div class="banner__header center-content">
-      <h1 class="banner__heading"><%= image_tag 'logo.png', class: "logo" %>xpat unlocked</h1>
+    <div class="banner__header">
+      <h1 class="banner__heading">
+        <%= image_tag 'logo.png', class: "logo" %>xpat unlocked
+      </h1>
       <p class="banner__slogan">Need help with Japanese bills?</p>
       <a class="scroll-button center" href="#">
         <i aria-hidden="true" data-x-icon="" class="x-icon-angle-down"></i>
       </a>
-
     </div>
   </div>
-
-<section class="main-body">
-    <div class="container-body">
-      <div class="heading">
-        <h1>What we do.</h1>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-md-4">
-          <a href="#" class="thumbnail">
-            <img src="..." alt="...">
-          </a>
-        </div>
-        <div class="col-xs-12 col-md-4">
-          <a href="#" class="thumbnail">
-            <img src="..." alt="...">
-          </a>
-        </div>
-        <div class="col-xs-12 col-md-4">
-          <a href="#" class="thumbnail">
-            <img src="..." alt="...">
-          </a>
-        </div>
-      </div>
-    </div>
+</div>
+<section class="site-feature">
+  <div class="main-card center-content">
+    <i class="material-icons">
+      linked_camera
+    </i>
+    <p>blank test</p>
+  </div>
 </section>
-
-<%= simple_form_for(@user_document) do |f| %>
-  <!-- [...] -->
-  <%= f.input :photo %>
-  <%= f.input :photo_cache, as: :hidden %>
-  <%= f.submit %>
-<% end %>
+<section class="site-feature colored">
+  <div class="main-card center-content">
+    <i class="material-icons">
+      alarm
+    </i>
+    <p>blank test</p>
+  </div>
+</section>
