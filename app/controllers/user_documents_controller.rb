@@ -3,7 +3,7 @@ class UserDocumentsController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    VisionApi.detect_user_image("https://resources.realestate.co.jp/wp-content/uploads/2018/09/Tenshutsu-Todoke-Notice-of-Moving-Out-Japan.png")
+    VisionApi.detect_user_image("https://www7.tepco.co.jp/wp-content/uploads/sites/2/ep02-01-000-img02.gif")
   end
 
   def create
