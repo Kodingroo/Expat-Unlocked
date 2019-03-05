@@ -25,7 +25,7 @@ class VisionApi
     words.shift
     { words: filter_words(words), boundingPolys: boxes }
     # FOR TESTING PURPOSES ONLY
-    # puts JSON.pretty_generate(filter_words(words))
+    return filter_words(words)
     # puts JSON.pretty_generate(words)
   end
 
