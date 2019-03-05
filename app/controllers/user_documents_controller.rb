@@ -4,11 +4,10 @@ class UserDocumentsController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    @user_document = policy_scope(UserDocument)
+    @user_documents = policy_scope(UserDocument)
   end
 
   def create
-<<<<<<< HEAD
     @user_document = UserDocument.new(user_document_params)
 
     authorize @user_document
@@ -24,7 +23,6 @@ class UserDocumentsController < ApplicationController
     else
       render "pages/home"
     end
-=======
     # The user image will be passed through this method
     # The method will hit the api and get the required data
     # TODO: Get all japanese text. Translate text.
@@ -34,7 +32,6 @@ class UserDocumentsController < ApplicationController
     # FOR REMINDER EMAILS
     # @user = current_user.build(user_params)
     # UserDocumentMailer.reminder(@user).deliver_now
->>>>>>> master
   end
 
   def show
@@ -44,7 +41,6 @@ class UserDocumentsController < ApplicationController
   def update
   end
 
-<<<<<<< HEAD
   private
 
   def find_document(image)
@@ -72,6 +68,4 @@ class UserDocumentsController < ApplicationController
     params.require(:user_document).permit(:title, :photo, :doc_type, :due_date, :remaining_balance, :current_due_amount, :reminder_date)
   end
 end
-=======
-end
->>>>>>> master
+

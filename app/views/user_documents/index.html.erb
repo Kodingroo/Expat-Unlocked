@@ -1,2 +1,36 @@
-<h1>UserDocuments#index</h1>
-<p>Find me in app/views/user_documents/index.html.erb</p>
+<h1><%= current_user.first_name %> Documents</h1>
+<p>Browse through all your uploaded documents</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <%= cl_image_tag current_user.photo, class: "avatar" %>
+    </div>
+    <% @user_documents.each do |doc| %>
+    <div class="col-md-7">
+      <div class="document">
+        <div class="document__header">
+          <h4 class="document__title"><%= doc.title %></h4>
+          <p class="document__status"><%= doc.state %></p>
+        </div>
+        <div class="document__image">
+          <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %> 
+        </div>
+        <div class="document__body">
+          <div class="document__data">
+            <%= doc.reminder_date %>
+          </div>
+          <div class="document__balance">
+            <%= doc.remaining_balance %>
+          </div>
+          <div class="document__due-amount">
+            <%= doc.current_due_amount %>
+          </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
