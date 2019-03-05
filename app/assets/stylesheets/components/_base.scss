@@ -1,19 +1,18 @@
 // COLORS
-$primary: rgb(142,45,226);
-$secondary: #6d83ff;
+$primary: rgb(142, 45, 226);
+$secondary: rgb(248, 140, 51);
 
-$white: #eeeeee;
-$black: #282929;
+$btn-color: #6d83ff;
 
-$btn-color: #9BA2FF;
+$white: white;
+$black: black;
 
 // FONTS
 $default-font-size: 18px;
 $heading-font-size: 48px;
-$title-font: '', cursive;
-$body-font: 'Nunito', sans-serif;
-$box-shadow: 0 2px 10px rgb(201, 201, 201);
-// AVATAR
+$title-font: 'Hind', sans-serif;
+$body-font: 'Open Sans', sans-serif;
+$box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 
 body {
   font-family: $body-font;
@@ -27,4 +26,25 @@ a:hover {
 
 a:focus {
   text-decoration: none;
+}
+
+.main-body {
+  background: white;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary-wrapper {
+  background: $primary;
+  padding: 10px 0;
+}
+
+.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 5px;
 }

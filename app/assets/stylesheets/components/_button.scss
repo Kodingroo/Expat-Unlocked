@@ -9,6 +9,31 @@
   transition: opacity 0.2s ease-in-out;
 }
 
+.is-inverted {
+  background: #fff;
+  border: 2px solid rgb(48, 48, 48);
+  color: $primary;
+}
+
 .button:hover {
   opacity: 0.8;
+}
+
+.is-small {
+  height: 40px;
+}
+
+.is-big {
+  display: block;
+  border-radius: 0;
+  height: 70px;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.scroll-button {
+  position: absolute;
+  top: 0;
+  left: 50%;
 }
