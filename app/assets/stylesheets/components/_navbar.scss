@@ -1,12 +1,81 @@
-.navbar {
-  background: transparent;
-  border: none;
+
+section
+{
+  background:yellow;
+}
+.banner
+{
+  background:red;
+  min-height:200px;
+}
+.banner .row
+{
+  text-align:center;
+  margin-top:50px;
+}
+.banner h1
+{
+  color:white;
+}
+.logo
+{
+  height: 80px;
+}
+.navbar-default{
+  background-color: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.5);
 }
 
-.nav {
-  color: white;
+/***********************************************************************
+*  OPAQUE NAVBAR SECTION
+***********************************************************************/
+.opaque-navbar {
+  background-color: rgba(0,0,0,0.5);
+  /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
+  height: 60px;
+  border-bottom: 0px;
+  transition: background-color .5s ease 0s;
 }
 
-.active {
-  background: rgba(0,0,0, 0.1);
+.opaque-navbar.opaque {
+  background-color: rgba(0,0,0,0.5);
+  height: 60px;
+  transition: background-color .5s ease 0s;
+}
+
+ul.dropdown-menu {
+  background-color: rgba(0,0,0,0.5);
+}
+
+
+@media (max-width: 760px) {
+  body
+  {
+    background:red;
+  }
+  .opaque-navbar {
+    background-color: rgba(0,0,0,0.5);
+    height: 60px;
+    transition: background-color .5s ease 0s;
+  }
+
+  .navbar {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+  }
+
+  .nav {
+    color: white;
+  }
+
+  .active {
+    background-color: rgba(0,0,0,0.5);
+
+  }
+  li.mobile-invisible {
+    display: none;
+  }
+  .nav.mobile-invisible {
+    display: none;
+  }
 }

@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_045113) do
     t.string "title"
     t.string "doc_type"
     t.string "photo"
-    t.string "state"
+    t.boolean "state", default: false
     t.date "due_date"
     t.integer "remaining_balance"
     t.integer "current_due_amount"
