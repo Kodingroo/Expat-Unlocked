@@ -48,7 +48,7 @@ ul.dropdown-menu {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 760px) {
   body
   {
     background:red;
@@ -72,7 +72,10 @@ ul.dropdown-menu {
     background-color: rgba(0,0,0,0.5);
 
   }
-  .mobile-invisible {
-    visibility: hidden;
+  li.mobile-invisible {
+    display: none;
+  }
+  .nav.mobile-invisible {
+    display: none;
   }
 }
