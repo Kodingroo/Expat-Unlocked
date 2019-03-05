@@ -81,13 +81,14 @@ puts 'Finished Documents!'
 
 #USER DOCUMENTS
 puts 'Creating User Documents...'
+photo_url = "http://static.giantbomb.com/uploads/original/9/99864/2419866-nes_console_set.png"
 user_document_attributes = [
   {
     user_id: User.all.sample.id,
     document_id: Document.all.sample.id,
     title: 'Water',
     doc_type: 'Bill',
-    photo: Faker::Internet.url,
+    remote_photo_url: photo_url,
     state: :unpaid,
     due_date: Date.today.to_s(:long),
     remaining_balance: rand(120..240),
@@ -99,7 +100,7 @@ user_document_attributes = [
     document_id: Document.all.sample.id,
     title: 'Gas',
     doc_type: 'Tokyo Gas',
-    photo: Faker::Internet.url,
+    remote_photo_url: photo_url,
     state: :unpaid,
     due_date: Date.today.to_s(:long),
     remaining_balance: rand(120..240),
@@ -111,7 +112,7 @@ user_document_attributes = [
     document_id: Document.all.sample.id,
     title: 'Electricity',
     doc_type: 'Tokyo Electricity',
-    photo: Faker::Internet.url,
+    remote_photo_url: photo_url,
     state: :unpaid,
     due_date: Date.today.to_s(:long),
     remaining_balance: rand(120..240),
@@ -122,4 +123,3 @@ user_document_attributes = [
 
 UserDocument.create!(user_document_attributes)
 puts 'Finished User Documents!'
-
