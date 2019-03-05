@@ -37,3 +37,14 @@ a:focus {
   justify-content: center;
   align-items: center;
 }
+
+.primary-wrapper {
+  background: $primary;
+  padding: 10px 0;
+}
+
+.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 5px;
+}
