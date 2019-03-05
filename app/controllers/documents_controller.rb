@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    @documents = Document.find(params[:id])
+    @document = Document.find(params[:id])
   end
 
   # def new
@@ -27,6 +27,6 @@ class DocumentsController < ApplicationController
   end
 
   def document_params
-    params.require(:document).permit(:doc_name, :company_name, :payment_type, :description)
+    params.require(:document).permit(:jp_name, :company_name, :payment_type, :description)
   end
 end
