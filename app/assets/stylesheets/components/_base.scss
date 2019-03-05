@@ -36,4 +36,15 @@ a:focus {
   background: white;
 }
 
+.white {
+  background-color: white;
+  & p {
+    color: $primary;
+  }
+}
 
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
