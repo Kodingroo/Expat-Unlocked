@@ -17,35 +17,38 @@ section
 {
   color:white;
 }
-.logo {
+.logo
+{
   height: 80px;
 }
-
-
+.navbar-default{
+  background-color: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.5);
+}
 
 /***********************************************************************
 *  OPAQUE NAVBAR SECTION
 ***********************************************************************/
 .opaque-navbar {
-    background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5);
   /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
-    height: 60px;
-    border-bottom: 0px;
-    transition: background-color .5s ease 0s;
+  height: 60px;
+  border-bottom: 0px;
+  transition: background-color .5s ease 0s;
 }
 
 .opaque-navbar.opaque {
-    background-color: rgba(0,0,0,0.5);
-    height: 60px;
-    transition: background-color .5s ease 0s;
+  background-color: rgba(0,0,0,0.5);
+  height: 60px;
+  transition: background-color .5s ease 0s;
 }
 
 ul.dropdown-menu {
-    background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5);
 }
 
 
-@media (max-width: 992px) {
+@media (max-width: 800px) {
   body
   {
     background:red;
@@ -54,17 +57,22 @@ ul.dropdown-menu {
     background-color: rgba(0,0,0,0.5);
     height: 60px;
     transition: background-color .5s ease 0s;
+  }
 
-.navbar {
-  background: transparent;
-  border: none;
-}
+  .navbar {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+  }
 
-.nav {
-  color: white;
-}
+  .nav {
+    color: white;
+  }
 
-.active {
-  background: rgba(0,0,0, 0.1);
+  .active {
+    background-color: rgba(0,0,0,0.5);
 
+  }
+  .mobile-invisible {
+    visibility: hidden;
+  }
 }
