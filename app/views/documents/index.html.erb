@@ -1,2 +1,12 @@
-<h1>Documents#index</h1>
-<p>Find me in app/views/documents/index.html.erb</p>
+<div class="container">
+    <h1>Documents#index</h1>
+    <p>Find me in app/views/documents/index.html.erb</p>
+    <% @documents.each do |document|%>
+      <h3><%= link_to document.jp_name, document_path(document), method: "get"%></h3>
+      <p><strong>Company name: </strong><%= document.company_name %></p>
+      <p><strong>Payment type: </strong><%= document.payment_type %></p>
+      <p><strong>Document description: </strong></p>
+      <p><%= document.description %></p>
+    <br>
+    <% end %>
+</div>

@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_024248) do
   enable_extension "plpgsql"
 
   create_table "documents", force: :cascade do |t|
-    t.string "doc_name"
+    t.string "jp_name"
     t.string "company_name"
     t.string "payment_type"
     t.string "description"
