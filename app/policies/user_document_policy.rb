@@ -10,6 +10,6 @@ class UserDocumentPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user == record.user
   end
 end
