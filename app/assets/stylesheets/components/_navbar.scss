@@ -1,3 +1,4 @@
+
 section
 {
   background:yellow;
@@ -53,7 +54,17 @@ ul.dropdown-menu {
     background-color: rgba(0,0,0,0.5);
     height: 60px;
     transition: background-color .5s ease 0s;
+
+.navbar {
+  background: transparent;
+  border: none;
 }
 
+.nav {
+  color: white;
 }
 
+.active {
+  background: rgba(0,0,0, 0.1);
+
+}
