@@ -1,19 +1,37 @@
-<div class="navbar navbar-inverse navbar-fixed-top opaque-navbar">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navMain">
-  <span class="glyphicon glyphicon-chevron-right" style="color:white;"></span>
+<div class="navbar <%=yield(:navbar_class) %>">
+  <!-- Logo -->
+  <a href="/" class="navbar-brand">
+    <%= image_tag 'logo.png', class: "logo" %>
+  </a>
 
-  </button>
-      <a href="/" class="navbar-link">
-      <%= image_tag 'logo.png', class: 'logo' %>
-    </a>
+  <!-- Right Navigation -->
+  <div class="navbar-right hidden-xs hidden-sm">
+
+    <a href="" class="navbar-item navbar-link">Upload</a>
+
+    <!-- Profile picture with dropdown list -->
+    <div class="navbar-item">
+      <div class="dropdown">
+        <%= image_tag 'avatar.png', class: "avatar dropdown-toggle",
+         id:"navbar-menu",
+          data: { "toggle": "dropdown" }   %>
+        <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="collapse navbar-collapse" id="navMain">
-      <ul class="nav navbar-nav pull-right">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Scan</a></li>
+  </div>
+
+  <!-- Dropdown appearing on mobile only -->
+  <div class="navbar-item hidden-md hidden-lg">
+    <div class="dropdown">
+      <i class="fas fa-bars dropdown-toggle" data-toggle="dropdown" role="button"></i>
+      <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
+        <li><a href="#">Host</a></li>
+        <li><a href="#">Trips</a></li>
+        <li><a href="#">Messagese</a></li>
       </ul>
     </div>
   </div>
