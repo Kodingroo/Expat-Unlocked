@@ -17,12 +17,12 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
-gem 'better_errors'
-gem 'binding_of_caller'
 gem 'faker'
 gem "pundit"
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
+gem 'httparty', '~> 0.13.7'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
