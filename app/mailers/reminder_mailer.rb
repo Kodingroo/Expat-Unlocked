@@ -1,16 +1,17 @@
-class UserMailer < ApplicationMailer
+class ReminderMailer < ApplicationMailer
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.user_mailer.reminder.subject
   #
-    def welcome(user)
+
+  def reminder(user)
     @user = user  # Instance variable => available in view
-    @greeting = "Hi, hows it going mate?"
+    @reminder = "Hi, this is a reminder"
 
     Email.create!(name: user.first_name)
-    mail to: "kodingroo@gmail.com", subject: "Test mail"
-    # This will render a view in `app/views/user_mailer`!
+    mail to: "kodingroo@gmail.com", subject: "Reminder mail"
   end
+
 end

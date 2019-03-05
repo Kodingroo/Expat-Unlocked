@@ -1,4 +1,5 @@
 class UserDocument < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
   belongs_to :user
   belongs_to :document, optional: true 
 
