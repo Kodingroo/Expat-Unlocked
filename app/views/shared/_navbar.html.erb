@@ -18,9 +18,9 @@
         <li class="mobile-invisible"><% if user_signed_in? %>
       <%= link_to "Profile", profile_path(current_user)%>
       <% else %>
-      <%= link_to "Sign in", new_user_session%>
+      <%= link_to "Sign in", new_user_session_path %>
       <% end %>
-        <li class="mobile-invisible"><%= link_to "Logout", destroy_user_session_path %>
+        <li class="mobile-invisible"><%= link_to "Logout", destroy_user_session_path, method: :delete %>
         <li class="dropdown mobile-invisible">
           <%= image_tag 'arrow.png', class: "avatar dropdown-toggle",
           id: "navbar-menu",
