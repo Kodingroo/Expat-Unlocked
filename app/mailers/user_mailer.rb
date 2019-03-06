@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
     @greeting = "Hi, hows it going mate?"
 
     Email.create!(name: user.first_name)
-    mail to: "kodingroo@gmail.com", subject: "Test mail"
+    mail to: "sherly@hartono.info", subject: "Test mail"
     # This will render a view in `app/views/user_mailer`!
   end
 end
