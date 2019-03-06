@@ -9,61 +9,60 @@
     </div>
   </div>
 </div>
-<section class="site-intro">
+
+<div class="container site-introduction">
   <div class="site-introduction">
     <h1>We find bills in Japan to be frustratingly hard to read, understand and deal with</h1>
     <p>We have created this app for all the people out there who get frustrated at the bills they receive.
       Enabling you to gain independence from that Japanese speaking partner and friend.
     </p>
   </div>
-</section>
-<section class="site-feature scan">
-  <div class="main-card center-content" style="width: 20rem">
+  <div class="cards">
+    <div class="card" style="width: 20rem">
       <%= link_to scan_info_path do %>
-    <div class="card-icon">
-      <i class="material-icons">
-        linked_camera
-      </i>
-    </div>
-    <% end %>
-    <div class="card-footer">
-      <p>
-        <strong>Recognition.</strong> Upload a photo of a Japanese bill and find
-        out what it is in seconds.
-      </p>
-    </div>
-    </div>
-</section>
-
-
-<section class="site-feature colored track">
-  <div class="main-card center-content" style="width: 20rem">
-      <%= link_to profile_path(current_user) do %>
-  <div class="card-icon">
-    <i class="material-icons">
-      alarm
-    </i>
-  </div>
-  <% end %>
-  <div class="card-footer">
-    <p><strong>Pay on time.</strong> With our easy-to-use due payments tracker.</p>
-  </div>
-</div>
-</div>
-</section>
-
-<section class="site-feature city-location">
-  <div class="main-card center-content" style="width: 20rem">
-    <%= link_to profile_path(current_user) do %>
-      <div class="card-icon">
-        <i class="material-icons">
-          location_on
-        </i>
+      <div class="card-body scan">
+          <div class="card-icon">
+           <i class="material-icons">
+              linked_camera
+            </i>
+          </div>
       </div>
       <% end %>
       <div class="card-footer">
-        <p><strong>Locate.</strong> Find out where your nearest city hall is.</p>
+        <p>Get all the information your need. Upload a photo of your Japanese bill and we'll translate it for you.
+          We'll give you the most relevant information such as how much and when it's due.
+        </p>
+      </div>
+    </div>
+     <div class="card" style="width: 20rem">
+       <%= link_to user_documents_path do %>
+      <div class="card-body track">
+          <div class="card-icon">
+            <i class="material-icons">
+              alarm
+            </i>
+          </div>
+      </div>
+      <% end %>
+      <div class="card-footer">
+        <p>Keep up to date with when your next bill is due with our tracking and notification system.
+          Remembering to go to the convenience stores every month is a pain. Let us remember for you.
+        </p>
+      </div>
+    </div>
+     <div class="card" style="width: 20rem">
+      <div class="card-body city-location">
+          <div class="card-icon">
+            <i class="material-icons">
+              location_on
+            </i>
+          </div>
+      </div>
+      <div class="card-footer">
+        <p>Need to register your address? or go down to the city hall? Don't know where it is? WE DO HEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEHEH
+          HEHEHEHEHEHE
+        </p>
       </div>
     </div>
   </div>
-</section>
+</div>
