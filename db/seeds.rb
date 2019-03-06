@@ -7,11 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 require 'date'
+require 'open-uri'
+require 'nokogiri'
 
 puts 'Cleaning database...'
 UserDocument.destroy_all if Rails.env.development?
 Document.destroy_all if Rails.env.development?
 User.destroy_all if Rails.env.development?
+# Venue.destroy_all if Rails.env.development?
 
 #USERS
 puts 'Creating Users...'
@@ -120,3 +123,28 @@ user_document_attributes = [
 
 UserDocument.create!(user_document_attributes)
 puts 'Finished User Documents!'
+
+# VENUES
+# puts 'Creating Venues...'
+# url = "https://www.tokyo-icc.jp/guide_eng/gov/01.html"
+
+# html_file = open(url).read
+# html_doc = Nokogiri::HTML(html_file)
+
+# array = []
+# html_doc.search('.w90 td').each do |element|
+#   array << element.text.strip
+# end
+
+# ward = array.slice(3..71)
+# pattern = /\d{2}-\d{4}-\d{4}/
+
+# ward.delete_if {|string| string.match(pattern)}
+
+# venues_attributes = ward.each_slice(2).map do |name, address|
+#   { name: name, address: address }
+# end
+
+# Venue.create!(venues_attributes)
+# puts 'Finished Venues!'
+
