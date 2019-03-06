@@ -1,6 +1,7 @@
 require 'json'
 
 REGEX = /[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]/
+DATE_REGEX = /([1-2]|[0-2]{2})月(\s?)([1-4]|[0-9]{1,2})日/
 
 
 class VisionApi
