@@ -61,13 +61,7 @@
         </div>
 
         <div class="center-content due-date-background-pink">
-          <%= @user_documents.first.due_date %>
-        </div>
-        <div class="center-content due-date-background-blue">
-          <%= @user_documents.second.due_date %>
-        </div>
-        <div class="center-content due-date-background-pink">
-          <%= @user_documents.third.due_date %>
+          <%= @user_documents.first(3) unless @user_documents.count.zero? %>
         </div>
       </div>
 
