@@ -65,3 +65,10 @@ a:focus {
   top: 90px;
   z-index: 100;
 }
+
+
+.left, .right{float:left; width: 50%}
+#container {
+    width: 300px;
+    margin: 0px auto;
+}

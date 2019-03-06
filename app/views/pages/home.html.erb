@@ -5,35 +5,38 @@
       <h1 class="banner__heading">
         xpat unlocked
       </h1>
-      <p class="banner__slogan">Need help with Japanese bills?</p>
+      <p class="banner__slogan">Japanese bill recognition</p>
     </div>
   </div>
 </div>
-<%= link_to scan_info_path do %>
 <section class="site-feature">
-  <div class="main-card center-content">
+  <%= link_to scan_info_path do %>
+  <div class="main-card center-content" style="width: 20rem">
     <div class="card-icon">
       <i class="material-icons">
         linked_camera
       </i>
     </div>
-    <div class="card-body">
-      <p>Take a photo of a Japanese bill and get a translation</p>
+    <div class="description">
+      <p>
+        <strong>Recognition.</strong> Upload a photo of a Japanese bill and find
+        out what it is in seconds.
+      </p>
     </div>
   </div>
+  <% end %>
 </section>
-<% end %>
 
 
 <section class="site-feature colored">
-  <div class="main-card center-content">
+  <div class="main-card center-content" style="width: 20rem">
     <div class="card-icon">
       <i class="material-icons">
         alarm
       </i>
     </div>
-    <div class="card-body">
-      <p>Keep track of when your bills are due</p>
+    <div class="description">
+      <p><strong>Pay on time.</strong> Keep track of due payments easily.</p>
     </div>
   </div>
 </section>
