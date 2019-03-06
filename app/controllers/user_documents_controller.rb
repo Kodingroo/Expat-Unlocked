@@ -38,7 +38,7 @@ class UserDocumentsController < ApplicationController
   def find_document(image)
     words = VisionApi.detect_user_image(image)
 
-    names = Document.all.map(&:doc_name)
+    names = Document.all.map(&:jp_name)
     doc_to_add = ""
 
     words.each do |word|
@@ -49,7 +49,7 @@ class UserDocumentsController < ApplicationController
       end
     end
     p doc_to_add
-    Document.find_by(doc_name: doc_to_add)
+    Document.find_by(jp_name: doc_to_add)
   end
 
   def set_user_document
