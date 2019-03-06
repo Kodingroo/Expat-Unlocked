@@ -53,18 +53,15 @@ ul.dropdown-menu {
 @media (max-width: 760px) {
 
   .navbar {
-
     border: none;
   }
 
-  .active {
 
-  }
   li.mobile-invisible {
-    display: none;
+    position: right;
   }
   .nav.mobile-invisible {
-    display: none;
+    position: right;
   }
 }
 
@@ -91,3 +88,5 @@ ul.dropdown-menu {
     opacity: 0;
   }
 }
+
+

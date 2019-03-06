@@ -9,34 +9,53 @@
     </div>
   </div>
 </div>
-<section class="site-feature">
-  <%= link_to scan_info_path do %>
+<section class="site-feature scan">
   <div class="main-card center-content" style="width: 20rem">
+      <%= link_to scan_info_path do %>
     <div class="card-icon">
       <i class="material-icons">
         linked_camera
       </i>
     </div>
-    <div class="description">
+    <% end %>
+    <div class="card-footer">
       <p>
         <strong>Recognition.</strong> Upload a photo of a Japanese bill and find
         out what it is in seconds.
       </p>
     </div>
-  </div>
-  <% end %>
+    </div>
 </section>
 
 
-<section class="site-feature colored">
+<section class="site-feature colored track">
   <div class="main-card center-content" style="width: 20rem">
-    <div class="card-icon">
-      <i class="material-icons">
-        alarm
-      </i>
-    </div>
-    <div class="description">
-      <p><strong>Pay on time.</strong> Keep track of due payments easily.</p>
+      <%= link_to profile_path(current_user) do %>
+  <div class="card-icon">
+    <i class="material-icons">
+      alarm
+    </i>
+  </div>
+  <% end %>
+  <div class="card-footer">
+    <p><strong>Pay on time.</strong> Keep track of due payments easily.</p>
+  </div>
+</div>
+</div>
+</section>
+
+<section class="site-feature 3">
+  <div class="main-card center-content" style="width: 20rem">
+    <%= link_to profile_path(current_user) do %>
+      <div class="card-icon">
+        <i class="material-icons">
+          location_on
+        </i>
+      </div>
+      <% end %>
+      <div class="card-footer">
+        <p><strong>Locate.</strong> Find out where your nearest city hall is.</p>
+      </div>
     </div>
   </div>
 </section>
