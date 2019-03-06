@@ -1,2 +1,56 @@
-<h1>UserDocuments#show</h1>
-<p>Find me in app/views/user_documents/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-offset-3">
+      <h2>This is a <%= @user_document.title %> bill, </h1>
+      <%= cl_image_tag @user_document.photo, height: 400, width: 500, crop: :fill %>
+      <div class = "container">
+        <div class = "row">
+          <div class="col-xs-4 col-md-4">
+            <div>
+              <p class = "title">Due date</p>
+            </div>
+            <div>
+              <p>Remaining Balance</p>
+            </div>
+            <div>
+              <p>Due Amount</p>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class="col-xs-4 col-md-4">
+            <div>
+              <p> ........ <%= @user_document.due_date %></p>
+            </div>
+            <div>
+              <p>.......<%= @user_document.remaining_balance %></p>
+            </div>
+            <div>
+              <p>.......<%= @user_document.current_due_amount %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% if @user_document.reminder_date.nil? %>
+        <div class="col-md-4">
+          <%= simple_form_for @user_document do |f| %>
+            <%= f.input :reminder_date %>
+            <%= f.submit "Remind me!", class: "button" %>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Remind me to pay on <%= @user_document.reminder_date %></p>
+        <div class="col-md-4">
+          <%= simple_form_for @user_document do |f| %>
+            <%= f.submit "Change reminder date", class: "button" %>
+            <%= f.input :reminder_date %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= button_to "sign out", destroy_user_session_path, method: "delete" %>
+
