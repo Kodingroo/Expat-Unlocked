@@ -1,0 +1,71 @@
+.card-profile {
+  overflow: hidden;
+  height: 200px;
+  background: $white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-profile img {
+  height: 100%;
+  width: 200px;
+  object-fit: cover;
+}
+
+.card-profile h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-profile p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-border{
+  border: 1px solid;
+}
+
+.card-profile .card-profile-infos {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 760px) {
+  .card-profile-display-none {
+    // display: none;
+  }
+  // .card-profile{
+  //   width: 120px;
+  // }
+  .card-profile img{
+    width: 120px;
+  }
+
+}
+
+.due-date-background-pink {
+  background: $pink;
+}
+
+.due-date-background-blue {
+  background: $blue;
+}
+
+.edit-button {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.100-percent-height {
+  height: 100%;
+}

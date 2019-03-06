@@ -29,6 +29,16 @@ body {
   background: $white;
 }
 
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -61,6 +71,7 @@ a:focus {
 .primary-wrapper {
   background: $primary;
   padding: 10px 0;
+  flex: 1;
 }
 
 .sticky {
@@ -71,8 +82,17 @@ a:focus {
 }
 
 
-.left, .right{float:left; width: 50%}
-#container {
-    width: 300px;
-    margin: 0px auto;
+.pink {
+  background-color: $pink;
 }
+
+.blue {
+  background-color: $blue;
+}
+
+.fifty-px-padding{
+  padding: 50px;
+}
+
+
+
