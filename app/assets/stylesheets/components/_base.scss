@@ -77,5 +77,16 @@ a:focus {
 }
 
 .pink {
-  background-color: #bf81ff;
+  background-color: $pink;
 }
+
+.blue {
+  background-color: $blue;
+}
+
+.fifty-px-padding{
+  padding: 50px;
+}
+
+
+
