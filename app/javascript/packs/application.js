@@ -12,13 +12,13 @@ const runOnScroll = () => {
 
 window.addEventListener('scroll', e => {
   if (window.scrollY > 100) {
-    nav.style.background = '#000';
+    nav.style.background = '$primary';
     nav.style.color = '#fff';
     nav.classList.add('sticky-nav');
     nav.classList.remove('fadeout');
   } else {
     nav.classList.remove('sticky-nav');
-    nav.style.background = 'rgba(0,0,0, .4)';
+    nav.style.background = '$primary';
     nav.style.color = '#000';
   }
 });
