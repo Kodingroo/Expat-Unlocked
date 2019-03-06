@@ -21,3 +21,13 @@
     font-size: 26px;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .sticky {
+    position: relative;
+  }
+
+  .margin-top-mobile {
+    margin-top: 150px;
+  }
+}

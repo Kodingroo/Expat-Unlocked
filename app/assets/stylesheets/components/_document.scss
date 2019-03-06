@@ -23,10 +23,40 @@
   &__title {
     font-size: $heading-font-size;
   }
+
   &__body {
     width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 10px;
+  }
+  &__data h5 {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  &__data p {
+    color: $primary;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.tag {
+  padding: 5px;
+  color: white;
+  border-radius: 4px;
+}
+
+.paid {
+  background: $primary;
+  & i {
+    color: greenyellow;
+  }
+}
+
+.unpaid {
+  background: orange;
+  & i {
+    color: red;
   }
 }
