@@ -25,16 +25,17 @@
               <%= f.input :photo %> <%= f.input :photo_cache, as: :hidden %> <%= f.submit "Check Document", class: "button is-inverted" %>
             <% end %>
         </div>
-
       </div>
       <div class="col-md-7">
         <% current_user.user_documents.each do |doc| %>
         <div class="col-md-12">
-          <div class="document">
+          <%= link_to user_document_path(doc), class: "document" do %>
+          <!-- <div class="document"> -->
             <div class="document__header">
               <h4 class="document__title"><%= doc.title %></h4>
               <p class="document__status"><%= doc.state %></p>
-<i class="fas fa-exclamation"></i>            </div>
+              <i class="fas fa-exclamation"></i>
+            </div>
             <div class="document__image">
               <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %>
             </div>
@@ -53,6 +54,7 @@
               </div>
               </div>
             </div>
+            <% end %>
           </div>
         <% end %>
       </div>
