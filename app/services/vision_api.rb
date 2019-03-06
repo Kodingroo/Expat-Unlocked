@@ -22,6 +22,7 @@ class VisionApi
     words = parsed_data["responses"][0]["textAnnotations"].map { |text| text["description"] }
 
     boxes = parsed_data["responses"][0]["textAnnotations"].map { |text| text["boundingPoly"]["vertices"] }
+    p words
     words.shift
     { words: filter_words(words), boundingPolys: boxes }
     # FOR TESTING PURPOSES ONLY
