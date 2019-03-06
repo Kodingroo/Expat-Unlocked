@@ -59,16 +59,15 @@
         <div class="center-content due-date-background-blue">
           <strong>Your next three Due Dates:</strong>
         </div>
-
-        <div class="center-content due-date-background-pink">
-          <%= @user_documents.first.due_date %>
-        </div>
-        <div class="center-content due-date-background-blue">
-          <%= @user_documents.second.due_date %>
-        </div>
-        <div class="center-content due-date-background-pink">
-          <%= @user_documents.third.due_date %>
-        </div>
+        <% if current_user.user_documents.present? %>
+          <div class="center-content due-date-background-pink">
+          <%current_user.user_documents.each do |user_document| %>
+          </div>
+            <div class="center-content due-date-background-blue">
+            <%= user_document.due_date%>
+            </div>
+          <% end %>
+        <% end %>
       </div>
 
     </div>
