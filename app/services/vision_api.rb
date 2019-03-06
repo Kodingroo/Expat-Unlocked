@@ -5,7 +5,7 @@ TODAY = Date.today
 # REGEX TO EXTRACT DATA
 REGEX = /[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[0-9]/
 DATE_REGEX = /([1-9]|[0-2]{2})月(\s?)([1-4]|[0-9]{1,2})日/
-YEN_REGEX = /\d+([,\/]\d{3})+円/
+YEN_REGEX = /(\d+,*\d+)円/
 
 
 class VisionApi
@@ -26,19 +26,26 @@ class VisionApi
         Date.new(Date.today.year, month, day)
       end
     end
-    due_this_month = nil;
-    due_next_month = nil;
+    due_this_month = nil
+    due_next_month = nil
+    already_paid = []
  
     dates.each do |date|
       if TODAY.mon == date.mon
         due_this_month = date
       elsif (TODAY.mon - date.mon).to_i < 30 && !TODAY.mon
         due_next_month = date
+      else
+        already_paid << date
       end
     end
-    p due_next_month
-    p due_this_month
-    due_next_month || due_this_month
+    due_next_month || due_this_month || already_paid[0]
+  end
+
+  def self.create_amount_due(yen_array)
+    yen_array.flatten.map do |yen|
+      yen.split(",").join("").to_i
+    end.max
   end
 
   def self.extract_date(detected_text)
@@ -57,17 +64,24 @@ class VisionApi
     response = HTTParty.post(url, body: data_json, headers: { 'Content-Type' => 'application/json' })
 
     parsed_data = JSON.parse(response.body)
-    puts JSON.pretty_generate(parsed_data)
-    puts ""
-    puts ""
-    puts ""
+
+
     words = parsed_data["responses"][0]["textAnnotations"].map { |text| text["description"] }
+
     puts JSON.pretty_generate(words)
+
     boxes = parsed_data["responses"][0]["textAnnotations"].map { |text| text["boundingPoly"]["vertices"] }
 
     all_text = words.shift
 
-    return { text: all_text, words: filter_words(words), boundingPolys: boxes, due_date: extract_date(all_text) }
+    p extract_yen(all_text).to_i
+    return {
+      text: all_text,
+      words: filter_words(words),
+      boundingPolys: boxes,
+      due_date: extract_date(all_text),
+      due_amount: extract_yen(all_text).to_i
+    }
   end
 
   # send the image to the api and detect the text
