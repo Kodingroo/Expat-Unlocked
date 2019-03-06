@@ -11,6 +11,14 @@ class VisionApi
     words_array.map { |word| word if REGEX =~ word }
   end
 
+  def extract_date(detected_text)
+    dates = detected_text.scan(DATE_REGEX)
+    dates = dates.map do |date|
+      date.delete_at(1)
+      Date.new(Date.today.year, date[0].to_i, date[1].to_i) 
+    end
+  end
+
   def self.fetch_data(api_body)
     url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['VISION_API_KEY']}"
 
@@ -23,8 +31,10 @@ class VisionApi
     words = parsed_data["responses"][0]["textAnnotations"].map { |text| text["description"] }
 
     boxes = parsed_data["responses"][0]["textAnnotations"].map { |text| text["boundingPoly"]["vertices"] }
-    p words
-    words.shift
+
+    p allText = words.shift
+    p DATE_REGEX.match(allText)
+
     { words: filter_words(words), boundingPolys: boxes }
     # FOR TESTING PURPOSES ONLY
     return filter_words(words)
