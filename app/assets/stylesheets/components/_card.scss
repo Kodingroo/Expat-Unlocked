@@ -1,7 +1,83 @@
 .main-card {
-  background: #ebebeb;
+  background: transparent;
   padding: 20px;
   border-radius: 4px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
   flex-direction: column;
 }
+
+.cards {
+  display: flex;
+}
+
+.card-icon {
+  margin-bottom: -20px;
+}
+.card {
+    flex: 1 1 auto;
+    margin: 10px;
+    border-radius: 1px;
+    box-shadow: $box-shadow;
+    transition: all 0.3s ease;
+}
+
+.card-body {
+    height: 180px;
+    background-size: cover;
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.card-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    background: black;
+    opacity: 0;
+}
+
+.card-user {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.card-description {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.card-category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: lighter;
+    opacity: 0.9;
+}
+
+.card-footer p {
+    color: rgba(0,0,0,0.8);
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+.card-footer .controls {
+    display: flex;
+    align-items: center;
+}
+
