@@ -19,6 +19,10 @@ $title-font: 'Hind', sans-serif;
 $body-font: 'Open Sans', sans-serif;
 $box-shadow: 0 12px 6px rgba(0, 0, 0, 0.3);
 
+h1 {
+  font-family: $headers-font;
+  font-weight: bold;
+}
 body {
   font-family: $body-font;
   font-size: $default-font-size;
