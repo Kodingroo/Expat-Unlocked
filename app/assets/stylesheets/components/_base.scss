@@ -3,7 +3,6 @@
 $primary: #6927ff;
 $secondary: #f88c33;
 
-
 //other colors?
 $blue: #837dff;
 $pink: #bf81ff;
@@ -17,7 +16,7 @@ $default-font-size: 18px;
 $heading-font-size: 48px;
 $title-font: 'Hind', sans-serif;
 $body-font: 'Open Sans', sans-serif;
-$box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+$box-shadow: 0 12px 6px rgba(0, 0, 0, 0.3);
 
 body {
   font-family: $body-font;
@@ -37,7 +36,6 @@ a:focus {
   background: white;
 }
 
-
 .white {
   background-color: white;
   & p {
@@ -45,13 +43,11 @@ a:focus {
   }
 }
 
-
 .center-content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 #is-marginless {
   margin: 0;
@@ -65,6 +61,6 @@ a:focus {
 .sticky {
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: 5px;
-
+  top: 90px;
+  z-index: 100;
 }

@@ -2,9 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   box-shadow: $box-shadow;
-  margin: 5px;
+  margin: 0 5px 20px 0;
   background: #ffffff;
   border-radius: 3px;
+  transition: all 0.2s ease-in;
+  &:hover {
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    transform: translateY(4px);
+  }
   & img {
     width: 100%;
   }
