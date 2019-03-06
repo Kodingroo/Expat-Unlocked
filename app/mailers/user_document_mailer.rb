@@ -3,7 +3,6 @@ class UserDocumentMailer < ApplicationMailer
   # with the following lookup:
   #
   #   en.user_document_mailer.creation_confirmation.subject
-  #
   def creation_confirmation(user_document)
     @user_document = user_document
 
