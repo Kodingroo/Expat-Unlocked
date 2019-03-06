@@ -1,15 +1,37 @@
 #navigation {
   margin: 0;
   background-color: $purple;
-  padding-right: 20px;
+  padding: 5px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   & a {
     color: #fff;
+    transition: opacity 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 23px 5px;
+    transition: background 0.2s ease;
+    &:hover {
+      background: rgba($primary, 0.7);
+    }
+  }
+  &__right {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    & div:not(:last-of-type) {
+      margin-right: 15px;
+    }
+  }
+
+  &__hamburger {
+    display: none;
   }
 }
 
-.navbar {
-  border: none;
+.navigation__drop {
+  display: none;
 }
+
 .banner .row {
   text-align: center;
   margin-top: 50px;
@@ -20,20 +42,6 @@
 .logo {
   height: 80px;
   margin-bottom: -20px;
-}
-
-
-.navbar-default {
-  background-color: $primary;
-}
-
-
-
-ul.dropdown-menu {
-  background-color: $blue;
-  & a {
-    color: #fff;
-  }
 }
 
 .sticky-nav {
@@ -51,17 +59,30 @@ ul.dropdown-menu {
 }
 
 @media (max-width: 760px) {
-
-  .navbar {
-    border: none;
+  #navigation {
+    &__right {
+      display: none;
+      position: relative;
+    }
+    &__hamburger {
+      display: block;
+      color: white;
+    }
   }
-
-
-  li.mobile-invisible {
-    position: right;
-  }
-  .nav.mobile-invisible {
-    position: right;
+  .dropdown {
+    display: block;
+    position: absolute;
+    background: rgba($primary, 0.9);
+    width: 100%;
+    padding: 10px;
+    top: 70px;
+    left: 0;
+    z-index: 9999;
+    animation: slidein 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    & a {
+      display: block;
+      padding: 20px;
+    }
   }
 }
 
@@ -89,4 +110,14 @@ ul.dropdown-menu {
   }
 }
 
+@keyframes slidein {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
 
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

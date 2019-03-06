@@ -2,10 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   box-shadow: $box-shadow;
-  margin: 0 5px 20px 0;
-  background: #ffffff;
+  margin: 0 5px 40px 0;
+  background: #fff;
   border-radius: 3px;
   transition: all 0.2s ease-in;
+  overflow: hidden;
   &:hover {
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
     transform: translateY(4px);
@@ -16,6 +17,8 @@
   &__header {
     flex: 0 0 100%;
     text-align: center;
+    background: rgba(66, 66, 66, 0.671);
+    color: #fff;
     &:hover {
       opacity: 0.9;
     }

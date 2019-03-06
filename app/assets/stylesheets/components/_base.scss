@@ -17,7 +17,8 @@ $default-font-size: 18px;
 $heading-font-size: 48px;
 $title-font: 'Hind', sans-serif;
 $body-font: 'Open Sans', sans-serif;
-$box-shadow: 0 12px 6px rgba(0, 0, 0, 0.3);
+$box-shadow: 0 8px 6px rgba(0, 0, 0, 0.3);
+$small-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
 
 h1 {
   font-family: $headers-font;
@@ -68,9 +69,13 @@ a:focus {
   margin: 0;
 }
 
+.margin-top-bottom {
+  margin-top: 20px;
+}
+
 .primary-wrapper {
   background: #eeeeee;
-  padding: 10px 0;
+  padding: 40px 0;
   flex: 1;
 }
 
@@ -81,7 +86,6 @@ a:focus {
   z-index: 100;
 }
 
-
 .pink {
   background-color: $pink;
 }
@@ -90,9 +94,6 @@ a:focus {
   background-color: $blue;
 }
 
-.fifty-px-padding{
+.fifty-px-padding {
   padding: 50px;
 }
-
-
-
