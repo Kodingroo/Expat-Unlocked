@@ -6,7 +6,7 @@
       rgba(105,39,255, 0.7) 50%,
       rgba(248, 140, 51, 0.5)
     ),
-    asset-url("banner.jpeg");
+    asset-url("shrine.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -16,7 +16,6 @@
     align-items: center;
     text-align: center;
     color: white;
-    border-bottom: 0.2px solid $primary;
     & h1 {
       font-family: $headers-font;
       font-size: 48px;
