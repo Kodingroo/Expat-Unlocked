@@ -24,6 +24,16 @@ body {
   background: $white;
 }
 
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -56,6 +66,7 @@ a:focus {
 .primary-wrapper {
   background: $primary;
   padding: 10px 0;
+  flex: 1;
 }
 
 .sticky {

@@ -16,10 +16,15 @@ class UserDocumentsController < ApplicationController
     @user_document.user = current_user
 
     if @user_document.save
-      @document = find_document(@user_document.photo.metadata["secure_url"])
+      api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
+      p api_data[:due_date].class
+      p api_data[:due_date] - 10
+      @document = find_document(api_data[:words])
       @user_document.document = @document
+      @user_document.due_date = api_data[:due_date]
+      @user_document.reminder_date = (api_data[:due_date] - 10)
       @user_document.save!
-      
+
       redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
     else
       render "pages/home"
@@ -35,9 +40,7 @@ class UserDocumentsController < ApplicationController
 
   private
 
-  def find_document(image)
-    words = VisionApi.detect_user_image(image)
-
+  def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
 

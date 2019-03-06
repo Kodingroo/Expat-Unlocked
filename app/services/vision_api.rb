@@ -1,7 +1,11 @@
 require 'json'
 
-REGEX = /[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]/
-DATE_REGEX = /([1-2]|[0-2]{2})月(\s?)([1-4]|[0-9]{1,2})日/
+TODAY = Date.today
+
+# REGEX TO EXTRACT DATA
+REGEX = /[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[0-9]/
+DATE_REGEX = /([1-9]|[0-2]{2})月(\s?)([1-4]|[0-9]{1,2})日/
+YEN_REGEX = /\d+([,\/]\d{3})+円/
 
 
 class VisionApi
@@ -11,12 +15,38 @@ class VisionApi
     words_array.map { |word| word if REGEX =~ word }
   end
 
-  def extract_date(detected_text)
-    dates = detected_text.scan(DATE_REGEX)
+  def self.create_due_date(dates)
     dates = dates.map do |date|
       date.delete_at(1)
-      Date.new(Date.today.year, date[0].to_i, date[1].to_i) 
+      month = date[0].to_i
+      day = date[1].to_i
+      if (month > TODAY.mon) && (month == 1)
+        Date.new(Date.today.year, month, day).next_year
+      else
+        Date.new(Date.today.year, month, day)
+      end
     end
+    due_this_month = nil;
+    due_next_month = nil;
+ 
+    dates.each do |date|
+      if TODAY.mon == date.mon
+        due_this_month = date
+      elsif (TODAY.mon - date.mon).to_i < 30 && !TODAY.mon
+        due_next_month = date
+      end
+    end
+    p due_next_month
+    p due_this_month
+    due_next_month || due_this_month
+  end
+
+  def self.extract_date(detected_text)
+    create_due_date(detected_text.scan(DATE_REGEX))
+  end
+
+  def self.extract_yen(detected_text)
+    create_amount_due(detected_text.scan(YEN_REGEX))
   end
 
   def self.fetch_data(api_body)
@@ -24,21 +54,20 @@ class VisionApi
 
     data_json = api_body.to_json
 
-    response = HTTParty.post(url, body: data_json, headers: {'Content-Type' => 'application/json'} )
+    response = HTTParty.post(url, body: data_json, headers: { 'Content-Type' => 'application/json' })
 
     parsed_data = JSON.parse(response.body)
-
+    puts JSON.pretty_generate(parsed_data)
+    puts ""
+    puts ""
+    puts ""
     words = parsed_data["responses"][0]["textAnnotations"].map { |text| text["description"] }
-
+    puts JSON.pretty_generate(words)
     boxes = parsed_data["responses"][0]["textAnnotations"].map { |text| text["boundingPoly"]["vertices"] }
 
-    p allText = words.shift
-    p DATE_REGEX.match(allText)
+    all_text = words.shift
 
-    { words: filter_words(words), boundingPolys: boxes }
-    # FOR TESTING PURPOSES ONLY
-    return filter_words(words)
-    # puts JSON.pretty_generate(words)
+    return { text: all_text, words: filter_words(words), boundingPolys: boxes, due_date: extract_date(all_text) }
   end
 
   # send the image to the api and detect the text
