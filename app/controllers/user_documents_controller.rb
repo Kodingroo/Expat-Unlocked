@@ -4,7 +4,7 @@ class UserDocumentsController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    @user_documents = policy_scope(UserDocument).order(created_at: :asc)
+    @user_documents = policy_scope(UserDocument).order(created_at: :desc)
     @user_document = UserDocument.new
   end
 
@@ -16,8 +16,9 @@ class UserDocumentsController < ApplicationController
     @user_document.user = current_user
 
     if @user_document.save
-      @document = find_document(@user_document.photo.metadata["secure_url"])
-      @user_document.document = @document
+      api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
+      @document = find_document(api_data[:words])
+      assign_data(@user_document, api_data)
       @user_document.save!
 
       redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
@@ -42,9 +43,16 @@ class UserDocumentsController < ApplicationController
 
   private
 
-  def find_document(image)
-    words = VisionApi.detect_user_image(image)
+  def assign_data(user_document, api_data)
+    p api_data[:due_amount]
+    user_document.document = @document
+    user_document.due_date = api_data[:due_date]
+    user_document.reminder_date = (api_data[:due_date] - 10)
+    user_document.current_due_amount = api_data[:due_amount]
+    user_document.remaining_balance = api_data[:due_amount]
+  end
 
+  def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
 

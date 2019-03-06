@@ -34,6 +34,7 @@
             <div class="document__header">
               <h4 class="document__title"><%= doc.title %></h4>
               <p class="document__status"><%= doc.state %></p>
+
               <i class="fas fa-exclamation"></i>            </div>
               <div class="document__image">
                 <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %>
@@ -56,4 +57,3 @@
       </div>
     </div>
   </div>
-  <%= console %>
