@@ -14,15 +14,16 @@
     <div class="row">
       <div class="col-sm-12 col-md-5 center-content sticky">
         <div class="user-card">
-          <% unless current_user.photo.url.nil? %>
-            <%= cl_image_tag current_user.photo, class: "avatar" %>
-          <% else %>
+          <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
+          <% unless current_user.photo.url.nil? %> 
+            <%= cl_image_tag current_user.photo, class: "avatar" %> 
+          <% else %> 
             <%= image_tag 'avatar.png', class: "avatar" %> <% end %>
           <div class="user-card__title">
             <%= current_user.first_name %> <%= current_user.last_name %>
           </div>
-          <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true %>
+          <%= simple_form_for(@user_document) do |f| %> 
+          <%= f.input :photo, required: true, label: 'Upload Bill'%> 
           <%= f.input :photo_cache, as: :hidden %> <%=
           f.submit "Check Document", id: "upload-button", class: "button
           is-inverted" %> <% end %>
