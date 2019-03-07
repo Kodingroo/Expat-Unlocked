@@ -3,9 +3,9 @@
   <div class="banner">
     <div class="banner__header">
       <h1 class="banner__heading">
-        xpat unlocked
+        <%= image_tag 'logo.png', class: "logo" %>xpat unlocked
       </h1>
-      <p class="banner__slogan">Japanese bill recognition</p>
+      <p class="banner__slogan">Japanese bill recognition and tracking</p>
     </div>
   </div>
 </div>
@@ -19,6 +19,7 @@
   </div>
   <div class="row">
   <div class="col-md-4 col-xs-10">
+  <h3>Recognition</h3>
     <div class="card">
       <%= link_to scan_info_path do %>
       <div class="card-body scan">
@@ -37,6 +38,7 @@
     </div>
     </div>
     <div class="col-md-4 col-xs-10">
+    <h3>Tracking</h3>
      <div class="card">
        <%= link_to user_documents_path do %>
       <div class="card-body track">
@@ -55,6 +57,7 @@
     </div>
     </div>
     <div class="col-md-4 col-xs-10">
+    <h3>Location</h3>
      <div class="card">
       <div class="card-body city-location">
           <div class="card-icon">
