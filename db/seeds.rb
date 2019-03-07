@@ -66,8 +66,14 @@ document_attributes = [
     description: Faker::TvShows::GameOfThrones.quote
   },
   {
-    jp_name: '健康保険',
+    jp_name: '国民健康保險',
     company_name: 'National Health Insurance',
+    payment_type: 'Convenience Store',
+    description: Faker::TvShows::GameOfThrones.quote
+  },
+  {
+    jp_name: 'ご不在連絡票',
+    company_name: 'Missed Package',
     payment_type: 'Convenience Store',
     description: Faker::TvShows::GameOfThrones.quote
   },
