@@ -82,3 +82,4 @@ class UserDocumentsController < ApplicationController
     params.require(:user_document).permit(:title, :photo, :doc_type, :due_date, :remaining_balance, :current_due_amount, :reminder_date, :state)
   end
 end
+

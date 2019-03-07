@@ -88,6 +88,19 @@
     </div>
   </div>
 
+
+  <div class="container">
+    <div class="row">
+      <div class="center-content" style="margin-bottom: 60px;">
+        <div>
+          <%= button_to "user documents", user_documents_path, method: "get" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   </div>
     </div>
   </div>
@@ -126,3 +139,19 @@
     <button class="button">Gas</button>
   </div>
 </div>
+
+
+<%= simple_form_for profile_path(@user), html: {method: :get} do |f| %>
+          <%= f.input :query, collection: ['due date', 'most expensive', 'least expensive'] %>
+          <%= f.button :submit, 'apply' %>
+        <% end %>
+
+<% @user_documents.each do |doc| %>
+    <% if @collection_type == 'due date' %>
+      <%= doc.due_date %>
+    <% elsif @collection_type == 'most expensive' %>
+      <%= doc.current_due_amount %>
+    <% elsif @collection_type == 'least expensive' %>
+      <%= doc.current_due_amount %>
+    <% end %>
+  <% end %>
