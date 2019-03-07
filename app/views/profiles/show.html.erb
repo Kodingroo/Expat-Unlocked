@@ -1,70 +1,104 @@
 <div class="primary-wrapper">
-  <div class = "container">
-    <div class = "row">
-      <div class="col-sm-8 col-sm-offset-2">
-        <div class="card-profile card-border">
-          <div class="card-profile-display-none">
-            <% if @user.photo.blank? %>
-              <%= image_tag "avatar.png", class:"show-image" %>
-            <% else %>
-              <%= cl_image_tag @user.photo, class:"show-image" %>
-            <% end %>
-          </div>
-         <div class="card-profile-infos">
-          <div style="height: 100%;">
-            <div class="edit-button">
-              <div>
-                <div>
-                  <h2>
-                    Username:
-                  </h2>
-                  <%= @user.username %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-5 center-content">
+        <div class="user-card">
+          <% unless current_user.photo.url.nil? %>
+          <%= cl_image_tag current_user.photo, class: "avatar" %>
+          <% else %>
+          <%= image_tag 'avatar.png', class: "avatar" %> <% end %>
+          <div class="user-card__title">
+            <%= current_user.first_name %> <%= current_user.last_name %>
+            <div class="card-profile-infos">
+              <div style="height: 100%;">
+                <div class="edit-button">
+                  <div>
+                    <div>
+                      <h2>
+                        Username:
+                      </h2>
+                      <%= @user.username %>
+                    </div>
+                    <div>
+                      <h2>
+                        Address:
+                      </h2>
+                      <%= @user.address %>
+                    </div>
+                  </div>
+                  <div>
+                    <% if current_user == @user %> <%= button_to "edit profile",
+                              edit_user_registration_path, method: "get" %> <% end %>
+                  </div>
                 </div>
-                <div>
-                  <h2>
-                    Address:
-                  </h2>
-                  <%= @user.address %>
-                </div>
-              </div>
-              <div>
-                <% if current_user == @user %>
-                <%= button_to "edit profile", edit_user_registration_path, method: "get" %>
-                <% end %>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="col-sm-12 col-md-7 margin-top-mobile">
 
-<div class="container fifty-px-padding">
-  <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <div class="card-border">
-        <div class="center-content due-date-background-blue">
+      </div>
+
+      <div class="user-card">
+        <div class="document__image">
+          <% @user_documents.each do |doc| %>
+          <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
+          <% end %>
+        </div>
+        <div class="center-content">
           <strong>Your next three Due Dates:</strong>
+          <div class="center-content">
+            <%= @user_documents.first(3) unless @user_documents.count.zero? %>
+          </div>
+          <div class="center-content" style="margin-bottom: 60px;">
+            <div>
+              <%= button_to "user documents", user_documents_path, method: "get" %>
+            </div>
+          </div>
         </div>
-        
-        <div class="center-content due-date-background-pink">
-          <%= @user_documents.first unless @user_documents.count.zero? %>
-        </div>
+    </div>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="center-content" style="margin-bottom: 60px;">
-      <div>
-        <%= button_to "user documents", user_documents_path, method: "get" %>
-      </div>
+  </div>
     </div>
   </div>
 </div>
-
-
+<div class="primary-wrapper" style="background: white;">
+  <div class="container">
+    <div class="row">
+      <% @user_documents.each do |doc| %>
+      <div class="col-md-6 col-xs-10">
+        <h3>Gas</h3>
+        <div class="card payment-card">
+          <div class="card-body">
+            <div class="average">
+            <h4>Monthly average: </h4>
+            </div>
+            <div class="most-expensive">
+              <h4>Most expensive:</h4>
+            </div>
+            <div class="least-expensive">
+              <h4>Least expensive:</h4>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="primary-wrapper">
+    <h1 class="center-content">
+      All documents
+    </h1>
+    <button class="button">Filter</button>
+    <button class="button">All</button>
+    <button class="button">Electricity</button>
+    <button class="button">Water</button>
+    <button class="button">Gas</button>
+  </div>
+</div>
