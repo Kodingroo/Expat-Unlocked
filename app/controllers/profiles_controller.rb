@@ -6,7 +6,6 @@ class ProfilesController < ApplicationController
     # authorize @user
     skip_authorization
     @user_documents = UserDocument.all
-<<<<<<< HEAD
     @user_document = UserDocument.new
     @documents = Document.all
   end
@@ -14,8 +13,6 @@ class ProfilesController < ApplicationController
   def update
     authorize @user
     @user.update(user_params)
-=======
->>>>>>> 8849bd9fb71218c7a39ce06995afb43d922fdcfe
 
     @collection_type = params["/profile.#{@user.id}"][:query] if params["/profile.#{@user.id}"]
     if @collection_type == 'due date'

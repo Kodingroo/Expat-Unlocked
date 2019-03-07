@@ -10,10 +10,8 @@
           <%= image_tag 'avatar.png', class: "avatar" %> <% end %>
           <div class="user-card__title">
             <%= current_user.first_name %> <%= current_user.last_name %>
-<<<<<<< HEAD
             <%= current_user.address %> <%= current_user.email %>
             <%= current_user.user_documents.count %>
-=======
             <div class="card-profile-infos">
               <div style="height: 100%;">
                 <div class="edit-button">
@@ -44,7 +42,6 @@
                 </div>
               </div>
             </div>
->>>>>>> 8849bd9fb71218c7a39ce06995afb43d922fdcfe
           </div>
           <%= simple_form_for(@user_document) do |f| %>
           <%= f.input :photo, required: true, label: 'Upload Bill'%>
@@ -54,29 +51,6 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-7 margin-top-mobile">
-<<<<<<< HEAD
-        <div class="user-card">
-          <div class="document__image">
-            <% @user_documents.each do |doc| %>
-            <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
-            <% end %>
-          </div>
-          <div class="center-content">
-            <strong>Your next three Due Dates:</strong>
-            <div class="center-content">
-              <%= @user_documents.first(3) unless @user_documents.count.zero? %>
-            </div>
-            <div class="center-content" style="margin-bottom: 60px;">
-              <div>
-                <%= button_to "user documents", user_documents_path, method: "get" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-=======
 
       </div>
 
@@ -138,7 +112,6 @@
   </div>
     </div>
   </div>
->>>>>>> 8849bd9fb71218c7a39ce06995afb43d922fdcfe
 </div>
 <div class="primary-wrapper" style="background: white;">
   <div class="container">
@@ -174,9 +147,6 @@
     <button class="button">Water</button>
     <button class="button">Gas</button>
   </div>
-<<<<<<< HEAD
-  </div>
-=======
 </div>
 
 
@@ -194,4 +164,3 @@
       <%= doc.current_due_amount %>
     <% end %>
   <% end %>
->>>>>>> 8849bd9fb71218c7a39ce06995afb43d922fdcfe
