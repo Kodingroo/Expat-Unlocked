@@ -65,8 +65,8 @@
         </div>
 
         <%= simple_form_for profile_path(@user), html: {method: :get} do |f| %>
-        <%= f.input :query, collection: ['due date', 'most expensive'] %>
-        <%= f.button :submit %>
+          <%= f.input :query, collection: ['due date', 'most expensive', 'least expensive'] %>
+          <%= f.button :submit, 'apply' %>
         <% end %>
 
       </div>
@@ -82,6 +82,7 @@
       <%= doc.due_date %>
     <% elsif @collection_type == 'most expensive' %>
       <%= doc.current_due_amount %>
+    <% elsif @collection_type == 'least expensive' %>
+      <%= doc.current_due_amount %>
     <% end %>
   <% end %>
-  <%= console %>
