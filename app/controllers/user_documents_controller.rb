@@ -14,15 +14,21 @@ class UserDocumentsController < ApplicationController
     authorize @user_document
 
     @user_document.user = current_user
-
+  
     if @user_document.save
-      UserDocumentMailer.creation_confirmation(@user_document).deliver_now
-      api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
-      @document = find_document(api_data[:words])
-      assign_data(@user_document, api_data)
-      @user_document.save
-
-      redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
+      if @user_document.photo.metadata.nil?
+        flash[:alert] = "Did you forget to upload your photo?"
+        redirect_back fallback_location:
+        @user_document.destroy
+      else
+        UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
+        @document = find_document(api_data[:words])
+        assign_data(@user_document, api_data)
+        @user_document.save
+  
+        redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
+      end
     else
       flash[:alert] = "You haz errors!"
       render :index
