@@ -5,32 +5,33 @@
         <div class="card-profile card-border">
           <div class="card-profile-display-none">
             <% if @user.photo.blank? %>
-              <%= image_tag "avatar.png", class:"show-image" %>
+            <%= image_tag "avatar.png", class:"show-image" %>
             <% else %>
-              <%= cl_image_tag @user.photo, class:"show-image" %>
+            <%= cl_image_tag @user.photo, class:"show-image" %>
             <% end %>
           </div>
-         <div class="card-profile-infos">
-          <div style="height: 100%;">
-            <div class="edit-button">
-              <div>
+          <div class="card-profile-infos">
+            <div style="height: 100%;">
+              <div class="edit-button">
                 <div>
-                  <h2>
-                    Username:
-                  </h2>
-                  <%= @user.username %>
+                  <div>
+                    <h2>
+                      Username:
+                    </h2>
+                    <%= @user.username %>
+                  </div>
+                  <div>
+                    <h2>
+                      Address:
+                    </h2>
+                    <%= @user.address %>
+                  </div>
                 </div>
                 <div>
-                  <h2>
-                    Address:
-                  </h2>
-                  <%= @user.address %>
+                  <% if current_user == @user %>
+                  <%= button_to "edit profile", edit_user_registration_path, method: "get" %>
+                  <% end %>
                 </div>
-              </div>
-              <div>
-                <% if current_user == @user %>
-                <%= button_to "edit profile", edit_user_registration_path, method: "get" %>
-                <% end %>
               </div>
             </div>
           </div>
@@ -38,33 +39,49 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="container fifty-px-padding">
-  <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <div class="card-border">
-        <div class="center-content due-date-background-blue">
-          <strong>Your next three Due Dates:</strong>
+  <div class="container fifty-px-padding">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="card-border">
+          <div class="center-content due-date-background-blue">
+            <strong>Your next three Due Dates:</strong>
+          </div>
+
+          <div class="center-content due-date-background-pink">
+            <%= @user_documents.first unless @user_documents.count.zero? %>
+          </div>
+
         </div>
-        
-        <div class="center-content due-date-background-pink">
-          <%= @user_documents.first unless @user_documents.count.zero? %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="center-content" style="margin-bottom: 60px;">
+        <div>
+          <%= button_to "user documents", user_documents_path, method: "get" %>
         </div>
+
+        <%= simple_form_for profile_path(@user), html: {method: :get} do |f| %>
+        <%= f.input :query, collection: ['due date', 'most expensive'] %>
+        <%= f.button :submit %>
+        <% end %>
 
       </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="row">
-    <div class="center-content" style="margin-bottom: 60px;">
-      <div>
-        <%= button_to "user documents", user_documents_path, method: "get" %>
-      </div>
-    </div>
-  </div>
-</div>
+  <!-- select_tag options in html -->
+  <!-- use a query -->
+  <!-- .where function -->
 
-
+  <% @user_documents.each do |doc| %>
+    <% if @collection_type == 'due date' %>
+      <%= doc.due_date %>
+    <% elsif @collection_type == 'most expensive' %>
+      <%= doc.current_due_amount %>
+    <% end %>
+  <% end %>
+  <%= console %>
