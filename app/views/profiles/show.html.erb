@@ -31,14 +31,15 @@
                   </div>
                   <div>
                     <% if current_user == @user %> <%= button_to "edit profile",
-                              edit_user_registration_path, method: "get" %> <% end %>
+                      edit_user_registration_path, method: "get" %> <% end %>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <h2>
-                    Email:
-                  </h2>
-                  <%= @user.email %>
+                  <div>
+                    <h2>
+                      Email:
+                    </h2>
+                    <%= @user.email %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,69 +50,68 @@
           <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
           <% end %>
         </div>
-      </div>
-      <div class="col-sm-12 col-md-7 margin-top-mobile">
+        <div class="col-sm-12 col-md-7 margin-top-mobile">
 
-      </div>
-
-      <div class="user-card">
-        <div class="document__image">
-          <% @user_documents.each do |doc| %>
-          <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
-          <% end %>
         </div>
-          <% sorted = current_user.user_documents.order('due_date ASC')%>
-          <% sorted.first(3).each do |user_document| %>
-              <% unless user_document.state %></p>
-                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date.strftime("%b %d %Y") %></p>
-                <p><%= (user_document.due_date - Date.today).to_i %> days remaining</p>
-                <%= simple_form_for(user_document) do |f| %>
-                  <%= f.label "Paid" %>
-                  <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
-                <% end %>
-              <% end %>
-          <% end %>
-        </div>
-    </div>
 
-        <div class="card-border">
-          <div class="center-content due-date-background-blue">
-            <strong>Recently paid bils:</strong>
-          </div>
-              <%if (current_user.user_documents.where(state: 1).count == 0)%>
-                 <%= "You haven't paid any bills recently" %>
-              <% end %>
-            <% sorted.first(3).each do |user_document| %>
-              <% if user_document.state %></p>
-                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
-                <%= simple_form_for(user_document) do |f| %>
-                  <%= f.label "Paid" %>
-                  <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
-                <% end %>
-              <% end %>
+        <div class="user-card">
+          <div class="document__image">
+            <% @user_documents.each do |doc| %>
+            <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
             <% end %>
           </div>
+          <% sorted = current_user.user_documents.order('due_date ASC')%>
+          <% sorted.first(3).each do |user_document| %>
+          <% unless user_document.state %></p>
+          <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date.strftime("%b %d %Y") %></p>
+          <p><%= (user_document.due_date - Date.today).to_i %> days remaining</p>
+          <%= simple_form_for(user_document) do |f| %>
+          <%= f.label "Paid" %>
+          <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+          <% end %>
+          <% end %>
+          <% end %>
         </div>
+      </div>
+
+      <div class="card-border">
+        <div class="center-content due-date-background-blue">
+          <strong>Recently paid bils:</strong>
+        </div>
+        <%if (current_user.user_documents.where(state: 1).count == 0)%>
+        <%= "You haven't paid any bills recently" %>
+        <% end %>
+        <% sorted.first(3).each do |user_document| %>
+        <% if user_document.state %></p>
+        <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
+        <%= simple_form_for(user_document) do |f| %>
+        <%= f.label "Paid" %>
+        <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+        <% end %>
+        <% end %>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
+</div>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="center-content" style="margin-bottom: 60px;">
-        <div>
-          <%= button_to "user documents", user_documents_path, method: "get" %>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="center-content" style="margin-bottom: 60px;">
+      <div>
+        <%= button_to "user documents", user_documents_path, method: "get" %>
       </div>
     </div>
   </div>
+</div>
 
 
 
-  </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
 </div>
 <div class="primary-wrapper" style="background: white;">
   <div class="container">
@@ -123,7 +123,7 @@
         <div class="card payment-card">
           <div class="card-body">
             <div class="average">
-            <h4>Monthly average: </h4>
+              <h4>Monthly average: </h4>
             </div>
             <div class="most-expensive">
               <h4>Most expensive:</h4>
@@ -149,18 +149,28 @@
   </div>
 </div>
 
+<%= form_tag profile_path, method: :get do |f| %>
+  <%= select_tag "sort_by", options_for_select(["due date", "most expensive", "least expensive"], params[:sort_by]) %>
+  <%= select_tag "category", options_for_select(@categories, params[:category]) %>
+  <%= submit_tag 'apply' %>
+<% end %>
 
-<%= simple_form_for profile_path(@user), html: {method: :get} do |f| %>
-          <%= f.input :query, collection: ['due date', 'most expensive', 'least expensive'] %>
-          <%= f.button :submit, 'apply' %>
-        <% end %>
 
-<% @user_documents.each do |doc| %>
+<ul>
+  <% @user_documents.each do |doc| %>
+  <li>
     <% if @collection_type == 'due date' %>
       <%= doc.due_date %>
     <% elsif @collection_type == 'most expensive' %>
       <%= doc.current_due_amount %>
     <% elsif @collection_type == 'least expensive' %>
       <%= doc.current_due_amount %>
+    <% else %>
+      <%= doc.document.company_name %>
+      <%= doc.due_date%>
+      <%= doc.current_due_amount %>
     <% end %>
+  </li>
   <% end %>
+</ul>
+
