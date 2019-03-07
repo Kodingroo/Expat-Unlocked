@@ -1,6 +1,6 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_user_document, only: [:show, :update]
+  before_action :set_user_document, only: [:show, :update, :destroy]
   # before_action :authenticate_user!
 
   def index
@@ -44,10 +44,15 @@ class UserDocumentsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @user_document
+    @user_document.destroy
+    redirect_to user_documents_path
+  end
+
   private
 
   def assign_data(user_document, api_data)
-    p api_data[:due_amount]
     user_document.document = @document
     user_document.due_date = api_data[:due_date]
     user_document.reminder_date = (api_data[:due_date] - 10)
@@ -58,18 +63,16 @@ class UserDocumentsController < ApplicationController
   def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
-    p "Words"
-    p words
-    p names
+   
     words.each do |word|
       names.any? do |name|
         unless word.nil?
-          p doc_to_add = name if word.include?(name)
+          doc_to_add = name if word.include?(name)
         end
       end
     end
-    p "Doc to add"
-    p doc_to_add
+
+    doc_to_add
     Document.find_by(jp_name: doc_to_add)
   end
 
