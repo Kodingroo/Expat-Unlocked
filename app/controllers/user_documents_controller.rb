@@ -16,6 +16,7 @@ class UserDocumentsController < ApplicationController
     @user_document.user = current_user
 
     if @user_document.save
+      UserDocumentMailer.creation_confirmation(@user_document).deliver_now
       api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
       @document = find_document(api_data[:words])
       assign_data(@user_document, api_data)
@@ -35,6 +36,7 @@ class UserDocumentsController < ApplicationController
     @user_document.update(user_document_params)
     authorize @user_document
     if @user_document.save
+      UserDocumentMailer.creation_confirmation(@user_document).deliver_now
       redirect_to user_document_path(@user_document)
     else
       render :show
