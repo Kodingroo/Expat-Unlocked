@@ -6,7 +6,6 @@
   background: #fff;
   box-shadow: $box-shadow;
   transition: all 0.2s ease-in;
-  overflow: hidden;
   &:hover {
     box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
     transform: translateY(4px);

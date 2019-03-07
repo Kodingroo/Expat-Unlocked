@@ -6,6 +6,8 @@ class ProfilesController < ApplicationController
     # authorize @user
     skip_authorization
     @user_documents = UserDocument.all
+    @user_document = UserDocument.new
+    @documents = Document.all
   end
 
   def update
