@@ -70,7 +70,7 @@ document_attributes = [
     company_name: 'National Health Insurance',
     payment_type: 'Convenience Store',
     description: Faker::TvShows::GameOfThrones.quote
-  }
+  },
   {
     jp_name: '水道',
     company_name: 'Tokyo Water',

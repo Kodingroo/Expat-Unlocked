@@ -26,6 +26,12 @@
                   </h2>
                   <%= @user.address %>
                 </div>
+                <div>
+                  <h2>
+                    Address:
+                  </h2>
+                  <%= @user.email %>
+                </div>
               </div>
               <div>
                 <% if current_user == @user %>
@@ -47,10 +53,7 @@
         <div class="center-content due-date-background-blue">
           <strong>Your next three Due Dates:</strong>
         </div>
-        
-        <div class="center-content due-date-background-pink">
-          <%= @user_documents.first unless @user_documents.count.zero? %>
-        </div>
+
 
       </div>
     </div>
