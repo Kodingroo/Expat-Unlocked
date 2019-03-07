@@ -7,6 +7,7 @@
   background: #fff;
   box-shadow: $box-shadow;
   transition: all 0.2s ease-in;
+  overflow: hidden;
   &:hover {
     box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
     transform: translateY(4px);
@@ -15,6 +16,13 @@
     width: 120px;
     height: 120px;
     box-shadow: $small-box-shadow;
+  }
+  &__edit {
+    background: $primary;
+    margin-bottom: 5px;
+    &:hover {
+      color: #fff;
+    }
   }
   &__title {
     color: rgb(44, 44, 44);
