@@ -6,6 +6,13 @@ class ProfilesController < ApplicationController
     # authorize @user
     skip_authorization
     @user_documents = UserDocument.all
+    @user_document = UserDocument.new
+    @documents = Document.all
+  end
+
+  def update
+    authorize @user
+    @user.update(user_params)
 
     @categories = []
     if @user_documents.exists?
