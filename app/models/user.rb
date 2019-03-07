@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :user_documents
+  has_many :documents, through: :user_documents
   has_many :venue
   mount_uploader :photo, PhotoUploader
   validates :address, presence: true
