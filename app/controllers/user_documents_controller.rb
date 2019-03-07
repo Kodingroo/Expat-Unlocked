@@ -1,6 +1,6 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_user_document, only: [:show, :update]
+  before_action :set_user_document, only: [:show, :update, :pay]
   # before_action :authenticate_user!
 
   def index
@@ -24,7 +24,7 @@ class UserDocumentsController < ApplicationController
 
       redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
     else
-      flash[:alert] = "You haz errors!"
+      flash[:alert] = "You have errors!"
       render :index
     end
   end
@@ -33,16 +33,44 @@ class UserDocumentsController < ApplicationController
     authorize @user_document
   end
 
+  def pay
+    authorize @user_document
+    @user_document.state = true
+
+    if @user_document.save
+      respond_to do |format|
+        format.js
+        format.html { redirect_to profile_path(@user) }
+      end
+    else
+      respond_to do |format|
+        format.html { render 'profiles/show' }
+        format.js  # <-- idem
+      end
+    end
+  end
+
   def update
     @old_date = @user_document.reminder_date
     @user_document.update(user_document_params)
     authorize @user_document
-    if @user_document.save && @old_date != @user_document.reminder_date
-      UserDocumentMailer.creation_confirmation(@user_document).deliver_now
-      redirect_back fallback_location: user_document_path(@user_document)
+    if @user_document.save
+      respond_to do |format|
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+        format.html { redirect_to profile_path(@user) }
+      end
     else
-      redirect_back fallback_location: user_document_path(@user_document)
+      respond_to do |format|
+        format.html { render 'profiles/show' }
+        format.js  # <-- idem
+      end
     end
+    # if @user_document.save && @old_date != @user_document.reminder_date
+    #   UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+    #   redirect_back fallback_location: user_document_path(@user_document)
+    # else
+    #   redirect_back fallback_location: user_document_path(@user_document)
+    # end
   end
 
   private

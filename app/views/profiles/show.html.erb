@@ -65,10 +65,7 @@
               <% unless user_document.state %></p>
                 <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date.strftime("%b %d %Y") %></p>
                 <p><%= (user_document.due_date - Date.today).to_i %> days remaining</p>
-                <%= simple_form_for(user_document) do |f| %>
-                  <%= f.label "Paid" %>
-                  <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
-                <% end %>
+                <%= link_to 'paid', pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
               <% end %>
           <% end %>
         </div>
@@ -84,9 +81,9 @@
             <% sorted.first(3).each do |user_document| %>
               <% if user_document.state %></p>
                 <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
-                <%= simple_form_for(user_document) do |f| %>
+                <%= simple_form_for(user_document, html: { method: :patch }, remote: true) do |f| %>
                   <%= f.label "Paid" %>
-                  <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+                  <%= f.check_box :state %>
                 <% end %>
               <% end %>
             <% end %>

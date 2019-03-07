@@ -1,0 +1,20 @@
+function refreshForm(innerHTML) {
+  const newPaidForm = document.getElementById('<% user_document.id %>-paid-document');
+  newPaidform.innerHTML = innerHTML;
+}
+
+function addPaid(reviewHTML) {
+  const reviews = document.getElementById('reviews');
+  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+}
+
+<% if @review.errors.any? %>
+  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>');
+<% else %>
+  addPaid('<%= j render "reviews/show", review: @review %>');
+  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>');
+<% end %>
+
+
+// delete button that i pushed.
+// add paid status button to the recently paid bills section

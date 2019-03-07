@@ -16,4 +16,8 @@ class UserDocumentPolicy < ApplicationPolicy
   def update?
     record.user == user
   end
+
+  def pay?
+    update?
+  end
 end
