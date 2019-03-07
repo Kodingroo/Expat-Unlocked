@@ -5,4 +5,6 @@ class UserDocument < ApplicationRecord
 
   # validates :photo, presence: true
   # validates :doc_type, presence: true
+  # FILTER = %w(due_date doc_type state)
 end
+

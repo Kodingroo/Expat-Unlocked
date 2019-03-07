@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
     # authorize @user
     skip_authorization
     @user_documents = UserDocument.all
+<<<<<<< HEAD
     @user_document = UserDocument.new
     @documents = Document.all
   end
@@ -13,22 +14,45 @@ class ProfilesController < ApplicationController
   def update
     authorize @user
     @user.update(user_params)
+=======
+>>>>>>> 8849bd9fb71218c7a39ce06995afb43d922fdcfe
 
-    if @user.save
-      redirect_to @user
+    @collection_type = params["/profile.#{@user.id}"][:query] if params["/profile.#{@user.id}"]
+    if @collection_type == 'due date'
+      date_query = "SELECT * FROM user_documents ORDER BY due_date DESC"
+      @user_documents = UserDocument.find_by_sql(date_query)
+    elsif @collection_type == 'most expensive'
+      expensive_query = "SELECT * FROM user_documents ORDER BY current_due_amount DESC"
+      @user_documents = UserDocument.find_by_sql(expensive_query)
+    elsif @collection_type == 'least expensive'
+      cheap_query = "SELECT * FROM user_documents ORDER BY current_due_amount ASC"
+      @user_documents = UserDocument.find_by_sql(cheap_query)
     else
-      render :edit
+     @user_documents = UserDocument.all
     end
-  end
 
-  private
+ end
 
-  def user_params
-    params.require(:user).permit(:username)
-  end
+ def update
+  authorize @user
+  @user.update(user_params)
 
-  def set_user
-    @user = current_user
+  if @user.save
+    redirect_to @user
+  else
+    render :edit
   end
+end
+
+private
+
+def user_params
+  params.require(:user).permit(:username)
+end
+
+def set_user
+  @user = current_user
+end
 
 end
+
