@@ -19,11 +19,12 @@ class UserDocumentsController < ApplicationController
       api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
       @document = find_document(api_data[:words])
       assign_data(@user_document, api_data)
-      @user_document.save!
+      @user_document.save
 
       redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
     else
-      render "pages/home"
+      flash[:alert] = "You haz errors!"
+      render :index
     end
   end
 
