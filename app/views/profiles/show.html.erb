@@ -41,6 +41,11 @@
       </div>
 
       <div class="user-card">
+        <div class="document__image">
+          <% @user_documents.each do |doc| %>
+          <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
+          <% end %>
+        </div>
         <div class="center-content">
           <strong>Your next three Due Dates:</strong>
           <div class="center-content">
