@@ -47,15 +47,11 @@
         <div class="center-content due-date-background-blue">
           <strong>Your next three Due Dates:</strong>
         </div>
-        <% if current_user.user_documents.present? %>
-          <div class="center-content due-date-background-pink">
-          <%current_user.user_documents.each do |user_document| %>
-          </div>
-            <div class="center-content due-date-background-blue">
-            <p><%= user_document.due_date%></p>
-            </div>
-          <% end %>
-        <% end %>
+        
+        <div class="center-content due-date-background-pink">
+          <%= @user_documents.first unless @user_documents.count.zero? %>
+        </div>
+
       </div>
     </div>
   </div>
