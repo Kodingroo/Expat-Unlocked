@@ -1,5 +1,4 @@
 .user-card {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,4 +29,8 @@
   .margin-top-mobile {
     margin-top: 150px;
   }
+}
+
+.user-card-photo {
+  width: 100%;
 }
