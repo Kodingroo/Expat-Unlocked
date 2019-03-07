@@ -60,6 +60,18 @@ puts 'Finished Users!'
 puts 'Creating Documents...'
 document_attributes = [
   {
+    jp_name: '区民税',
+    company_name: 'Local Tax',
+    payment_type: 'Convenience Store',
+    description: Faker::TvShows::GameOfThrones.quote
+  },
+  {
+    jp_name: '健康保険',
+    company_name: 'National Health Insurance',
+    payment_type: 'Convenience Store',
+    description: Faker::TvShows::GameOfThrones.quote
+  }
+  {
     jp_name: '水道',
     company_name: 'Tokyo Water',
     payment_type: 'Convenience Store',

@@ -56,14 +56,17 @@ class UserDocumentsController < ApplicationController
   def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
-
+    p "Words"
+    p words
+    p names
     words.each do |word|
       names.any? do |name|
         unless word.nil?
-          doc_to_add = name if word.include?(name)
+          p doc_to_add = name if word.include?(name)
         end
       end
     end
+    p "Doc to add"
     p doc_to_add
     Document.find_by(jp_name: doc_to_add)
   end
