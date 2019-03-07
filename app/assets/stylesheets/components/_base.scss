@@ -97,3 +97,14 @@ a:focus {
 .fifty-px-padding {
   padding: 50px;
 }
+
+#new_user_document {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  & div {
+    width: 218px;
+  }
+}

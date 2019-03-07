@@ -34,13 +34,14 @@ class UserDocumentsController < ApplicationController
   end
 
   def update
+    @old_date = @user_document.reminder_date
     @user_document.update(user_document_params)
     authorize @user_document
-    if @user_document.save
+    if @user_document.save && @old_date != @user_document.reminder_date
       UserDocumentMailer.creation_confirmation(@user_document).deliver_now
-      redirect_to user_document_path(@user_document)
+      redirect_back fallback_location: user_document_path(@user_document)
     else
-      render :show
+      redirect_back fallback_location: user_document_path(@user_document)
     end
   end
 
@@ -78,7 +79,7 @@ class UserDocumentsController < ApplicationController
   end
 
   def user_document_params
-    params.require(:user_document).permit(:title, :photo, :doc_type, :due_date, :remaining_balance, :current_due_amount, :reminder_date)
+    params.require(:user_document).permit(:title, :photo, :doc_type, :due_date, :remaining_balance, :current_due_amount, :reminder_date, :state)
   end
 end
 
