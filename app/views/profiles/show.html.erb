@@ -53,9 +53,11 @@
         <div class="center-content due-date-background-blue">
           <strong>Your next three Due Dates:</strong>
         </div>
-          <% current_user.user_documents.first(3).each do |user_document| %>
+          <% sorted = current_user.user_documents.order('due_date ASC')%>
+          <% sorted.first(3).each do |user_document| %>
               <% unless user_document.state %></p>
-                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
+                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date.strftime("%b %d %Y") %></p>
+                <p><%= (user_document.due_date - Date.today).to_i %> days remaining</p>
                 <%= simple_form_for(user_document) do |f| %>
                   <%= f.label "Paid" %>
                   <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
@@ -63,6 +65,9 @@
               <% end %>
           <% end %>
         </div>
+
+
+
         <div class="card-border">
           <div class="center-content due-date-background-blue">
             <strong>Recently paid bils:</strong>
@@ -70,7 +75,7 @@
               <%if (current_user.user_documents.where(state: 1).count == 0)%>
                  <%= "You haven't paid any bills recently" %>
               <% end %>
-            <% current_user.user_documents.first(3).each do |user_document| %>
+            <% sorted.first(3).each do |user_document| %>
               <% if user_document.state %></p>
                 <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
                 <%= simple_form_for(user_document) do |f| %>
