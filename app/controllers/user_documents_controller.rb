@@ -20,11 +20,12 @@ class UserDocumentsController < ApplicationController
       api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
       @document = find_document(api_data[:words])
       assign_data(@user_document, api_data)
-      @user_document.save!
+      @user_document.save
 
       redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
     else
-      render "pages/home"
+      flash[:alert] = "You haz errors!"
+      render :index
     end
   end
 
@@ -57,14 +58,17 @@ class UserDocumentsController < ApplicationController
   def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
-
+    p "Words"
+    p words
+    p names
     words.each do |word|
       names.any? do |name|
         unless word.nil?
-          doc_to_add = name if word.include?(name)
+          p doc_to_add = name if word.include?(name)
         end
       end
     end
+    p "Doc to add"
     p doc_to_add
     Document.find_by(jp_name: doc_to_add)
   end

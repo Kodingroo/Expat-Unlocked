@@ -1,21 +1,32 @@
-<nav id="navigation" class="navbar navbar-default ">
-  <div class=" ">
+<nav id="navigation" class="">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+    <div class="navbar__left">
       <a href="/" class="navbar-link">
       <%= image_tag 'logo.png', class: "logo" %>
-    </a>
+      </a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-      <ul class="nav navbar-nav navbar-right mobile-invisible">
-        <li class="mobile-invisible"><% if user_signed_in? %></li>
-        <li><%= link_to "Profile", profile_path(current_user)%></li>
-        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+    <div id="navigation__right">
+      <% if user_signed_in? %>
+        <div><%= link_to "Profile", profile_path(current_user)%></div>
+        <div><%= link_to "My Documents", user_documents_path(current_user)%></div>
+        <div><%= link_to "Log out", destroy_user_session_path, method: :delete %></div>
       <% else %>
-      <%= link_to "Sign in", new_user_session_path %>
+        <%= link_to "Sign in", new_user_session_path %>
       <% end %>
-      </ul>
     </div>
+    <div id="navigation__hamburger">
+      <i class="fas fa-bars"></i>
+      <div class="navigation__drop">
+          <% if user_signed_in? %>
+            <div><%= link_to "Profile", profile_path(current_user)%></div>
+            <div><%= link_to "My Documents", user_documents_path(current_user)%></div>
+            <div><%= link_to "Log out", destroy_user_session_path, method: :delete %></div>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path %>
+          <% end %>
+        </div>
+    </div>
+    
   </div>
 </nav>

@@ -1,9 +1,10 @@
-
 <div class="container">
   <% unless current_user.first_name.nil? %>
-  <h1><%= current_user.first_name %> <%= current_user.last_name %>'s Documents</h1>
+    <h1>
+      <%= current_user.first_name %> <%= current_user.last_name %>'s Documents
+    </h1>
   <% else %>
-  <h1>My Documents</h1>
+    <h1>My Documents</h1>
   <% end %>
   <p>Browse through all your uploaded documents</p>
 </div>
@@ -11,65 +12,65 @@
 <div class="primary-wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-md-5 center-content sticky">
+      <div class="col-sm-12 col-md-5 center-content sticky">
         <div class="user-card">
-          <% unless current_user.photo.url.nil? %>
-          <%= cl_image_tag current_user.photo, class: "avatar" %>
-          <% else %>
-          <%= image_tag 'avatar.png', class: "avatar" %>
-          <% end %>
+          <% unless current_user.photo.url.nil? %> 
+            <%= cl_image_tag current_user.photo, class: "avatar" %> 
+          <% else %> 
+            <%= image_tag 'avatar.png', class: "avatar" %> <% end %>
           <div class="user-card__title">
             <%= current_user.first_name %> <%= current_user.last_name %>
           </div>
-          <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo %> <%= f.input :photo_cache, as: :hidden %> <%= f.submit "Check Document", class: "button is-inverted" %>
-          <% end %>
+          <%= simple_form_for(@user_document) do |f| %> 
+          <%= f.input :photo, required: true %> 
+          <%= f.input :photo_cache, as: :hidden %> <%=
+          f.submit "Check Document", id: "upload-button", class: "button
+          is-inverted" %> <% end %>
         </div>
       </div>
-      <div class="col-md-7">
+      <div class="col-sm-12 col-md-7 margin-top-mobile">
         <% current_user.user_documents.each do |doc| %>
-        <div class="col-md-12">
-          <%= link_to user_document_path(doc), class: "document" do %>
-          <!-- <div class="document"> -->
-            <div class="document__header">
-              <h4 class="document__title"><%= doc.title %></h4>
-              <p class="document__status"><%= doc.state %></p>
-              <i class="fas fa-exclamation"></i>
-            </div>
-            <div class="document__image">
-              <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %>
-            </div>
-            <div class="document__body">
-              <div class="document__data">
-                <%= doc.reminder_date %>
+            <div class="document">
+              <div class="document__header">
+                <h4 class="document__title">
+                  <%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
+                  doc.document.jp_name %>
+                </h4>
+                <p class="document__status">
+                  <% if doc.state == true %>
+                  <span class="tag paid"
+                    ><i class="fas fa-check"></i> Paid</span
+                  >
+                  <% else %>
+                  <span class=" tag unpaid"
+                    ><i class="fas fa-exclamation"></i> Unpaid</span
+                  >
+                  <% end %>
+                </p>
               </div>
-              <div class="document__data">
-                <%= doc.due_date %>
-              </div>
-              <div class="document__balance">
-                <%= doc.remaining_balance %>
-              </div>
-              <div class="document__due-amount">
-                <%= doc.current_due_amount %>
+              <div class="document__image">
+                <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %>
               </div>
               <div class="document__body">
                 <div class="document__data">
-                  <%= doc.reminder_date %>
+                  <h5>Due On</h5>
+                  <p><%= doc.due_date %></p>
                 </div>
-                <div class="document__balance">
-                  <%= doc.remaining_balance %>
-                </div>
-                <div class="document__due-amount">
-                  <%= doc.current_due_amount %>
+                <div class="document__data">
+                  <h5>Amount Due</h5>
+                  <p class="document__amount">
+                    <%= doc.current_due_amount %>円
+                  </p>
                 </div>
               </div>
             </div>
             <% end %>
           </div>
-          <% end %>
-        </div>
-      </div>
+     
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> master

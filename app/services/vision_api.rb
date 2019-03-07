@@ -43,6 +43,8 @@ class VisionApi
   end
 
   def self.create_amount_due(yen_array)
+    p "yarr"
+    p yen_array
     yen_array.flatten.map do |yen|
       yen.split(",").join("").to_i
     end.max
