@@ -31,6 +31,12 @@
                               edit_user_registration_path, method: "get" %> <% end %>
                   </div>
                 </div>
+                <div>
+                  <h2>
+                    Email:
+                  </h2>
+                  <%= @user.email %>
+                </div>
               </div>
             </div>
           </div>
@@ -46,19 +52,37 @@
           <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
           <% end %>
         </div>
-        <div class="center-content">
-          <strong>Your next three Due Dates:</strong>
-          <div class="center-content">
-            <%= @user_documents.first(3) unless @user_documents.count.zero? %>
-          </div>
-          <div class="center-content" style="margin-bottom: 60px;">
-            <div>
-              <%= button_to "user documents", user_documents_path, method: "get" %>
-            </div>
-          </div>
+          <% sorted = current_user.user_documents.order('due_date ASC')%>
+          <% sorted.first(3).each do |user_document| %>
+              <% unless user_document.state %></p>
+                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date.strftime("%b %d %Y") %></p>
+                <p><%= (user_document.due_date - Date.today).to_i %> days remaining</p>
+                <%= simple_form_for(user_document) do |f| %>
+                  <%= f.label "Paid" %>
+                  <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+                <% end %>
+              <% end %>
+          <% end %>
         </div>
     </div>
 
+        <div class="card-border">
+          <div class="center-content due-date-background-blue">
+            <strong>Recently paid bils:</strong>
+          </div>
+              <%if (current_user.user_documents.where(state: 1).count == 0)%>
+                 <%= "You haven't paid any bills recently" %>
+              <% end %>
+            <% sorted.first(3).each do |user_document| %>
+              <% if user_document.state %></p>
+                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
+                <%= simple_form_for(user_document) do |f| %>
+                  <%= f.label "Paid" %>
+                  <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
