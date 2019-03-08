@@ -96,25 +96,68 @@
           <% end %>
 
           <div class="bills-list">
+
             <% @user_documents.each do |doc| %>
-              <li>
                 <% if @collection_type == 'due date' %>
-                  <%= doc.due_date %>
+                  <div class="bill-list__item">
+                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
+                    <div class="bill-list__company">
+                      <%= doc.document.company_name %>
+                    </div>
+                    <div class="bill-list__due-date">
+                      <%= doc.due_date.strftime("%b %d, %Y") %>
+                    </div>
+                    <div class="bill-list__due">
+                      <%= doc.current_due_amount %>円
+                    </div>
+                  </div>
                 <% elsif @collection_type == 'most expensive' %>
-                  <%= doc.current_due_amount %>
+                  <div class="bill-list__item">
+                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
+                    <div class="bill-list__company">
+                      <%= doc.document.company_name %>
+                    </div>
+                    <div class="bill-list__due-date">
+                      <%= doc.due_date.strftime("%b %d, %Y") %>
+                    </div>
+                    <div class="bill-list__due">
+                      <%= doc.current_due_amount %>円
+                    </div>
+                  </div>
                 <% elsif @collection_type == 'least expensive' %>
-                  <%= doc.current_due_amount %>
+                  <div class="bill-list__item"
+                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %> 
+                    <div class="bill-list__company">
+                     <%= doc.document.company_name %>
+                    </div>
+                    <div class="bill-list__due-date">
+                      <%= doc.due_date.strftime("%b %d, %Y") %>
+                    </div>
+                    <div class="bill-list__due">
+                      <%= doc.current_due_amount %>円
+                    </div>
+                  </div>
                 <% else %>
-                  <%= doc.document.company_name %>
-                  <%= doc.due_date%>
-                  <%= doc.current_due_amount %>
+                  <div class="bill-list__item">
+                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
+                    <div class="bill-list__company">
+                      <%= doc.document.company_name %>
+                    </div>
+                    <div class="bill-list__due-date">
+                      <%= doc.due_date.strftime("%b %d, %Y") %>
+                    </div>
+                    <div class="bill-list__due">
+                      <%= doc.current_due_amount %>円
+                    </div>
+                  </div>
                 <% end %>
-              </li>
-            <% end %>
-          </div>
+              <% end %>
+            </div>
+           </div>
+        </div>
+
       </div>
-    </div>
-      
-    </div>
+    </div> 
   </div>
+</div>
    

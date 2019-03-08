@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   def show
     # authorize @user
     skip_authorization
-    @user_documents = UserDocument.all
+    @user_documents = UserDocument.where(user_id: current_user)
     @user_document = UserDocument.new
     @documents = Document.all
 
