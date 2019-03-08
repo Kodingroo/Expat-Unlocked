@@ -3,8 +3,8 @@
     <div class="col-sm-6 col-sm-offset-3">
 
       <h1>Scan Info</h1>
-       <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true,  as: :hidden%>
+       <%#= simple_form_for(@user_document) do |f| %>
+          <%= f.input :photo, required: true, as: :hidden%>
           <%= f.input :photo_cache, as: :hidden %>
           <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
        <% end %>
