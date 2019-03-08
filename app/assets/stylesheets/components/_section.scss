@@ -50,10 +50,16 @@
   background-position: center;
 }
 
-// #canvas {
-//   width: 100%;
-// }
+#canvas {
+  width: 100%;
+  display: none;
+}
 
 #video {
   width: 100%;
+}
+
+#photo {
+  width: 100%;
+  justify-content: center;
 }

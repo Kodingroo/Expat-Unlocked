@@ -3,69 +3,86 @@
     <div class="col-sm-6 col-sm-offset-3">
 
       <h1>Scan Info</h1>
-       <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true, as: :hidden%>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-       <% end %>
+       <%#= simple_form_for(@user_document) do |f| %>
+          <%#= f.input :photo, required: true, as: :hidden%>
+          <%#= f.input :photo_cache, as: :hidden %>
+          <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+       <%# end %>
     </div>
   </div>
 </div>
 
+<!--   <form action="#" id="myform" enctype="multipart/form-data">
+
+    <input type="file"
+    id="capture"
+    accept="image/*"
+    capture
+    multiple />
+
+    <br/>
+    <input type="submit" value="Process" />
+  </form>
+</main> -->
+
+
 <div class="col-sm-6 col-sm-offset-3" >
-  <video id = "video" ></video>
+  <video id = "video" height = "500" ></video>
   <a href="#" id="capture" class= "button is-big" >Take Photo</a>
-  <canvas id = "canvas" ></canvas>
+  <canvas id = "canvas" height = "300" ></canvas>
+  <img id= "photo"src="" alt="document photo">
+
   <script>
-    // (function () {
-    //     var video = document.getElementById('video'),
-    //       canvas = document.getElementById('canvas'),
-    //       context = canvas.getContext('2d'),
-    //       photo = document.getElementById('photo')
-    //       vendorUrl = window.URL || window.webkitURL;
 
-    //     navigator.getMedia =  navigator.getUserMedia ||
-    //                           navigator.webkitGetUserMedia ||
-    //                           navigator.mozGetUserMedia ||
-    //                           navigator.msGetUserMedia
-    //     navigator.getMedia({
-    //       video: true,
-    //       audio: false
-    //     }, function(stream){
-    //       video.srcObject=stream;
-    //       video.play();
-    //     }, function(error) {
-    //       //an error occured
-    //       //error.code
-    //     });
+    const constraints = { audio: false, video: { width: 1280, height: 720 } };
+    const canvas = document.getElementById('canvas'),
+          context = canvas.getContext('2d'),
+          photo = document.getElementById('photo');
 
-    //     document.getElementById('capture').addEventListener('click', function () {
-    //       context.drawImage(video, 0, 0, 400, 300);
-    //       photo.setAttribute('src', canvas.toDataURL('image/png'));
-    //     });
-    //   })();
-  </script>
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(mediaStream) {
+      var video = document.querySelector('video');
+          video.srcObject = mediaStream;
+      video.onloadedmetadata = function(e) {
+        video.play();
+      };
+    })
+    .catch(function(err) { console.log(err.name + ": " + err.message);
+    });
+
+    document.getElementById('capture').addEventListener('click', function () {
+      context.drawImage(video, 0, 0, 400, 300);
+      photo.setAttribute('src', canvas.toDataURL('image/png'));
+    });
+
+    </script>
 </div>
 
-
-<script>
-  const constraints = { audio: true, video: { width: 1280, height: 720 } };
-  const context = canvas.getContext('2d');
-
-  navigator.mediaDevices.getUserMedia(constraints)
-  .then(function(mediaStream) {
-    var video = document.querySelector('video'),
-        canvas = document.getElementById('canvas');
-
-    video.srcObject = mediaStream;
-    video.onloadedmetadata = function(e) {
-      video.play();
-    };
-  })
-  .catch(function(err) { console.log(err.name + ": " + err.message);
-  });
-  document.getElementById('capture').addEventListener('click', function () {
-    context.drawImage(video, 0, 0, 400, 300);
-    photo.setAttribute('src', canvas.toDataURL('image/png'));
-    });
-</script>
+<!--   <script>
+    (function () {
+        var video = document.getElementById('video'),
+          canvas = document.getElementById('canvas'),
+          context = canvas.getContext('2d'),
+          photo = document.getElementById('photo')
+          vendorUrl = window.URL || window.webkitURL;
+        navigator.getMedia =  navigator.getUserMedia ||
+                              navigator.webkitGetUserMedia ||
+                              navigator.mozGetUserMedia ||
+                              navigator.msGetUserMedia
+        navigator.getMedia({
+          video: true,
+          audio: false
+        }, function(stream){
+          video.srcObject=stream;
+          video.play();
+        }, function(error) {
+          //an error occured
+          //error.code
+        });
+        document.getElementById('capture').addEventListener('click', function () {
+          context.drawImage(video, 0, 0, 400, 300);
+          photo.setAttribute('src', canvas.toDataURL('image/png'));
+        });
+      })();
+  </script> -->
+</div>
