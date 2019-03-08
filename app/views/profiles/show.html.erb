@@ -33,11 +33,11 @@
           </div>
       </div>
 
-      <div class="col-xs-12 col-md-7 margin-top-mobile">
+      <div class="col-xs-12 col-md-7 margin-top-mobile due-card-list">
         <% sorted = current_user.user_documents.order('due_date ASC')%>
-        <div class="due-card">
-          <% sorted.first(3).each do |user_document| %>
-            <% unless user_document.state %>
+        <% sorted.first(3).each do |user_document| %>
+        <% unless user_document.state %>
+            <div class="due-card">
               <div class="due-card__title">
                 Bill Type
               </div>
@@ -56,11 +56,11 @@
               <div class="due-card__subtitle">
                 <%= (user_document.due_date - Date.today).to_i %>
               </div>
-              <%= link_to ‘Paid’, pay_user_document_path(user_document), method: :patch, remote: true, id: “#{user_document.id}-paid-document” %>
+              <%= link_to "paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
+            </div>
+          </div>
             <% end %>
           <% end %>
-        </div>
-      </div>
 
       <div class="col-xs-12">
               <div class="col-md-12">
@@ -74,7 +74,7 @@
             <% sorted.first(3).each do |user_document| %>
             <% if user_document.state %>
             <%= user_document.title %> Bill: <%= user_document.due_date %>
-            <%= link_to ‘Not paid’, unpaid_user_document_path(user_document), method: :patch, remote: true, id: “#{user_document.id}-unpaid-document” %>
+            <%= link_to "unpaid", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
             <% end %>
             <% end %>
         </div>
@@ -91,19 +91,23 @@
 
           <div class="bills-list">
             <% @user_documents.each do |doc| %>
-              <li>
                 <% if @collection_type == 'due date' %>
-                  <%= doc.due_date %>
+                  <%= doc.document.company_name %>
+                  <%= doc.due_date%>
+                  <%= doc.current_due_amount %>
                 <% elsif @collection_type == 'most expensive' %>
+                  <%= doc.document.company_name %>
+                  <%= doc.due_date%>
                   <%= doc.current_due_amount %>
                 <% elsif @collection_type == 'least expensive' %>
                   <%= doc.current_due_amount %>
                 <% else %>
-                  <%= doc.document.company_name %>
-                  <%= doc.due_date%>
-                  <%= doc.current_due_amount %>
+                  <div class="bill_list__items">
+                    <%= doc.document.company_name %>
+                    <%= doc.due_date%>
+                    <%= doc.current_due_amount %>
+                  </div>
                 <% end %>
-              </li>
             <% end %>
           </div>
       </div>
@@ -111,4 +115,3 @@
 
     </div>
   </div>
-
