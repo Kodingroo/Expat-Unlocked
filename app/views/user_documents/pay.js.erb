@@ -11,8 +11,3 @@ function addButton(buttonHTML) {
 
 deleteButton('');
 addButton('<%= link_to 'unpaid', unpaid_user_document_path(@user_document), method: :patch, remote: true, id: "#{@user_document.id}-unpaid-document" %>');
-
-
-
-// delete button that i pushed.
-// add paid status button to the recently paid bills section

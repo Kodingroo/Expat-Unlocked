@@ -60,6 +60,7 @@
           <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
           <% end %>
         </div>
+        <div class="upcoming-bills">
           <% sorted = current_user.user_documents.order('due_date ASC')%>
           <% sorted.first(3).each do |user_document| %>
               <% unless user_document.state %></p>
@@ -68,6 +69,7 @@
                 <%= link_to 'paid', pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
               <% end %>
           <% end %>
+                </div>
         </div>
     </div>
 
