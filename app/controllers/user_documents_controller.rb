@@ -10,11 +10,14 @@ class UserDocumentsController < ApplicationController
 
   def create
     @user_document = UserDocument.new(user_document_params)
-
     authorize @user_document
 
-    @user_document.user = current_user
-  
+    if current_or_guest_user.username == "guest"
+      @user_document.user = guest_user
+    else
+      @user_document.user = current_user
+    end
+
     if @user_document.save
       if @user_document.photo.metadata.nil?
         flash[:alert] = "Did you forget to upload your photo?"
@@ -26,7 +29,7 @@ class UserDocumentsController < ApplicationController
         @document = find_document(api_data[:words])
         assign_data(@user_document, api_data)
         @user_document.save
-  
+
         redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
       end
     else
@@ -36,7 +39,12 @@ class UserDocumentsController < ApplicationController
   end
 
   def show
-    authorize @user_document
+    # authorize @user_document
+    # if current_or_guest_user.username == "guest"
+    #   @user_document.user = guest_user
+    # else
+    #   @user_document.user = current_user
+    # end
   end
 
   def update
@@ -70,7 +78,7 @@ class UserDocumentsController < ApplicationController
   def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
-   
+
     words.each do |word|
       names.any? do |name|
         unless word.nil?
@@ -88,7 +96,15 @@ class UserDocumentsController < ApplicationController
   end
 
   def user_document_params
-    params.require(:user_document).permit(:title, :photo, :doc_type, :due_date, :remaining_balance, :current_due_amount, :reminder_date, :state)
+    params.require(:user_document).permit(
+      :title,
+      :photo,
+      :doc_type,
+      :due_date,
+      :remaining_balance,
+      :current_due_amount,
+      :reminder_date,
+      :state
+    )
   end
 end
-
