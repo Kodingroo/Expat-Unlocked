@@ -3,20 +3,21 @@
     <div class="col-sm-6 col-sm-offset-3">
 
       <h1>Scan Info</h1>
-       <%#= simple_form_for(@user_document) do |f| %>
-          <%#= f.input :photo, required: true, label: 'Upload Bill'%>
-          <%#= f.input :photo_cache, as: :hidden %>
-          <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-       <%# end %>
+       <%= simple_form_for(@user_document) do |f| %>
+          <%= f.input :photo, required: true,  as: :hidden%>
+          <%= f.input :photo_cache, as: :hidden %>
+          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+       <% end %>
     </div>
   </div>
 </div>
 
 <div class="col-sm-6 col-sm-offset-3" >
-  <video id = "video" width = "500" height = "400"></video>
-  <a href="#" id="capture" class= "button is-big">Take Photo</a>
-  <canvas id = "canvas" width = "500" height = "400"></canvas>
-  <img id= "photo"src="http://www.scienceshorts.com/wp-content/uploads/2018/02/Hamster.jpg" alt="document photo">
+  <video id = "video" height = "500" ></video>
+  <a href="#" id="capture" class= "button is-big" >Take Photo</a>
+  <canvas id = "canvas" height = "300" ></canvas>
+<!--
+  <img id= "photo"src="http://www.scienceshorts.com/wp-content/uploads/2018/02/Hamster.jpg/" alt="document photo"> -->
   <script>
     (function () {
         var video = document.getElementById('video'),
@@ -41,8 +42,8 @@
         });
 
         document.getElementById('capture').addEventListener('click', function () {
-          context.drawImage(video, 0, 0, 500, 400);
-          photo.setAttribute('src', canvas.toDataURL('image/jpg'));
+          context.drawImage(video, 0, 0, 400, 300);
+          photo.setAttribute('src', canvas.toDataURL('image/png'));
         });
       })();
   </script>
