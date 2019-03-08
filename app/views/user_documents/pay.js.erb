@@ -1,19 +1,17 @@
-function refreshForm(innerHTML) {
-  const newPaidForm = document.getElementById('<% user_document.id %>-paid-document');
-  newPaidform.innerHTML = innerHTML;
+function deleteButton(innerHTML) {
+  const button = document.getElementById('<%= @user_document.id %>-paid-document');
+  button.innerHTML = innerHTML;
 }
 
-function addPaid(reviewHTML) {
-  const reviews = document.getElementById('reviews');
-  reviews.insertAdjacentHTML('beforeend', reviewHTML);
+function addButton(buttonHTML) {
+  const element = document.querySelector('.due-date-background-blue');
+  element.insertAdjacentHTML('afterend', buttonHTML);
 }
 
-<% if @review.errors.any? %>
-  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>');
-<% else %>
-  addPaid('<%= j render "reviews/show", review: @review %>');
-  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>');
-<% end %>
+
+deleteButton('');
+addButton('<%= link_to 'unpaid', unpaid_user_document_path(@user_document), method: :patch, remote: true, id: "#{@user_document.id}-unpaid-document" %>');
+
 
 
 // delete button that i pushed.

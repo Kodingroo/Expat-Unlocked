@@ -81,10 +81,7 @@
             <% sorted.first(3).each do |user_document| %>
               <% if user_document.state %></p>
                 <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
-                <%= simple_form_for(user_document, html: { method: :patch }, remote: true) do |f| %>
-                  <%= f.label "Paid" %>
-                  <%= f.check_box :state %>
-                <% end %>
+                <%= link_to 'unpaid', unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document" %>
               <% end %>
             <% end %>
           </div>

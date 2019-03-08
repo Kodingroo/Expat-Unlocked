@@ -1,6 +1,6 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_user_document, only: [:show, :update, :pay]
+  before_action :set_user_document, only: [:show, :update, :pay, :unpaid]
   # before_action :authenticate_user!
 
   def index
@@ -39,8 +39,8 @@ class UserDocumentsController < ApplicationController
 
     if @user_document.save
       respond_to do |format|
-        format.js
         format.html { redirect_to profile_path(@user) }
+        format.js
       end
     else
       respond_to do |format|
@@ -49,6 +49,24 @@ class UserDocumentsController < ApplicationController
       end
     end
   end
+
+   def unpaid
+    authorize @user_document
+    @user_document.state = false
+
+    if @user_document.save
+      respond_to do |format|
+        format.html { redirect_to profile_path(@user) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render 'profiles/show' }
+        format.js  # <-- idem
+      end
+    end
+  end
+
 
   def update
     @old_date = @user_document.reminder_date

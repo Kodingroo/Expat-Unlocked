@@ -20,4 +20,8 @@ class UserDocumentPolicy < ApplicationPolicy
   def pay?
     update?
   end
+
+  def unpaid?
+    update?
+  end
 end
