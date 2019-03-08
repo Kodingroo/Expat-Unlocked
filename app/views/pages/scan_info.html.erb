@@ -13,37 +13,59 @@
 </div>
 
 <div class="col-sm-6 col-sm-offset-3" >
-  <video id = "video" height = "500" ></video>
+  <video id = "video" ></video>
   <a href="#" id="capture" class= "button is-big" >Take Photo</a>
-  <canvas id = "canvas" height = "300" ></canvas>
+  <canvas id = "canvas" ></canvas>
   <script>
-    (function () {
-        var video = document.getElementById('video'),
-          canvas = document.getElementById('canvas'),
-          context = canvas.getContext('2d'),
-          photo = document.getElementById('photo')
-          vendorUrl = window.URL || window.webkitURL;
+    // (function () {
+    //     var video = document.getElementById('video'),
+    //       canvas = document.getElementById('canvas'),
+    //       context = canvas.getContext('2d'),
+    //       photo = document.getElementById('photo')
+    //       vendorUrl = window.URL || window.webkitURL;
 
-        navigator.getMedia =  navigator.getUserMedia ||
-                              navigator.webkitGetUserMedia ||
-                              navigator.mozGetUserMedia ||
-                              navigator.msGetUserMedia
-        navigator.getMedia({
-          video: true,
-          audio: false
-        }, function(stream){
-          video.srcObject=stream;
-          video.play();
-        }, function(error) {
-          //an error occured
-          //error.code
-        });
+    //     navigator.getMedia =  navigator.getUserMedia ||
+    //                           navigator.webkitGetUserMedia ||
+    //                           navigator.mozGetUserMedia ||
+    //                           navigator.msGetUserMedia
+    //     navigator.getMedia({
+    //       video: true,
+    //       audio: false
+    //     }, function(stream){
+    //       video.srcObject=stream;
+    //       video.play();
+    //     }, function(error) {
+    //       //an error occured
+    //       //error.code
+    //     });
 
-        document.getElementById('capture').addEventListener('click', function () {
-          context.drawImage(video, 0, 0, 400, 300);
-          photo.setAttribute('src', canvas.toDataURL('image/png'));
-        });
-      })();
+    //     document.getElementById('capture').addEventListener('click', function () {
+    //       context.drawImage(video, 0, 0, 400, 300);
+    //       photo.setAttribute('src', canvas.toDataURL('image/png'));
+    //     });
+    //   })();
   </script>
 </div>
 
+
+<script>
+  const constraints = { audio: true, video: { width: 1280, height: 720 } };
+  const context = canvas.getContext('2d');
+
+  navigator.mediaDevices.getUserMedia(constraints)
+  .then(function(mediaStream) {
+    var video = document.querySelector('video'),
+        canvas = document.getElementById('canvas');
+
+    video.srcObject = mediaStream;
+    video.onloadedmetadata = function(e) {
+      video.play();
+    };
+  })
+  .catch(function(err) { console.log(err.name + ": " + err.message);
+  });
+  document.getElementById('capture').addEventListener('click', function () {
+    context.drawImage(video, 0, 0, 400, 300);
+    photo.setAttribute('src', canvas.toDataURL('image/png'));
+    });
+</script>
