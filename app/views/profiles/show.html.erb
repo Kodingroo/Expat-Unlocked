@@ -116,7 +116,7 @@
 <div class="primary-wrapper" style="background: white;">
   <div class="container">
     <div class="row">
-    <% current_user.documents.each do |doc| %>
+      <% current_user.documents.each do |doc| %>
       <div class="col-md-6 col-xs-10">
         <h3><%= doc.jp_name %></h3>
         <h3><%= doc.company_name %></h3>
@@ -150,11 +150,10 @@
 </div>
 
 <%= form_tag profile_path, method: :get do |f| %>
-  <%= select_tag "sort_by", options_for_select(["due date", "most expensive", "least expensive"], params[:sort_by]) %>
+  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
   <%= select_tag "category", options_for_select(@categories, params[:category]) %>
   <%= submit_tag 'apply' %>
 <% end %>
-
 
 <ul>
   <% @user_documents.each do |doc| %>
@@ -174,3 +173,4 @@
   <% end %>
 </ul>
 
+<%= console %>
