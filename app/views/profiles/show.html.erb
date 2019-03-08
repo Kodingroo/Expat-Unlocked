@@ -1,162 +1,117 @@
 <div class="primary-wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12 col-md-5">
+
+      <div class="col-xs-12 col-md-3">
         <div class="user-card">
-          <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
-          <% unless current_user.photo.url.nil? %>
-          <%= cl_image_tag current_user.photo, class: "avatar" %>
-          <% else %>
-          <%= image_tag 'avatar.png', class: "avatar" %> <% end %>
-          <div class="user-card__title">
-            <%= current_user.first_name %> <%= current_user.last_name %>
-            <%= current_user.address %> <%= current_user.email %>
-            <%= current_user.user_documents.count %>
-            <div class="card-profile-infos">
-              <div style="height: 100%;">
-                <div class="edit-button">
-                  <div>
-                    <div>
-                      <h2>
-                        Username:
-                      </h2>
-                      <%= @user.username %>
-                    </div>
-                    <div>
-                      <h2>
-                        Address:
-                      </h2>
-                      <%= @user.address %>
-                    </div>
-                  </div>
-                  <div>
-                    <% if current_user == @user %> <%= button_to "edit profile",
-                              edit_user_registration_path, method: "get" %> <% end %>
-                  </div>
-                </div>
-                <div>
-                  <h2>
-                    Email:
-                  </h2>
-                  <%= @user.email %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true, label: 'Upload Bill'%>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-7 margin-top-mobile">
-
-      </div>
-
-      <div class="user-card">
-        <div class="document__image">
-          <% @user_documents.each do |doc| %>
-          <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
-          <% end %>
-        </div>
-        <div class="upcoming-bills">
-          <% sorted = current_user.user_documents.order('due_date ASC')%>
-          <% sorted.first(3).each do |user_document| %>
-              <% unless user_document.state %></p>
-                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date.strftime("%b %d %Y") %></p>
-                <p><%= (user_document.due_date - Date.today).to_i %> days remaining</p>
-                <%= link_to 'paid', pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
-              <% end %>
-          <% end %>
-                </div>
-        </div>
-    </div>
-
-        <div class="card-border">
-          <div class="center-content due-date-background-blue">
-            <strong>Recently paid bils:</strong>
-          </div>
-              <%if (current_user.user_documents.where(state: 1).count == 0)%>
-                 <%= "You haven't paid any bills recently" %>
-              <% end %>
-            <% sorted.first(3).each do |user_document| %>
-              <% if user_document.state %></p>
-                <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
-                <%= link_to 'unpaid', unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document" %>
-              <% end %>
+          <div class="user-card__header">
+            <% unless current_user.photo.url.nil? %>
+              <%= cl_image_tag current_user.photo, class: "avatar" %>
+            <% else %>
+              <%= image_tag 'avatar.png', class: "avatar" %>
             <% end %>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="container">
-    <div class="row">
-      <div class="center-content" style="margin-bottom: 60px;">
-        <div>
-          <%= button_to "user documents", user_documents_path, method: "get" %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  </div>
-    </div>
-  </div>
-</div>
-<div class="primary-wrapper" style="background: white;">
-  <div class="container">
-    <div class="row">
-    <% current_user.documents.each do |doc| %>
-      <div class="col-md-6 col-xs-10">
-        <h3><%= doc.jp_name %></h3>
-        <h3><%= doc.company_name %></h3>
-        <div class="card payment-card">
-          <div class="card-body">
-            <div class="average">
-            <h4>Monthly average: </h4>
-            </div>
-            <div class="most-expensive">
-              <h4>Most expensive:</h4>
-            </div>
-            <div class="least-expensive">
-              <h4>Least expensive:</h4>
+            <div class="user-card__body center-content">
+              <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
+              <div class="user-card__heading">
+                <%= current_user.first_name %> <%= current_user.last_name %>
+              </div>
+              <div class="user-card__info">
+                <div class="user-card__title">
+                    Total bills uploaded
+                </div>
+                <div class="user-card__count">
+                  <%= current_user.user_documents.count %>
+                </div>
+              </div>
+              <%= simple_form_for(@user_document) do |f| %>
+                <%= f.input :photo, required: true, label: 'Upload Bill'%>
+                <%= f.input :photo_cache, as: :hidden %>
+                <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+              <% end %>
             </div>
           </div>
+      </div>
+
+      <div class="col-xs-12 col-md-7 margin-top-mobile">
+        <% sorted = current_user.user_documents.order('due_date ASC')%>
+        <div class="due-card">
+          <% sorted.first(3).each do |user_document| %>
+            <% unless user_document.state %>
+              <div class="due-card__title">
+                Bill Type
+              </div>
+              <div class="due-card__subtitle">
+                <%= user_document.document.company_name %>
+              </div>
+              <div class="due-card__title">
+                Due Date
+              </div>
+              <div class="due-card__subtitle">
+                <%= user_document.due_date.strftime("%b %d %Y") %>
+              </div>
+              <div class="due-card__title">
+                Days Remaining
+              </div>
+              <div class="due-card__subtitle">
+                <%= (user_document.due_date - Date.today).to_i %>
+              </div>
+              <%= simple_form_for(user_document) do |f| %>
+                <%= f.label "Paid" %>
+                <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="primary-wrapper">
-    <h1 class="center-content">
-      All documents
-    </h1>
-    <button class="button">Filter</button>
-    <button class="button">All</button>
-    <button class="button">Electricity</button>
-    <button class="button">Water</button>
-    <button class="button">Gas</button>
-  </div>
-</div>
 
+      <div class="col^xs-12">
+              <div class="col-md-12">
+        <div class="card-border">
+            <div class="center-content due-date-background-blue">
+              <strong>Recently paid bils:</strong>
+            </div>
+            <%if (current_user.user_documents.where(state: 1).count == 0)%>
+            <%= "You haven't paid any bills recently" %>
+            <% end %>
+            <% sorted.first(3).each do |user_document| %>
+            <% if user_document.state %>
+            <%= user_document.title %> Bill: <%= user_document.due_date %>
+            <%= simple_form_for(user_document) do |f| %>
+            <%= f.label "Paid" %>
+            <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+            <% end %>
+            <% end %>
+            <% end %>
+        </div>
+      </div>
+      </div>
 
-<%= simple_form_for profile_path(@user), html: {method: :get} do |f| %>
-          <%= f.input :query, collection: ['due date', 'most expensive', 'least expensive'] %>
-          <%= f.button :submit, 'apply' %>
+      <div class="col-xs-12">
+        <%= form_tag profile_path, method: :get do |f| %>
+          <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
+          <%= select_tag "category", options_for_select(@categories, params[:category]) %>
+          <%= submit_tag 'apply' %>
         <% end %>
 
-<% @user_documents.each do |doc| %>
-    <% if @collection_type == 'due date' %>
-      <%= doc.due_date %>
-    <% elsif @collection_type == 'most expensive' %>
-      <%= doc.current_due_amount %>
-    <% elsif @collection_type == 'least expensive' %>
-      <%= doc.current_due_amount %>
-    <% end %>
-  <% end %>
+        <ul>
+          <% @user_documents.each do |doc| %>
+          <li>
+            <% if @collection_type == 'due date' %>
+              <%= doc.due_date %>
+            <% elsif @collection_type == 'most expensive' %>
+              <%= doc.current_due_amount %>
+            <% elsif @collection_type == 'least expensive' %>
+              <%= doc.current_due_amount %>
+            <% else %>
+              <%= doc.document.company_name %>
+              <%= doc.due_date%>
+              <%= doc.current_due_amount %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
