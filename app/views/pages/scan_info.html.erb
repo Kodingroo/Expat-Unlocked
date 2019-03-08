@@ -12,77 +12,91 @@
   </div>
 </div>
 
-<!--   <form action="#" id="myform" enctype="multipart/form-data">
+<input type="file" accept="image/*" id="file-input">
 
-    <input type="file"
-    id="capture"
-    accept="image/*"
-    capture
-    multiple />
+<script>
+  const fileInput = document.getElementById('file-input');
 
-    <br/>
-    <input type="submit" value="Process" />
-  </form>
-</main> -->
+  fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
+</script>
 
 
-<div class="col-sm-6 col-sm-offset-3" >
-  <video id = "video" height = "500" ></video>
-  <a href="#" id="capture" class= "button is-big" >Take Photo</a>
-  <canvas id = "canvas" height = "300" ></canvas>
-  <img id= "photo"src="" alt="document photo">
+  <div class="col-sm-6 col-sm-offset-3" >
+    <video id = "video" height = "500" ></video>
+    <a href="#" id="capture" class= "button is-big" >Take Photo</a>
+    <canvas id = "canvas" height = "300" ></canvas>
+    <!-- <img id= "photo" src="" alt="document photo"> -->
 
-  <script>
+  <!--   <script>
 
-    const constraints = { audio: false, video: { width: 1280, height: 720 } };
-    const canvas = document.getElementById('canvas'),
-          context = canvas.getContext('2d'),
-          photo = document.getElementById('photo');
+      const constraints = { audio: false, video: { width: 1280, height: 720 } };
+      const canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d'),
+            photo = document.getElementById('photo');
 
-    navigator.mediaDevices.getUserMedia(constraints)
-    .then(function(mediaStream) {
-      var video = document.querySelector('video');
-          video.srcObject = mediaStream;
-      video.onloadedmetadata = function(e) {
-        video.play();
-      };
-    })
-    .catch(function(err) { console.log(err.name + ": " + err.message);
-    });
-
-    document.getElementById('capture').addEventListener('click', function () {
-      context.drawImage(video, 0, 0, 400, 300);
-      photo.setAttribute('src', canvas.toDataURL('image/png'));
-    });
-
-    </script>
-</div>
-
-<!--   <script>
-    (function () {
-        var video = document.getElementById('video'),
-          canvas = document.getElementById('canvas'),
-          context = canvas.getContext('2d'),
-          photo = document.getElementById('photo')
-          vendorUrl = window.URL || window.webkitURL;
-        navigator.getMedia =  navigator.getUserMedia ||
-                              navigator.webkitGetUserMedia ||
-                              navigator.mozGetUserMedia ||
-                              navigator.msGetUserMedia
-        navigator.getMedia({
-          video: true,
-          audio: false
-        }, function(stream){
-          video.srcObject=stream;
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(mediaStream) {
+        var video = document.querySelector('video');
+            video.srcObject = mediaStream;
+        video.onloadedmetadata = function(e) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
           video.play();
-        }, function(error) {
-          //an error occured
-          //error.code
-        });
-        document.getElementById('capture').addEventListener('click', function () {
-          context.drawImage(video, 0, 0, 400, 300);
-          photo.setAttribute('src', canvas.toDataURL('image/png'));
-        });
-      })();
-  </script> -->
+        };
+      })
+      .catch(function(err) { console.log(err.name + ": " + err.message);
+      });
+
+      document.getElementById('capture').addEventListener('click', function () {
+        context.drawImage(video, 0, 0);
+        photo.setAttribute('src', canvas.toDataURL('image/png'));
+      });
+
+      </script> -->
+  </div>
 </div>
+
+<script>
+  (function() {
+    'use strict';
+    var video = document.querySelector('video')
+      , canvas;
+
+    /**
+     *  generates a still frame image from the stream in the <video>
+     *  appends the image to the <body>
+     */
+    function takeSnapshot() {
+      var img = document.querySelector('img') || document.createElement('img');
+      var context;
+      var width = video.offsetWidth
+        , height = video.offsetHeight;
+
+      canvas = canvas || document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, width, height);
+
+      img.src = canvas.toDataURL('image/png');
+      document.body.appendChild(img);
+    }
+
+    if (navigator.mediaDevices) {
+      // access the web cam
+      navigator.mediaDevices.getUserMedia({video: true})
+      // permission granted:
+        .then(function(stream) {
+          video.srcObject = stream;
+          video.play();
+          video.addEventListener('click', takeSnapshot);
+        })
+        // permission denied:
+        .catch(function(error) {
+          document.body.textContent = 'Could not access the camera. Error: ' + error.name;
+        });
+    }
+  })();
+
+</script>
