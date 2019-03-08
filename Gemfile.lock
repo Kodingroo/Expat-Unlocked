@@ -80,6 +80,8 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise-guests (0.6.1)
+      devise
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.1)
@@ -257,6 +259,7 @@ DEPENDENCIES
   carrierwave (~> 1.2)
   cloudinary (~> 1.9.1)
   devise
+  devise-guests
   dotenv-rails
   faker
   font-awesome-sass (~> 5.5.0)
