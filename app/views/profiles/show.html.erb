@@ -33,43 +33,47 @@
           </div>  
       </div>
 
-      <div class="col-xs-12 col-md-7 margin-top-mobile">
+      <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
         <% sorted = current_user.user_documents.order('due_date ASC')%>
-        <div class="due-card">
           <% sorted.first(3).each do |user_document| %>
+          <div class="due-card">
             <% unless user_document.state %>
-              <div class="due-card__title">
-                Bill Type
+              <div class="due-card__type">
+                <div class="due-card__title">
+                  Bill Type
+                </div>
+                <div class="due-card__subtitle">
+                  <%= user_document.document.company_name %> 
+                </div>
               </div>
-              <div class="due-card__subtitle">
-                <%= user_document.document.company_name %> 
+              <div class="due-card__date">
+                <div class="due-card__title">
+                  Due Date
+                </div>
+                <div class="due-card__subtitle">
+                  <%= user_document.due_date.strftime("%b %d %Y") %>
+                </div>
               </div>
-              <div class="due-card__title">
-                Due Date
-              </div>
-              <div class="due-card__subtitle">
-                <%= user_document.due_date.strftime("%b %d %Y") %>
-              </div>
-              <div class="due-card__title">
-                Days Remaining
-              </div>
-              <div class="due-card__subtitle">
-                <%= (user_document.due_date - Date.today).to_i %> 
+                <div class="due-card__remaining-days">
+                  <div class="due-card__title">
+                  Days Remaining
+                </div>
+                <div class="due-card__subtitle">
+                  <%= (user_document.due_date - Date.today).to_i %> 
+                </div>
               </div>
               <%= simple_form_for(user_document) do |f| %>
                 <%= f.label "Paid" %>
                 <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
               <% end %>
-            <% end %>
           <% end %>
         </div>  
+        <% end %>
       </div>
 
-      <div class="col-xs-12">
-              <div class="col-md-12">
-        <div class="card-border">
-            <div class="center-content due-date-background-blue">
-              <strong>Recently paid bils:</strong>
+      <div class="col-xs-12 col-md-9 user-card">
+            <div class="center-content">
+              <strong>Recently paid bills</strong>
             </div>
             <%if (current_user.user_documents.where(state: 1).count == 0)%>
             <%= "You haven't paid any bills recently" %>
@@ -83,8 +87,7 @@
             <% end %>
             <% end %>
             <% end %>
-        </div>
-      </div>
+ 
       </div>
 
       <div class="col-xs-12">
