@@ -10,19 +10,28 @@ class UserDocumentsController < ApplicationController
 
   def create
     @user_document = UserDocument.new(user_document_params)
-
     authorize @user_document
 
-    @user_document.user = current_user
+    if current_or_guest_user.username == "guest"
+      @user_document.user = guest_user
+    else
+      @user_document.user = current_user
+    end
 
     if @user_document.save
-      UserDocumentMailer.creation_confirmation(@user_document).deliver_now
-      api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
-      @document = find_document(api_data[:words])
-      assign_data(@user_document, api_data)
-      @user_document.save
+      if @user_document.photo.metadata.nil?
+        flash[:alert] = "Did you forget to upload your photo?"
+        redirect_back fallback_location:
+        @user_document.destroy
+      else
+        UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
+        @document = find_document(api_data[:words])
+        assign_data(@user_document, api_data)
+        @user_document.save
 
-      redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
+        redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
+      end
     else
       flash[:alert] = "You have errors!"
       render :index
@@ -30,7 +39,12 @@ class UserDocumentsController < ApplicationController
   end
 
   def show
-    authorize @user_document
+    # authorize @user_document
+    # if current_or_guest_user.username == "guest"
+    #   @user_document.user = guest_user
+    # else
+    #   @user_document.user = current_user
+    # end
   end
 
   def pay
@@ -91,10 +105,15 @@ class UserDocumentsController < ApplicationController
     # end
   end
 
+  def destroy
+    authorize @user_document
+    @user_document.destroy
+    redirect_to user_documents_path
+  end
+
   private
 
   def assign_data(user_document, api_data)
-    p api_data[:due_amount]
     user_document.document = @document
     user_document.due_date = api_data[:due_date]
     user_document.reminder_date = (api_data[:due_date] - 10)
@@ -105,18 +124,16 @@ class UserDocumentsController < ApplicationController
   def find_document(words)
     names = Document.all.map(&:jp_name)
     doc_to_add = ""
-    p "Words"
-    p words
-    p names
+
     words.each do |word|
       names.any? do |name|
         unless word.nil?
-          p doc_to_add = name if word.include?(name)
+          doc_to_add = name if word.include?(name)
         end
       end
     end
-    p "Doc to add"
-    p doc_to_add
+
+    doc_to_add
     Document.find_by(jp_name: doc_to_add)
   end
 
@@ -125,7 +142,15 @@ class UserDocumentsController < ApplicationController
   end
 
   def user_document_params
-    params.require(:user_document).permit(:title, :photo, :doc_type, :due_date, :remaining_balance, :current_due_amount, :reminder_date, :state)
+    params.require(:user_document).permit(
+      :title,
+      :photo,
+      :doc_type,
+      :due_date,
+      :remaining_balance,
+      :current_due_amount,
+      :reminder_date,
+      :state
+    )
   end
 end
-

@@ -84,6 +84,18 @@
             <% end %>
             <% end %>
         </div>
+        <%if (current_user.user_documents.where(state: 1).count == 0)%>
+        <%= "You haven't paid any bills recently" %>
+        <% end %>
+        <% sorted.first(3).each do |user_document| %>
+        <% if user_document.state %></p>
+        <p> <strong><%= user_document.title %> Bill: </strong> <%= user_document.due_date %></p>
+        <%= simple_form_for(user_document) do |f| %>
+        <%= f.label "Paid" %>
+        <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+        <% end %>
+        <% end %>
+        <% end %>
       </div>
       </div>
 
