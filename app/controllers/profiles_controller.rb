@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
 
     @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = []
+    @collection_type = params[:sort_by]
 
     if @user_documents.exists?
       @user_documents.each do |doc|
