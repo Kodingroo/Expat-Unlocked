@@ -19,6 +19,7 @@ class ProfilesController < ApplicationController
       end
 
       @categories.uniq!
+      @collection_type = params[:sort_by]
 
       @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
 
