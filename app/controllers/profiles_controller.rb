@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
 
     @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = []
+    @collection_type = params[:sort_by]
 
     if @user_documents.exists?
       @user_documents.each do |doc|
@@ -18,6 +19,7 @@ class ProfilesController < ApplicationController
       end
 
       @categories.uniq!
+      @collection_type = params[:sort_by]
 
       @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
 

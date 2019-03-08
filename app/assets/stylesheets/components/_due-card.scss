@@ -1,0 +1,11 @@
+.due-card {
+  display: flex;
+  align-items: center;
+  box-shadow: $box-shadow;
+  transition: all 0.2s ease-in;
+  background: #fff;
+  &:hover {
+    box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
+    transform: translateY(4px);
+  }
+}

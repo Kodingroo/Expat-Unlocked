@@ -1,6 +1,6 @@
 <div class="primary-wrapper">
   <div class="container">
-    <div class="row">
+    <div class="row profile">
 
       <div class="col-xs-12 col-md-3">
         <div class="user-card">
@@ -88,30 +88,33 @@
       </div>
 
       <div class="col-xs-12">
-        <%= form_tag profile_path, method: :get do |f| %>
-          <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
-          <%= select_tag "category", options_for_select(@categories, params[:category]) %>
-          <%= submit_tag 'apply' %>
-        <% end %>
-
-        <ul>
-          <% @user_documents.each do |doc| %>
-          <li>
-            <% if @collection_type == 'due date' %>
-              <%= doc.due_date %>
-            <% elsif @collection_type == 'most expensive' %>
-              <%= doc.current_due_amount %>
-            <% elsif @collection_type == 'least expensive' %>
-              <%= doc.current_due_amount %>
-            <% else %>
-              <%= doc.document.company_name %>
-              <%= doc.due_date%>
-              <%= doc.current_due_amount %>
-            <% end %>
-          </li>
+        <div class="filter">
+          <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
+            <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
+            <%= select_tag "category", options_for_select(@categories, params[:category]) %>
+            <%= submit_tag 'Filter', class: "button is-inverted is-small" %>
           <% end %>
-        </ul>
+
+          <div class="bills-list">
+            <% @user_documents.each do |doc| %>
+              <li>
+                <% if @collection_type == 'due date' %>
+                  <%= doc.due_date %>
+                <% elsif @collection_type == 'most expensive' %>
+                  <%= doc.current_due_amount %>
+                <% elsif @collection_type == 'least expensive' %>
+                  <%= doc.current_due_amount %>
+                <% else %>
+                  <%= doc.document.company_name %>
+                  <%= doc.due_date%>
+                  <%= doc.current_due_amount %>
+                <% end %>
+              </li>
+            <% end %>
+          </div>
       </div>
+    </div>
 
     </div>
   </div>
+

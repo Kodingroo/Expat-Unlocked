@@ -2,29 +2,64 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background: #fff;
   box-shadow: $box-shadow;
   transition: all 0.2s ease-in;
+  background: #fff;
   &:hover {
     box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
     transform: translateY(4px);
   }
+  &__header {
+    height: 100px;
+    position: relative;
+    background: $primary;
+    width: 100%;
+  }
   & .avatar {
-    width: 120px;
-    height: 120px;
-    box-shadow: $small-box-shadow;
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: -90px;
+    right: 0;
+    border: solid 4px #fff;
   }
   &__edit {
     background: $primary;
     margin-bottom: 5px;
+    text-align: center;
     &:hover {
       color: #fff;
     }
   }
-  &__title {
+  &__body {
+    flex-direction: column;
+    padding-top: 60px;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+  }
+  &__heading {
     color: rgb(44, 44, 44);
-    font-size: 26px;
+    font-size: 22px;
+  }
+  &__title {
+    color: rgb(75, 75, 75);
+    font-size: 14px;
+    font-weight: bold;
+    font-family: $title-font;
+  }
+  &__count {
+    color: $primary;
+    font-size: 20px;
+    font-family: $title-font;
+    font-weight: 900;
   }
 }
 
