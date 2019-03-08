@@ -21,14 +21,26 @@
   <div class="col-md-4 col-xs-10">
   <h3>Recognition</h3>
     <div class="card">
-      <%= link_to scan_info_path do %>
-      <div class="card-body scan">
-          <div class="card-icon">
-           <i class="material-icons">
-              linked_camera
-            </i>
-          </div>
-      </div>
+      <% if current_or_guest_user.username == "guest" %>
+        <%= link_to scan_info_path do %>
+        <div class="card-body scan">
+            <div class="card-icon">
+             <i class="material-icons">
+                linked_camera
+              </i>
+            </div>
+        </div>
+        <% end %>
+        <% else %>
+         <%= link_to profile_path do %>
+        <div class="card-body scan">
+            <div class="card-icon">
+             <i class="material-icons">
+                linked_camera
+              </i>
+            </div>
+        </div>
+        <% end %>
       <% end %>
       <div class="card-footer">
         <p>Get all the information your need. Upload a photo of your Japanese bill and we'll translate it for you.

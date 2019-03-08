@@ -56,7 +56,7 @@
 
         <div class="user-card">
           <div class="document__image">
-            <% @user_documents.each do |doc| %>
+            <% current_user.user_documents.each do |doc| %>
             <%= cl_image_tag doc.photo, :width => 300, :crop => "fit" %>
             <% end %>
           </div>
@@ -149,6 +149,7 @@
   </div>
 </div>
 
+
 <%= form_tag profile_path, method: :get do |f| %>
   <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
   <%= select_tag "category", options_for_select(@categories, params[:category]) %>
@@ -173,4 +174,3 @@
   <% end %>
 </ul>
 
-<%= console %>
