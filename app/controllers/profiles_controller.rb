@@ -8,23 +8,16 @@ class ProfilesController < ApplicationController
     @user_documents = UserDocument.all
     @user_document = UserDocument.new
     @documents = Document.all
-  end
 
-  def update
-    authorize @user
-    @user.update(user_params)
-
+    @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = []
-    if @user_documents.exists?
 
+    if @user_documents.exists?
       @user_documents.each do |doc|
         @categories << doc.document.company_name
       end
 
       @categories.uniq!
-      # @categories.reject! { |cat| cat == params[:category] }.uniq!
-      # raise
-      # @filter = @user_documents.find_all{ |doc| doc.document[:company_name].include?(@categories) }
 
       @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
 
@@ -37,22 +30,13 @@ class ProfilesController < ApplicationController
       else
         @user_documents
       end
-      # if @categories == @user_documents.document.company_name
-      #   @collection_type = params["/profile.#{@user.id}"][:query] if params["/profile.#{@user.id}"]
-      #   if @collection_type == 'due date'
-      #     date_query = "SELECT * FROM user_documents ORDER BY due_date DESC"
-      #     @user_documents = UserDocument.find_by_sql(date_query)
-      #   elsif @collection_type == 'most expensive'
-      #     expensive_query = "SELECT * FROM user_documents ORDER BY current_due_amount DESC"
-      #     @user_documents = UserDocument.find_by_sql(expensive_query)
-      #   elsif @collection_type == 'least expensive'
-      #     cheap_query = "SELECT * FROM user_documents ORDER BY current_due_amount ASC"
-      #     @user_documents = UserDocument.find_by_sql(cheap_query)
-      #   else
-      #     @user_documents = UserDocument.all
-      #   end
-      # end
     end
+
+  end
+
+  def update
+    authorize @user
+    @user.update(user_params)
 
   end
 
