@@ -27,3 +27,4 @@ class UserDocumentPolicy < ApplicationPolicy
     record.user == user
   end
 end
+end

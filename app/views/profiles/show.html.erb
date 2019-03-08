@@ -56,13 +56,16 @@
               <div class="due-card__subtitle">
                 <%= (user_document.due_date - Date.today).to_i %>
               </div>
-              <%= link_to ‘paid’, pay_user_document_path(user_document), method: :patch, remote: true, id: “#{user_document.id}-paid-document” %>
+              <%= simple_form_for(user_document) do |f| %>
+                <%= f.label "Paid" %>
+                <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
+              <% end %>
             <% end %>
           <% end %>
         </div>
       </div>
 
-      <div class="col^xs-12">
+      <div class="col-xs-12">
               <div class="col-md-12">
         <div class="card-border">
             <div class="center-content due-date-background-blue">
