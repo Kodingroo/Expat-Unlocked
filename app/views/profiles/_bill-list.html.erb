@@ -1,12 +1,12 @@
 <div class="bill-list__item">
-  <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
+  <%= link_to "", user_document_path(user_document), class: "bill-list__link", method: :get %>
   <div class="bill-list__company">
-    <%= doc.document.company_name %>
+    <%= user_document.document.company_name %>
   </div>
   <div class="bill-list__due-date">
-    <%= doc.due_date.strftime("%b %d, %Y") %>
+    <%= user_document.due_date.strftime("%b %d, %Y") %>
   </div>
   <div class="bill-list__due">
-    <%= doc.current_due_amount %>円
+    <%= user_document.current_due_amount %>円
   </div>
 </div>
