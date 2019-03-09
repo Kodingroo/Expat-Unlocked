@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     @documents = Document.all
 
     @sort_by = ["due date", "most expensive", "least expensive"]
-    @categories = []
+    @categories = ["all"]
     @collection_type = params[:sort_by]
 
     if @user_documents.exists?
@@ -21,9 +21,13 @@ class ProfilesController < ApplicationController
       @categories.uniq!
       @collection_type = params[:sort_by]
 
-      @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
+      unless params[:category] == "all"
+        @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
+      end
 
-      @user_documents = if params[:sort_by] == "due date"
+      @user_documents = if params[:category] == "all"
+        @user_documents.sort_by { |doc| doc.due_date }
+      elsif params[:sort_by] == "due date"
         @user_documents.sort_by { |doc| doc.due_date }
       elsif params[:sort_by] == "most expensive"
         @user_documents.sort_by { |doc| -doc.current_due_amount }
