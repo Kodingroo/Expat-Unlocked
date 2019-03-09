@@ -8,7 +8,7 @@
             <% unless current_user.photo.url.nil? %>
               <%= cl_image_tag current_user.photo, class: "avatar" %>
             <% else %>
-              <%= image_tag 'avatar.png', class: "avatar" %> 
+              <%= image_tag 'avatar.png', class: "avatar" %>
             <% end %>
           </div>
           <div class="user-card__body center-content">
@@ -24,13 +24,7 @@
                  <%= current_user.user_documents.count %>
               </div>
             </div>
-            <%= simple_form_for(@user_document) do |f| %>
-              <%= f.input :photo, required: true, label: 'Upload Bill'%>
-              <%= f.input :photo_cache, as: :hidden %>
-              <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-            <% end %>
           </div>
-        </div>  
       </div>
 
       <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
@@ -68,4 +62,4 @@
     </div> 
   </div>
 </div>
-   
+

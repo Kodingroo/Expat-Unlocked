@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
     @user_document = UserDocument.new
     @documents = Document.all
 
+
     @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = []
     @collection_type = params[:sort_by]
@@ -17,6 +18,7 @@ class ProfilesController < ApplicationController
       @user_documents.each do |doc|
         @categories << doc.document.company_name
       end
+
 
       @categories.uniq!
       @collection_type = params[:sort_by]
