@@ -2,32 +2,32 @@
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
 
-      <h1>Scan Info</h1>
-       <%#= simple_form_for(@user_document) do |f| %>
-          <%#= f.input :photo, required: true, as: :hidden%>
-          <%#= f.input :photo_cache, as: :hidden %>
-          <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-       <%# end %>
+      <h1 id = "title">Scan Info</h1>
+      <!--------------- classic form ----------------------------------------->
+       <%= simple_form_for(@user_document) do |f| %>
+          <%= f.input :photo, required: true, as: :hidden%>
+          <%= f.input :photo_cache, as: :hidden %>
+          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+       <% end %>
     </div>
   </div>
 </div>
 
+<!--------------- input image form ----------------------------------------->
 <input type="file" accept="image/*" id="file-input">
-
 <script>
   const fileInput = document.getElementById('file-input');
-
   fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
 </script>
 
 
   <div class="col-sm-6 col-sm-offset-3" >
-    <video id = "video" height = "500" ></video>
+    <video id = "video" ></video>
     <a href="#" id="capture" class= "button is-big" >Take Photo</a>
-    <canvas id = "canvas" height = "300" ></canvas>
-    <!-- <img id= "photo" src="" alt="document photo"> -->
-
-  <!--   <script>
+    <canvas id = "canvas" ></canvas>
+    <img id = "photo" src="" alt="">
+    <!--------------- Manual click camera ----------------------------------------->
+    <!--   <script>
 
       const constraints = { audio: false, video: { width: 1280, height: 720 } };
       const canvas = document.getElementById('canvas'),
@@ -53,50 +53,51 @@
       });
 
       </script> -->
+
+    <script>
+      (function() {
+        'use strict';
+        let video = document.querySelector('video')
+          , canvas;
+
+        /**
+         *  generates a still frame image from the stream in the <video>
+         *  appends the image to the <body>
+         */
+        function takeSnapshot() {
+          let img = document.getElementById('photo') || document.createElement('img');
+          let context;
+
+          canvas = canvas || document.createElement('canvas');
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+
+          context = canvas.getContext('2d');
+          context.drawImage(video, 0, 0);
+
+          img.src = canvas.toDataURL('image/png');
+          // document.body.appendChild(img);
+          let h = document.getElementById("title");
+          h.insertAdjacentHTML('afterbegin', `<img ${img.src} >`);
+        }
+
+        if (navigator.mediaDevices) {
+          // access the web cam
+          navigator.mediaDevices.getUserMedia({video: true})
+          // permission granted:
+          .then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+            video.addEventListener('click', takeSnapshot);
+            document.getElementById('capture').addEventListener('click', takeSnapshot);
+          })
+          // permission denied:
+          .catch(function(error) {
+            document.h1.textContent = 'Could not access the camera. Error: ' + error.name;
+          });
+        }
+      })();
+
+    </script>
   </div>
 </div>
-
-<script>
-  (function() {
-    'use strict';
-    var video = document.querySelector('video')
-      , canvas;
-
-    /**
-     *  generates a still frame image from the stream in the <video>
-     *  appends the image to the <body>
-     */
-    function takeSnapshot() {
-      var img = document.querySelector('img') || document.createElement('img');
-      var context;
-      var width = video.offsetWidth
-        , height = video.offsetHeight;
-
-      canvas = canvas || document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-
-      context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, width, height);
-
-      img.src = canvas.toDataURL('image/png');
-      document.body.appendChild(img);
-    }
-
-    if (navigator.mediaDevices) {
-      // access the web cam
-      navigator.mediaDevices.getUserMedia({video: true})
-      // permission granted:
-        .then(function(stream) {
-          video.srcObject = stream;
-          video.play();
-          video.addEventListener('click', takeSnapshot);
-        })
-        // permission denied:
-        .catch(function(error) {
-          document.body.textContent = 'Could not access the camera. Error: ' + error.name;
-        });
-    }
-  })();
-
-</script>
