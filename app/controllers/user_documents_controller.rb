@@ -87,7 +87,6 @@ class UserDocumentsController < ApplicationController
       end
     end
 
-    doc_to_add
     Document.find_by(jp_name: doc_to_add)
   end
 
