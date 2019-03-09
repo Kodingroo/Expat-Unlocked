@@ -23,7 +23,7 @@
           Days Remaining
         </div>
         <div class="due-card__subtitle">
-          <%= (user_document.due_date - Date.today).to_i %> 
+          <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Overdue" %>
         </div>
       </div>
       <%= check_box_tag dom_id(user_document, :checkbox), "", data: { url: user_document_path(user_document), remote: true }, get: :patch %>
