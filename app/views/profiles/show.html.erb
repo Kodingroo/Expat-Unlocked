@@ -11,83 +11,28 @@
               <%= image_tag 'avatar.png', class: "avatar" %>
             <% end %>
           </div>
-            <div class="user-card__body center-content">
-              <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
-              <div class="user-card__heading">
-                <%= current_user.first_name %> <%= current_user.last_name %>
+          <div class="user-card__body center-content">
+            <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
+            <div class="user-card__heading">
+              <%= current_user.first_name %> <%= current_user.last_name %>
+            </div>
+            <div class="user-card__info">
+              <div class="user-card__title">
+                Total bills uploaded
               </div>
-              <div class="user-card__info">
-                <div class="user-card__title">
-                    Total bills uploaded
-                </div>
-                <div class="user-card__count">
-                  <%= current_user.user_documents.count %>
-                </div>
+              <div class="user-card__count">
+                 <%= current_user.user_documents.count %>
               </div>
-              <%= simple_form_for(@user_document) do |f| %>
-                <%= f.input :photo, required: true, label: 'Upload Bill'%>
-                <%= f.input :photo_cache, as: :hidden %>
-                <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-              <% end %>
             </div>
           </div>
       </div>
 
       <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
-        <% sorted = current_user.user_documents.order('due_date ASC')%>
-          <% sorted.first(3).each do |user_document| %>
-          <div class="due-card">
-            <% unless user_document.state %>
-              <div class="due-card__type">
-                <div class="due-card__title">
-                  Bill Type
-                </div>
-                <div class="due-card__subtitle">
-                  <%= user_document.document.company_name %>
-                </div>
-              </div>
-              <div class="due-card__date">
-                <div class="due-card__title">
-                  Due Date
-                </div>
-                <div class="due-card__subtitle">
-                  <%= user_document.due_date.strftime("%b %d %Y") %>
-                </div>
-              </div>
-                <div class="due-card__remaining-days">
-                  <div class="due-card__title">
-                  Days Remaining
-                </div>
-                <div class="due-card__subtitle">
-                  <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Overdue" %>
-                </div>
-              </div>
-              <%= simple_form_for(user_document) do |f| %>
-                <%= f.label "Paid" %>
-                <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
-              <% end %>
-          <% end %>
-        </div>
-        <% end %>
+        <%= render "due-cards" %>
       </div>
 
       <div class="col-xs-12 col-md-9 user-card">
-            <div class="center-content">
-              <strong>Recently paid bills</strong>
-            </div>
-            <%if (current_user.user_documents.where(state: 1).count == 0)%>
-            <%= "You haven't paid any bills recently" %>
-            <% end %>
-            <% sorted.first(3).each do |user_document| %>
-            <% if user_document.state %>
-            <%= user_document.title %> Bill: <%= user_document.due_date %>
-            <%= simple_form_for(user_document) do |f| %>
-            <%= f.label "Paid" %>
-            <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
-            <% end %>
-            <% end %>
-            <% end %>
-
+        <%= render "paid" %>
       </div>
 
       <div class="col-xs-12">
@@ -99,68 +44,22 @@
           <% end %>
 
           <div class="bills-list">
-
-            <% @user_documents.each do |doc| %>
-                <% if @collection_type == 'due date' %>
-                  <div class="bill-list__item">
-                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
-                    <div class="bill-list__company">
-                      <%= doc.document.company_name %>
-                    </div>
-                    <div class="bill-list__due-date">
-                      <%= doc.due_date.strftime("%b %d, %Y") %>
-                    </div>
-                    <div class="bill-list__due">
-                      <%= doc.current_due_amount %>円
-                    </div>
-                  </div>
-                <% elsif @collection_type == 'most expensive' %>
-                  <div class="bill-list__item">
-                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
-                    <div class="bill-list__company">
-                      <%= doc.document.company_name %>
-                    </div>
-                    <div class="bill-list__due-date">
-                      <%= doc.due_date.strftime("%b %d, %Y") %>
-                    </div>
-                    <div class="bill-list__due">
-                      <%= doc.current_due_amount %>円
-                    </div>
-                  </div>
-                <% elsif @collection_type == 'least expensive' %>
-                  <div class="bill-list__item"
-                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
-                    <div class="bill-list__company">
-                     <%= doc.document.company_name %>
-                    </div>
-                    <div class="bill-list__due-date">
-                      <%= doc.due_date.strftime("%b %d, %Y") %>
-                    </div>
-                    <div class="bill-list__due">
-                      <%= doc.current_due_amount %>円
-                    </div>
-                  </div>
-                <% else %>
-                  <div class="bill-list__item">
-                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
-                    <div class="bill-list__company">
-                      <%= doc.document.company_name %>
-                    </div>
-                    <div class="bill-list__due-date">
-                      <%= doc.due_date.strftime("%b %d, %Y") %>
-                    </div>
-                    <div class="bill-list__due">
-                      <%= doc.current_due_amount %>円
-                    </div>
-                  </div>
-                <% end %>
+            <% @user_documents.each do |user_document| %>
+              <% if @collection_type == 'due date' %>
+                <%= render "bill-list", user_document: user_document %>
+              <% elsif @collection_type == 'most expensive' %>
+                <%= render "bill-list", user_document: user_document %>
+              <% elsif @collection_type == 'least expensive' %>
+                <%= render "bill-list", user_document: user_document %>
+              <% else %>
+                <%= render "bill-list", user_document: user_document %>
               <% end %>
-            </div>
-           </div>
+            <% end %>
+          </div>
         </div>
-
       </div>
-    </div>
+
+    </div> 
   </div>
 </div>
 

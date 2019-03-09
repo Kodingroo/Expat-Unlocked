@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_user, only: [ :show ]
+  before_action :set_user, only: [:show]
   skip_after_action :verify_authorized
 
   def show
@@ -26,22 +26,20 @@ class ProfilesController < ApplicationController
       @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
 
       @user_documents = if params[:sort_by] == "due date"
-        @user_documents.sort_by { |doc| doc.due_date }
-      elsif params[:sort_by] == "most expensive"
-        @user_documents.sort_by { |doc| -doc.current_due_amount }
-      elsif params[:sort_by] == "least expensive"
-        @user_documents.sort_by { |doc| doc.current_due_amount }
-      else
-        @user_documents
-      end
+                          @user_documents.sort_by { |doc| doc.due_date }
+                        elsif params[:sort_by] == "most expensive"
+                          @user_documents.sort_by { |doc| -doc.current_due_amount }
+                        elsif params[:sort_by] == "least expensive"
+                          @user_documents.sort_by { |doc| doc.current_due_amount }
+                        else
+                          @user_documents
+                        end
     end
-
   end
 
   def update
     authorize @user
     @user.update(user_params)
-
   end
 
   def update
@@ -64,6 +62,4 @@ class ProfilesController < ApplicationController
   def set_user
     @user = current_user
   end
-
 end
-
