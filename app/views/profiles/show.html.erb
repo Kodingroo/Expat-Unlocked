@@ -8,7 +8,7 @@
             <% unless current_user.photo.url.nil? %>
               <%= cl_image_tag current_user.photo, class: "avatar" %>
             <% else %>
-              <%= image_tag 'avatar.png', class: "avatar" %> 
+              <%= image_tag 'avatar.png', class: "avatar" %>
             <% end %>
           </div>
             <div class="user-card__body center-content">
@@ -30,7 +30,7 @@
                 <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
               <% end %>
             </div>
-          </div>  
+          </div>
       </div>
 
       <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
@@ -43,7 +43,7 @@
                   Bill Type
                 </div>
                 <div class="due-card__subtitle">
-                  <%= user_document.document.company_name %> 
+                  <%= user_document.document.company_name %>
                 </div>
               </div>
               <div class="due-card__date">
@@ -59,7 +59,7 @@
                   Days Remaining
                 </div>
                 <div class="due-card__subtitle">
-                  <%= (user_document.due_date - Date.today).to_i %> 
+                  <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Overdue" %>
                 </div>
               </div>
               <%= simple_form_for(user_document) do |f| %>
@@ -67,7 +67,7 @@
                 <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
               <% end %>
           <% end %>
-        </div>  
+        </div>
         <% end %>
       </div>
 
@@ -87,7 +87,7 @@
             <% end %>
             <% end %>
             <% end %>
- 
+
       </div>
 
       <div class="col-xs-12">
@@ -129,7 +129,7 @@
                   </div>
                 <% elsif @collection_type == 'least expensive' %>
                   <div class="bill-list__item"
-                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %> 
+                    <%= link_to "", user_document_path(doc), class: "bill-list__link", method: :get %>
                     <div class="bill-list__company">
                      <%= doc.document.company_name %>
                     </div>
@@ -160,7 +160,7 @@
         </div>
 
       </div>
-    </div> 
+    </div>
   </div>
 </div>
-   
+
