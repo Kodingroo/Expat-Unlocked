@@ -4,7 +4,7 @@
   <%if (current_user.user_documents.where(state: 1).count == 0)%>
     <%= "You haven't paid any bills recently" %>
   <% end %>
-  <% sorted.first(3).each do |user_document| %>
+  <% sorted.first(5).each do |user_document| %>
     <% if user_document.state %>
       <%= user_document.title %> Bill: <%= user_document.due_date %>
       <%= simple_form_for(user_document, remote: true)do |f| %>
