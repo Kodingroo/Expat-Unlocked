@@ -3,22 +3,23 @@
     <div class="col-sm-6 col-sm-offset-3">
 
       <h1 id = "title">Scan Info</h1>
+
       <!--------------- classic form ----------------------------------------->
+       <%#= simple_form_for(@user_document) do |f| %>
+          <%#= f.input :photo, required: true, as: :hidden, input_html: { id: 'photoForm'}%>
+          <%#= f.input :photo_cache, as: :hidden %>
+          <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+       <%# end %>
+
+
        <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true, as: :hidden%>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+          <%= f.input :photo, required: true, input_html: { id: 'photoForm', :value => "balbla"}%>
+          <%= f.input :photo_cache%>
+          <%= f.submit "Save Document", id: "save-button", class: "button is-inverted" %>
        <% end %>
     </div>
   </div>
 </div>
-
-<!--------------- input image form ----------------------------------------->
-<input type="file" accept="image/*" id="file-input">
-<script>
-  const fileInput = document.getElementById('file-input');
-  fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
-</script>
 
 
   <div class="col-sm-6 col-sm-offset-3" >
@@ -26,10 +27,10 @@
     <a href="#" id="capture" class= "button is-big" >Take Photo</a>
     <canvas id = "canvas" ></canvas>
     <img id = "photo" src="" alt="">
-    <!--------------- Manual click camera ----------------------------------------->
-    <!--   <script>
+    <!--------------- latest style ----------------------------------------->
+      <script>
 
-      const constraints = { audio: false, video: { width: 1280, height: 720 } };
+      const constraints = { audio: false, video: true };
       const canvas = document.getElementById('canvas'),
             context = canvas.getContext('2d'),
             photo = document.getElementById('photo');
@@ -47,57 +48,54 @@
       .catch(function(err) { console.log(err.name + ": " + err.message);
       });
 
-      document.getElementById('capture').addEventListener('click', function () {
-        context.drawImage(video, 0, 0);
+      function takePhoto(){
+        context.drawImage(video, 0, 0)
         photo.setAttribute('src', canvas.toDataURL('image/png'));
+      }
+
+      document.getElementById('capture').addEventListener('click', takePhoto);
+      document.getElementById('video').addEventListener('click', takePhoto);
+      console.log(document.getElementById('photoForm').val);
+
+      document.getElementById("save-button").addEventListener("submit", (event) => {
+        event.preventDefault();
+        // document.getElementById("photoForm").val("image/png");
+        console.log(document.getElementById('photoForm').value);
       });
 
-      </script> -->
+// -------------------------------------------------------------
+    // ("#save_snap").click(function (event){
 
-    <script>
-      (function() {
-        'use strict';
-        let video = document.querySelector('video')
-          , canvas;
+    // // save canvas image as data url (png format by default)
+    // var dataURL = canvas2.toDataURL();
+    // // set canvasImg image src to dataURL
+    // // so it can be saved as an image
+    // $('#canvasImg').attr("src" , dataURL);
+    // $('#downloader').attr("download" , "download.png");
+    // $('#downloader').attr("href" , dataURL);
 
-        /**
-         *  generates a still frame image from the stream in the <video>
-         *  appends the image to the <body>
-         */
-        function takeSnapshot() {
-          let img = document.getElementById('photo') || document.createElement('img');
-          let context;
+    //   //* trying to force download - jQuery trigger does not apply
 
-          canvas = canvas || document.createElement('canvas');
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
 
-          context = canvas.getContext('2d');
-          context.drawImage(video, 0, 0);
+    //   //Use CustomEvent Vanilla js: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
+    //   // In particular
+    //   var event1 = new MouseEvent('click', {
+    //   'view': window,
+    //   'bubbles': true,
+    //   'cancelable': true
+    //   });
 
-          img.src = canvas.toDataURL('image/png');
-          // document.body.appendChild(img);
-          let h = document.getElementById("title");
-          h.insertAdjacentHTML('afterbegin', `<img ${img.src} >`);
-        }
+    //   //NOW we are effectively clicking the element with the href attribute:
 
-        if (navigator.mediaDevices) {
-          // access the web cam
-          navigator.mediaDevices.getUserMedia({video: true})
-          // permission granted:
-          .then(function(stream) {
-            video.srcObject = stream;
-            video.play();
-            video.addEventListener('click', takeSnapshot);
-            document.getElementById('capture').addEventListener('click', takeSnapshot);
-          })
-          // permission denied:
-          .catch(function(error) {
-            document.h1.textContent = 'Could not access the camera. Error: ' + error.name;
-          });
-        }
-      })();
+    //   //Could use jQuery selector but then we would have to unwrap it
+    //   // to expose it to the native js function...
+    //   document.getElementById('downloader').dispatchEvent(event1);
 
-    </script>
+    //   });
+
+
+      </script>
+
   </div>
 </div>
+
