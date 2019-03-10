@@ -2,24 +2,30 @@
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
 
-      <h1 id = "title">Scan Info</h1>
+      <h1 id = "title">Basic upload</h1>
 
       <!--------------- classic form ----------------------------------------->
-       <%#= simple_form_for(@user_document) do |f| %>
-          <%#= f.input :photo, required: true, as: :hidden, input_html: { id: 'photoForm'}%>
+        <%#= simple_form_for(@user_document) do |f| %>
+          <%#= f.input :photo, required: true%>
           <%#= f.input :photo_cache, as: :hidden %>
           <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
        <%# end %>
 
-
+      <h1 id = "title">Take photo</h1>
        <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true, input_html: { id: 'photoForm', :value => "balbla"}%>
-          <%= f.input :photo_cache%>
-          <%= f.submit "Save Document", id: "save-button", class: "button is-inverted" %>
+          <%= f.input :photo,
+                       required: true,
+                       input_html: { id: 'photoForm',
+                                     value: 'blabla',
+                                     accept: 'image/png,image/gif,image/jpeg, image/jpg'
+                                   }%>
+          <%= f.input :photo_cache, as: :hidden%>
+          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
        <% end %>
     </div>
   </div>
 </div>
+
 
 
   <div class="col-sm-6 col-sm-offset-3" >
@@ -27,7 +33,6 @@
     <a href="#" id="capture" class= "button is-big" >Take Photo</a>
     <canvas id = "canvas" ></canvas>
     <img id = "photo" src="" alt="">
-    <!--------------- latest style ----------------------------------------->
       <script>
 
       const constraints = { audio: false, video: true };
@@ -49,50 +54,19 @@
       });
 
       function takePhoto(){
-        context.drawImage(video, 0, 0)
+        context.drawImage(video, 0, 0);
         photo.setAttribute('src', canvas.toDataURL('image/png'));
+        document.getElementById("photoForm").setAttribute('value', canvas.toDataURL('image/png'));
+        console.log(document.getElementById("photo"));
+        console.log(document.getElementById("photoForm"));
       }
 
       document.getElementById('capture').addEventListener('click', takePhoto);
       document.getElementById('video').addEventListener('click', takePhoto);
-      console.log(document.getElementById('photoForm').val);
-
-      document.getElementById("save-button").addEventListener("submit", (event) => {
-        event.preventDefault();
-        // document.getElementById("photoForm").val("image/png");
-        console.log(document.getElementById('photoForm').value);
-      });
-
-// -------------------------------------------------------------
-    // ("#save_snap").click(function (event){
-
-    // // save canvas image as data url (png format by default)
-    // var dataURL = canvas2.toDataURL();
-    // // set canvasImg image src to dataURL
-    // // so it can be saved as an image
-    // $('#canvasImg').attr("src" , dataURL);
-    // $('#downloader').attr("download" , "download.png");
-    // $('#downloader').attr("href" , dataURL);
-
-    //   //* trying to force download - jQuery trigger does not apply
-
-
-    //   //Use CustomEvent Vanilla js: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
-    //   // In particular
-    //   var event1 = new MouseEvent('click', {
-    //   'view': window,
-    //   'bubbles': true,
-    //   'cancelable': true
-    //   });
-
-    //   //NOW we are effectively clicking the element with the href attribute:
-
-    //   //Could use jQuery selector but then we would have to unwrap it
-    //   // to expose it to the native js function...
-    //   document.getElementById('downloader').dispatchEvent(event1);
-
-    //   });
-
+      // document.getElementById('upload-button').addEventListener('click', function(){
+      //   event.preventDefault();
+      //   console.log(document.getElementById("photoForm"));
+      // });
 
       </script>
 
