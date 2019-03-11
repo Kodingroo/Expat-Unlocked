@@ -1,32 +1,56 @@
 @import "base";
 
 .banner {
-  background-image: linear-gradient(
-      180deg,
-      rgba(105,39,255, 0.7) 50%,
-      rgba(0,0,0,0)
-    ),
-    asset-url("shrine-min.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    color: white;
-    & h1 {
-      font-family: $headers-font;
-      font-size: 48px;
-      font-weight: bold;
-      margin-top: -50px;
+  background: $primary;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  color: white;
+  & h1 {
+    font-family: $title-font;
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: -50px;
+  }
+  & h2 {
+    font-family: $body-font;
+    font-size: 36px;
+  }
+  & p {
+    opacity: 0.9;
+    font-weight: 200;
+    font-size: 24px;
+  }
+
+  & .card {
+    background: $secondary;
+    flex: 1 1 auto;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    transition: all 0.3s ease;
+    &:hover {
+      box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
+      transform: translateY(4px);
     }
-    & p {
-      opacity: 0.9;
-      font-weight: lighter;
-      font-size: 32px;
-    }
+  }
+  .result {
+    color: $primary;
+  }
+   .result-photo {
+  background-image: image-url('pic_water.png');
+  height: 350px;
+  background-size: cover;
+  color: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }
-
-
+}

@@ -1,9 +1,10 @@
 // COLORS
 
-$primary: rgb(133, 82, 234);
-$secondary: #f88c33;
+$primary: #474f85;
+$secondary: #f3f9fb;
 $tertiary: #479bdf;
-$purple: rgb(89, 48, 172);
+$nav: #98ccd3;
+$button: #51e3d4;
 //other colors?
 $blue: rgb(131, 125, 255);
 
@@ -16,13 +17,13 @@ $black: black;
 // FONTS
 $default-font-size: 18px;
 $heading-font-size: 48px;
-$title-font: 'Hind', sans-serif;
-$body-font: 'Open Sans', sans-serif;
+$title-font: 'Audiowide', cursive;
+$body-font: 'Raleway', sans-serif;
 $box-shadow: 0 6px 8px rgba(59, 59, 59, 0.2);
 $small-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
 
 h1 {
-  font-family: $headers-font;
+  font-family: 'Raleway';
   font-weight: bold;
 }
 body {
