@@ -14,41 +14,6 @@
   align-items: center;
 }
 
-.scan {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0,0,0,0)
-    ),
-    asset-url("camera-photo-min.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.track {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0,0,0,0)
-    ),
-    asset-url("calendar-min.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.city-location {
-    background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0,0,0,0)
-    ),
-    asset-url("tokyo-min.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
 
 #canvas {
   width: 100%;

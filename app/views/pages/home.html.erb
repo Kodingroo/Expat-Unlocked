@@ -4,7 +4,7 @@
     <div class="banner__header">
       <div class="col-xs-12 col-md-6">
         <h1 class="banner__heading">
-          <%= image_tag 'logo.png', class: "logo" %>JPbill
+          <%= image_tag 'logo.png', class: "logo" %>bill JP
         </h1>
         <div class="card">
           <div class="result">
@@ -19,7 +19,6 @@
             </ul>
           </div>
           <div class="result-photo">
-
           </div>
         </div>
       </div>
@@ -38,18 +37,12 @@
 <div class="container site-introduction">
   <div class="site-introduction">
     <h1>
-      We find bills in Japan to be frustratingly hard to read, understand and
-      deal with
+      Japanese bills can be hard to deal with. Let us help with:
     </h1>
-    <p>
-      We have created this app for all the people out there who get frustrated
-      at the bills they receive. Enabling you to gain independence from that
-      Japanese speaking partner and friend.
-    </p>
   </div>
   <div class="row">
     <div class="col-md-6 col-xs-10">
-      <h3>Recognition</h3>
+      <h2 class="center-content">Recognition</h2>
       <div class="card">
         <% if current_or_guest_user.username == "guest" %> <%= link_to
         scan_info_path do %>
@@ -79,12 +72,11 @@
       </div>
     </div>
     <div class="col-md-6 col-xs-10">
-      <h3>Tracking</h3>
+      <h2 class="center-content">Tracking</h2>
       <div class="card">
         <%= link_to user_documents_path do %>
         <div class="card-body track">
           <div class="card-icon">
-            <%= image_tag 'Asset 50.png', class: "logo" %>
           </div>
         </div>
         <% end %>

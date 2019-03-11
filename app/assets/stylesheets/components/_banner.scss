@@ -41,6 +41,7 @@
   }
   .result {
     color: $primary;
+    border-top: 10px;
   }
    .result-photo {
   background-image: image-url('pic_water.png');
@@ -51,6 +52,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-bottom: 10px;
 }
+}
+@media (max-width: 760px) {
+  .banner {
+    height: 100%;
+  }
 }

@@ -26,10 +26,15 @@ h1 {
   font-family: 'Raleway';
   font-weight: bold;
 }
-body {
+h2 {
+  font-family: $body-font;
+  font-size: 24px;
+  font-weight: bold;
+}
+body{
   font-family: $body-font;
   font-size: $default-font-size;
-  background: $white;
+  background: $secondary;
 }
 
 .site {
