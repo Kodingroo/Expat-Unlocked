@@ -2,48 +2,97 @@
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
 
-      <h1>Scan Info</h1>
+      <h1 id = "title">Basic upload</h1>
+
+      <!--------------- classic form ----------------------------------------->
+        <%#= simple_form_for(@user_document) do |f| %>
+          <%#= f.input :photo, required: true%>
+          <%#= f.input :photo_cache, as: :hidden %>
+          <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+       <%# end %>
+
+      <h1 id = "title">Take photo</h1>
        <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo, required: true, as: :hidden%>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+          <%= f.input :photo,
+                       required: true,
+                       remote: true,
+                       input_html: {
+                                     accept: 'image/png,image/gif,image/jpeg, image/jpg'
+                                   }
+          %>
+          <%= f.input :photo_cache, as: :hidden%>
+          <%= f.submit "Check Document",as: :hidden, id: "upload-button", class: "button is-inverted" %>
        <% end %>
     </div>
   </div>
 </div>
 
-<div class="col-sm-6 col-sm-offset-3" >
-  <video id = "video" height = "500" ></video>
-  <a href="#" id="capture" class= "button is-big" >Take Photo</a>
-  <canvas id = "canvas" height = "300" ></canvas>
-  <script>
-    (function () {
-        var video = document.getElementById('video'),
-          canvas = document.getElementById('canvas'),
-          context = canvas.getContext('2d'),
-          photo = document.getElementById('photo')
-          vendorUrl = window.URL || window.webkitURL;
+  <div class="col-sm-6 col-sm-offset-3" >
+    <video id = "video" ></video>
+    <a href="#" id="capture" class= "button is-big" >Take Photo</a>
+    <a href="#" id="submitOwn" class= "button is-big" >Photo is OK</a>
+    <canvas id = "canvas" ></canvas>
+    <img id = "photo" src="" alt="">
+      <script>
 
-        navigator.getMedia =  navigator.getUserMedia ||
-                              navigator.webkitGetUserMedia ||
-                              navigator.mozGetUserMedia ||
-                              navigator.msGetUserMedia
-        navigator.getMedia({
-          video: true,
-          audio: false
-        }, function(stream){
-          video.srcObject=stream;
+      const constraints = { audio: false, video: true };
+      const canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d'),
+            photo = document.getElementById('photo'),
+            photoForm = document.getElementById('new_user_document'),
+            photoInput = document.getElementById('user_document_photo');
+
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(mediaStream) {
+        var video = document.querySelector('video');
+            video.srcObject = mediaStream;
+        video.onloadedmetadata = function(e) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
           video.play();
-        }, function(error) {
-          //an error occured
-          //error.code
-        });
+        };
+      })
+      .catch(function(err) { console.log(err.name + ": " + err.message);
+      });
 
-        document.getElementById('capture').addEventListener('click', function () {
-          context.drawImage(video, 0, 0, 400, 300);
-          photo.setAttribute('src', canvas.toDataURL('image/png'));
+      function takePhoto(){
+        context.drawImage(video, 0, 0);
+        photo.setAttribute('src', canvas.toDataURL('image/png'));
+
+        // const formData = new FormData(photoForm);
+        // canvas.toBlob((blob) => {
+        //   formData.set("user_document[photo]", blob, 'image.png');
+        //   console.log(formData.get("user_document[photo]"));
+
+        //   const request = new XMLHttpRequest();
+        //   request.open("POST", photoForm.action);
+        //   request.send(formData);
+        //   request.onload = (event) => {
+        //     console.log(event);
+        //     window.location = event.currentTarget.responseURL;
+        //   };
+        // });
+      }
+
+      document.getElementById('capture').addEventListener('click', takePhoto);
+      document.getElementById('video').addEventListener('click', takePhoto);
+
+      document.getElementById('submitOwn').addEventListener('click', function(e){
+
+        const formData = new FormData(photoForm);
+        canvas.toBlob((blob) => {
+          formData.set("user_document[photo]", blob, 'image.png');
+          const request = new XMLHttpRequest();
+          request.open("POST", photoForm.action);
+          request.send(formData);
+          request.onload = (event) => {
+            console.log(event);
+            window.location = event.currentTarget.responseURL;
+          };
         });
-      })();
-  </script>
+      });
+
+      </script>
+  </div>
 </div>
 
