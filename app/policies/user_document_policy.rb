@@ -23,8 +23,9 @@ class UserDocumentPolicy < ApplicationPolicy
 
   def unpaid?
     update?
+  end
+
   def destroy?
     record.user == user
   end
-end
 end
