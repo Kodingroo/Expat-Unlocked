@@ -7,7 +7,10 @@ class ProfilesController < ApplicationController
     skip_authorization
     @user_documents = UserDocument.where(user_id: current_user)
     @user_document = UserDocument.new
-    @most_expensive_bill = UserDocument.most_expensive_bill(current_user)
+    @most_expensive_bill = UserDocument.most_expensive_bill(current_user)[0]
+    @least_expensive_bill = UserDocument.least_expensive_bill(current_user)[0]
+    @average_all_time = UserDocument.average_all_time(current_user)
+  
     @documents = Document.all
 
 

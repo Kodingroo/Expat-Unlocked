@@ -33,6 +33,37 @@
         </div>
       </div>
 
+      <div class="col-xs-12 col-md-9 margin-top-mobile general-stats box is-paddingless">
+        <div class="general-stats__heading">
+          <h2>General Stats</h2>
+        </div>
+        <div class="general-stats__highest">
+          <div class="general-stats__title"> 
+            Highest Bill
+          </div>
+          <div class="general-stats__content">
+            <%= number_with_delimiter(@most_expensive_bill.current_due_amount) %>円
+          </div>  
+        </div>
+        <div class="general-stats__lowest">
+          <div class="general-stats__title"> 
+            Lowest Bill
+          </div>
+          <div class="general-stats__content">
+            <%= number_with_delimiter(@least_expensive_bill.current_due_amount) %>円
+          </div>  
+        </div>
+        <div class="general-stats_average">
+          <div class="general-stats__title"> 
+            Average
+          </div>
+          <div class="general-stats__content">
+            <%= number_with_delimiter(@average_all_time.to_i) %>円
+          </div>  
+          </div>
+        </div>
+      </div>
+
       <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
         <%= render "due-cards" %>
       </div>

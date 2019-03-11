@@ -66,8 +66,18 @@ a:focus {
   align-items: center;
 }
 
+.box {
+  background: #fff;
+  color: $primary;
+  box-shadow: $box-shadow;
+}
+
 #is-marginless {
   margin: 0;
+}
+
+.is-paddingless {
+  padding: 0;
 }
 
 .margin-top-bottom {
