@@ -5,7 +5,7 @@ TODAY = Date.today
 # REGEX TO EXTRACT DATA
 REGEX = /[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[0-9]/
 DATE_REGEX = /([1-9]|[0-2]{2})月(\s?)([1-4]|[0-9]{1,2})日/
-YEN_REGEX = /(\d+,\s*\d+)円?/
+YEN_REGEX = /(\d+,\s*\d{3})円?/
 
 
 class VisionApi
@@ -66,7 +66,6 @@ class VisionApi
     response = HTTParty.post(url, body: data_json, headers: { 'Content-Type' => 'application/json' })
 
     parsed_data = JSON.parse(response.body)
-
 
     words = parsed_data["responses"][0]["textAnnotations"].map { |text| text["description"] }
 
