@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
 
     if @user_documents.exists?
       @user_documents.each do |doc|
-        @categories << doc.document.company_name
+        @categories << doc.document.company_name unless doc.document.company_name.nil?
       end
 
       @categories.uniq!

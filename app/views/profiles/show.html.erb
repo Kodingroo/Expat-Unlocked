@@ -25,17 +25,20 @@
               </div>
             </div>
           </div>
+          <%= simple_form_for(@user_document) do |f| %>
+            <%= f.input :photo, required: true, label: 'Upload Bill'%>
+            <%= f.input :photo_cache, as: :hidden %>
+            <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+          <% end %>
+        </div>
       </div>
+
       <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
         <%= render "due-cards" %>
-        <%= link_to "paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
-
       </div>
 
       <div class="col-xs-12 col-md-9 user-card">
         <%= render "paid" %>
-        <%= link_to "unpaid", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
-
       </div>
 
       <div class="col-xs-12">
