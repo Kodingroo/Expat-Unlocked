@@ -37,7 +37,10 @@
         <div class="row">
 
           <div class="col-xs-12 margin-top-mobile due-cards">
-            <%= render "due-cards" %>
+          <% sorted = current_user.user_documents.order('due_date ASC')%> 
+          <% sorted.first(3).each do |user_document| %>
+            <%= render "due-cards", user_document: user_document %>
+          <% end %>
           </div>
           <div class="col-xs-12 box">
             <%= render "paid" %>

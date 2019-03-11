@@ -1,6 +1,7 @@
 function deleteButton(innerHTML) {
   const button = document.getElementById('<%= @user_document.id %>-paid-document');
-  button.parentNode.innerHTML = innerHTML
+  console.log(button.parentNode.parentNode)
+  button.parentNode.parentNode.parentNode.removeChild(button.parentNode.parentNode)
 }
 
 function addButton(buttonHTML) {
