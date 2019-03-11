@@ -1,9 +1,9 @@
 .masonry { /* Masonry container */
-    column-count: 4;
+    column-count: 3;
     column-gap: 1em;
 }
 
-.item { /* Masonry bricks or child elements */
+.masonry-item { /* Masonry bricks or child elements */
     background-color: $white;
     display: inline-block;
     margin: 0 0 1em;
