@@ -25,15 +25,17 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
-
       <div class="col-xs-12 col-md-9 margin-top-mobile due-cards">
         <%= render "due-cards" %>
+        <%= link_to "paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
+
       </div>
 
       <div class="col-xs-12 col-md-9 user-card">
         <%= render "paid" %>
+        <%= link_to "unpaid", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
+
       </div>
 
       <div class="col-xs-12">
@@ -60,7 +62,7 @@
         </div>
       </div>
 
-    </div> 
+    </div>
   </div>
 </div>
 
