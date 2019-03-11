@@ -25,6 +25,7 @@ gem 'carrierwave', '~> 1.2'
 gem 'httparty', '~> 0.13.7'
 gem "geocoder"
 gem 'postmark-rails'
+gem 'av_capture'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
