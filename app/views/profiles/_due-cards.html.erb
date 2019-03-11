@@ -19,16 +19,16 @@ sorted.first(3).each do |user_document| %>
     <div class="due-card__remaining-days">
       <div class="due-card__title">
         Days Remaining: <%= (user_document.due_date - Date.today).positive? ?
-                (user_document.due_date - Date.today).to_i : "Overdue" %>
+        (user_document.due_date - Date.today).to_i : "Overdue" %>
       </div>
       <div class="due-card__image">
-        <%= cl_image_tag user_document.photo.url, :width => 600, :crop => "fill" %>
+        <%= cl_image_tag user_document.photo.url, :width => 600, :crop => "fill"
+        %>
       </div>
     </div>
 
     <%= link_to "paid", pay_user_document_path(user_document), method: :patch,
-    remote: true, id: "#{user_document.id}-paid-document" %>
-    <% end %>
+    remote: true, id: "#{user_document.id}-paid-document" %> <% end %>
   </div>
 </div>
 <% end %>
