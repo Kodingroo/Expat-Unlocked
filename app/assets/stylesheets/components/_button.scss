@@ -1,12 +1,14 @@
+@import "base";
 .button {
-  background: $secondary;
+  background: #FFE74C;
   border: none;
   border-radius: 5px;
-  color: $white;
+  color: $primary;
   height: 50px;
   font-size: $default-font-size;
   min-width: 120px;
   transition: opacity 0.2s ease-in-out;
+  font-weight: bold;
 }
 
 .is-inverted {

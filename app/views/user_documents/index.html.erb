@@ -1,24 +1,22 @@
-<div class="col-xs-12">
-  <div class="filter">
-    <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
-    <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
-    <%= select_tag "category", options_for_select(@categories, params[:category]) %>
-    <%= submit_tag 'Filter', class: "button is-inverted is-small" %>
-    <% end %>
 
     <div class="container">
-      <% unless current_user.first_name.nil? %>
+      <% unless current_user.first_name == "" %>
       <h1>
-        <%= current_user.first_name %> <%= current_user.last_name %>'s Documents
+        <%= current_user.first_name %>'s Documents
       </h1>
       <% else %>
       <h1>My Documents</h1>
       <% end %>
       <p>Browse through all your uploaded documents</p>
     </div>
-  </div>
-</div>
 
+  <div class="filter">
+    <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
+    <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
+    <%= select_tag "category", options_for_select(@categories, params[:category]) %>
+    <%= submit_tag 'Filter', class: "button is-inverted is-small" %>
+    <% end %>
+  </div>
 
 <div class="primary-wrapper">
   <div class="container">
@@ -26,7 +24,6 @@
       <% @user_documents.each do |doc| %>
       <div class="col-sm-12 col-md-4">
         <div class="document">
-          <div class="masonry-item">
             <%= link_to user_document_path(doc), method: :delete, class: "delete-user-document center-content" do %>
             <i class="fas fa-trash"></i>
             <% end %>
@@ -63,9 +60,6 @@
                 </p>
               </div>
             </div>
-
-
-          </div>
         </div>
       </div>
       <% end %>
