@@ -1,4 +1,4 @@
-@import "base";
+@import 'base';
 
 .banner {
   background: $primary;
@@ -11,6 +11,7 @@
   align-items: center;
   text-align: center;
   color: white;
+  padding-top: 20px;
   & h1 {
     font-family: $title-font;
     font-size: 48px;
@@ -45,19 +46,16 @@
     color: $primary;
     border-top: 10px;
   }
-   .result-photo {
-  background-image: image-url('pic_water.png');
-  min-height: 350px;
-  background-size: cover;
-  color: white;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 10px;
 }
+.result-photo {
+  width: 100%;
+  & img {
+    position: relative;
+    border-bottom: 10px;
+    width: 100%;
+  }
 }
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
   .banner {
     height: 100%;
     padding: 50px 0px;
