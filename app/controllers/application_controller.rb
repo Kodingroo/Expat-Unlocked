@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :current_or_guest_user
-  skip_before_filter :verify_authenticity_token, :only => [:update]
-
 
   include Pundit
 
