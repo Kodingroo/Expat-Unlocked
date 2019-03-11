@@ -11,7 +11,7 @@
 
 <div class="primary-wrapper">
   <div class="container">
-    <div class="row">     
+    <div class="row">
         <% current_user.user_documents.each do |doc| %>
           <div class="col-sm-12 col-md-4 margin-top-mobile">
             <div class="document">
@@ -37,7 +37,7 @@
                 </p>
               </div>
               <div class="document__image">
-                <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %>
+                <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fill", class: "height-change" %>
               </div>
               <div class="document__body">
                 <div class="document__data">
@@ -54,7 +54,7 @@
             </div>
              </div>
             <% end %>
-         
+
 
     </div>
   </div>

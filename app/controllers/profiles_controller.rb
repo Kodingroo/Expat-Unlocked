@@ -26,18 +26,18 @@ class ProfilesController < ApplicationController
       unless params[:category] == "all"
         @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
       end
-      
+
       @user_documents = if params[:category] == "all"
-                          @user_documents.sort_by { |doc| doc.due_date }
-                        elsif params[:sort_by] == "due date"
-                          @user_documents.sort_by { |doc| doc.due_date }
-                        elsif params[:sort_by] == "most expensive"
-                          @user_documents.sort_by { |doc| -doc.current_due_amount }
-                        elsif params[:sort_by] == "least expensive"
-                          @user_documents.sort_by { |doc| doc.current_due_amount }
-                        else
-                          @user_documents
-                        end
+        if params[:sort_by] == "due date"
+          @user_documents.sort_by { |doc| doc.due_date }
+        elsif params[:sort_by] == "most expensive"
+          @user_documents.sort_by { |doc| -doc.current_due_amount }
+        elsif params[:sort_by] == "least expensive"
+          @user_documents.sort_by { |doc| doc.current_due_amount }
+        else
+          @user_documents
+        end
+      end
     end
   end
 
