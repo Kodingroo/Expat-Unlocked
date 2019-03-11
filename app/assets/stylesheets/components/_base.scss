@@ -97,6 +97,9 @@ a:focus {
   padding: 40px 0;
   flex: 1;
 }
+.has-color {
+  background: $primary;
+}
 
 .sticky {
   position: -webkit-sticky; /* Safari */
@@ -112,6 +115,14 @@ a:focus {
   z-index: 100;
 }
 
+@media (max-width: 760px) {
+  .sticky-top {
+  position: -webkit-sticky; /* Safari */
+  position: relative;
+  top: 0;
+  z-index: 100;
+}
+}
 .pink {
   background-color: $pink;
 }
