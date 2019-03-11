@@ -25,6 +25,11 @@
               </div>
             </div>
           </div>
+          <%= simple_form_for(@user_document) do |f| %>
+            <%= f.input :photo, required: true, label: 'Upload Bill'%>
+            <%= f.input :photo_cache, as: :hidden %>
+            <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+          <% end %>
         </div>
       </div>
 
