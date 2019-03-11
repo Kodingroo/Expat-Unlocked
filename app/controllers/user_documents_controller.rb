@@ -60,7 +60,7 @@ class UserDocumentsController < ApplicationController
         redirect_back fallback_location:
         @user_document.destroy
       else
-        UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
         api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
         @document = find_document(api_data[:words])
         assign_data(@user_document, api_data)
@@ -180,6 +180,7 @@ class UserDocumentsController < ApplicationController
     params.require(:user_document).permit(
       :title,
       :photo,
+      :photo_cache,
       :doc_type,
       :due_date,
       :remaining_balance,
