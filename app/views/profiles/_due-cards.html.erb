@@ -1,3 +1,4 @@
+
 <% sorted = current_user.user_documents.order('due_date ASC')%> <%
 sorted.first(3).each do |user_document| %>
 <div class="col-xs-12 col-md-4">
@@ -32,3 +33,4 @@ sorted.first(3).each do |user_document| %>
   </div>
 </div>
 <% end %>
+
