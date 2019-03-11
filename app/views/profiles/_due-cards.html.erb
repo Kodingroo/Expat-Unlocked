@@ -24,7 +24,7 @@
                 Days Remaining
               </div>
               <div class="due-card__subtitle">
-                <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Overdue" %>
+                <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Your bill is #{pluralize((user_document.due_date - Date.today).to_i.abs, "day")} overdue." %>
               </div>
             </div>
             <%= link_to "paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
