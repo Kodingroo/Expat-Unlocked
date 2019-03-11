@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
     skip_authorization
     @user_documents = UserDocument.where(user_id: current_user)
     @user_document = UserDocument.new
+    @most_expensive_bill = UserDocument.most_expensive_bill(current_user)
     @documents = Document.all
 
 
@@ -19,14 +20,13 @@ class ProfilesController < ApplicationController
         @categories << doc.document.company_name
       end
 
-
       @categories.uniq!
       @collection_type = params[:sort_by]
 
       unless params[:category] == "all"
         @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
       end
-      
+
       @user_documents = if params[:category] == "all"
                           @user_documents.sort_by { |doc| doc.due_date }
                         elsif params[:sort_by] == "due date"
