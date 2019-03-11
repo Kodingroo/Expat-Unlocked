@@ -1,27 +1,3 @@
-      <div class="col-xs-12">
-        <div class="filter">
-          <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
-            <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
-            <%= select_tag "category", options_for_select(@categories, params[:category]) %>
-            <%= submit_tag 'Filter', class: "button is-inverted is-small" %>
-          <% end %>
-
-          <div class="bills-list">
-            <% @user_documents.each do |user_document| %>
-              <% if @collection_type == 'due date' %>
-                <%= render "bill-list", user_document: user_document %>
-              <% elsif @collection_type == 'most expensive' %>
-                <%= render "bill-list", user_document: user_document %>
-              <% elsif @collection_type == 'least expensive' %>
-                <%= render "bill-list", user_document: user_document %>
-              <% else %>
-                <%= render "bill-list", user_document: user_document %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
 <div class="container">
   <% unless current_user.first_name.nil? %>
     <h1>
@@ -32,7 +8,6 @@
   <% end %>
   <p>Browse through all your uploaded documents</p>
 </div>
-
 
 <div class="primary-wrapper">
   <div class="container">
