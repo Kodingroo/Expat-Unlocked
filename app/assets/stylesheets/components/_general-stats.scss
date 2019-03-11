@@ -1,0 +1,36 @@
+.general-stats {
+  padding: 0 20px;
+  background: $primary;
+  &__body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+  }
+
+  &__heading {
+    flex: 1 1 100%;
+    background: $primary;
+    color: #fff;
+    padding: 15px 5px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & h2 {
+      font-size: 30px;
+      margin: 0;
+    }
+  }
+  &__title {
+    font-size: 25px;
+    font-weight: 100;
+    padding: 15px 5px;
+  }
+  &__content {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 15px 5px;
+  }
+}

@@ -7,6 +7,10 @@ class ProfilesController < ApplicationController
     skip_authorization
     @user_documents = UserDocument.where(user_id: current_user.id)
     @user_document = UserDocument.new
+    @most_expensive_bill = UserDocument.most_expensive_bill(current_user)[0]
+    @least_expensive_bill = UserDocument.least_expensive_bill(current_user)[0]
+    @average_all_time = UserDocument.average_all_time(current_user)
+  
     @documents = Document.all
 
     @sort_by = ["due date", "most expensive", "least expensive"]
@@ -21,7 +25,6 @@ class ProfilesController < ApplicationController
       @user_documents.each do |doc|
         @categories << doc.document.company_name unless doc.document.company_name.nil?
       end
-
 
       @categories.uniq!
       @collection_type = params[:sort_by]

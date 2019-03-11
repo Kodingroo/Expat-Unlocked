@@ -1,4 +1,7 @@
 import 'bootstrap';
+import counting from './countup';
+
+console.log(counting());
 
 const nav = document.querySelector('#navigation');
 const dropdown = document.querySelector('#navigation__hamburger');
