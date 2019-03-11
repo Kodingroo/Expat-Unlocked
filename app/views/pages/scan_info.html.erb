@@ -15,22 +15,22 @@
        <%= simple_form_for(@user_document) do |f| %>
           <%= f.input :photo,
                        required: true,
-                       input_html: { id: 'photoForm',
-                                     value: 'blabla',
+                       remote: true,
+                       input_html: {
                                      accept: 'image/png,image/gif,image/jpeg, image/jpg'
-                                   }%>
+                                   }
+          %>
           <%= f.input :photo_cache, as: :hidden%>
-          <%= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
+          <%= f.submit "Check Document",as: :hidden, id: "upload-button", class: "button is-inverted" %>
        <% end %>
     </div>
   </div>
 </div>
 
-
-
   <div class="col-sm-6 col-sm-offset-3" >
     <video id = "video" ></video>
     <a href="#" id="capture" class= "button is-big" >Take Photo</a>
+    <a href="#" id="submitOwn" class= "button is-big" >Photo is OK</a>
     <canvas id = "canvas" ></canvas>
     <img id = "photo" src="" alt="">
       <script>
@@ -38,7 +38,9 @@
       const constraints = { audio: false, video: true };
       const canvas = document.getElementById('canvas'),
             context = canvas.getContext('2d'),
-            photo = document.getElementById('photo');
+            photo = document.getElementById('photo'),
+            photoForm = document.getElementById('new_user_document'),
+            photoInput = document.getElementById('user_document_photo');
 
       navigator.mediaDevices.getUserMedia(constraints)
       .then(function(mediaStream) {
@@ -56,17 +58,39 @@
       function takePhoto(){
         context.drawImage(video, 0, 0);
         photo.setAttribute('src', canvas.toDataURL('image/png'));
-        document.getElementById("photoForm").setAttribute('value', canvas.toDataURL('image/png'));
-        console.log(document.getElementById("photo"));
-        console.log(document.getElementById("photoForm"));
+
+        // const formData = new FormData(photoForm);
+        // canvas.toBlob((blob) => {
+        //   formData.set("user_document[photo]", blob, 'image.png');
+        //   console.log(formData.get("user_document[photo]"));
+
+        //   const request = new XMLHttpRequest();
+        //   request.open("POST", photoForm.action);
+        //   request.send(formData);
+        //   request.onload = (event) => {
+        //     console.log(event);
+        //     window.location = event.currentTarget.responseURL;
+        //   };
+        // });
       }
 
       document.getElementById('capture').addEventListener('click', takePhoto);
       document.getElementById('video').addEventListener('click', takePhoto);
-      // document.getElementById('upload-button').addEventListener('click', function(){
-      //   event.preventDefault();
-      //   console.log(document.getElementById("photoForm"));
-      // });
+
+      document.getElementById('submitOwn').addEventListener('click', function(e){
+
+        const formData = new FormData(photoForm);
+        canvas.toBlob((blob) => {
+          formData.set("user_document[photo]", blob, 'image.png');
+          const request = new XMLHttpRequest();
+          request.open("POST", photoForm.action);
+          request.send(formData);
+          request.onload = (event) => {
+            console.log(event);
+            window.location = event.currentTarget.responseURL;
+          };
+        });
+      });
 
       </script>
 

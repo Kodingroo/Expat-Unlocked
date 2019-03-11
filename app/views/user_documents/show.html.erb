@@ -43,7 +43,12 @@
         </div>
       </div>
     <div style="padding: 20px;">
-      <%= button_to "Save this document", profile_path, :class => "button", :method => :get %>
+      <%#= button_to "Save this document", profile_path, :class => "button", :method => :get %>
+      <div>
+          <%= simple_form_for @user_document do |f| %>
+          <%= f.submit "Save", class: "button" %>
+          <% end %>
+        </div>
     </div>
     <div style="padding: 20px;">
       <%= button_to "Delete document", scan_info_path,  :class => "button", :method => :get %>
@@ -76,4 +81,4 @@
   </div>
 </div>
 </div>
-<%= console %>
+

@@ -10,6 +10,7 @@ gem 'puma'
 gem 'rails', '5.2.2'
 gem 'redis'
 
+gem 'carrierwave-base64'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass', '~> 5.5.0'
@@ -17,7 +18,7 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-
+gem 'jquery-rails'
 gem 'faker'
 gem "pundit"
 gem 'cloudinary', '~> 1.9.1'
