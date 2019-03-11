@@ -1,32 +1,34 @@
 <% sorted = current_user.user_documents.order('due_date ASC')%>
   <% sorted.first(3).each do |user_document| %>
-    <div class="due-card">
-      <% unless user_document.state %>
-        <div class="due-card__type">
-          <div class="due-card__title">
-            Bill Type
-          </div>
-          <div class="due-card__subtitle">
-            <%= user_document.document.company_name %> 
-          </div>
-        </div>
-        <div class="due-card__date">
-          <div class="due-card__title">
-            Due Date
-          </div>
-          <div class="due-card__subtitle">
-            <%= user_document.due_date.strftime("%b %d %Y") %>
-          </div>
-        </div>
-        <div class="due-card__remaining-days">
-          <div class="due-card__title">
-          Days Remaining
-        </div>
-        <div class="due-card__subtitle">
-          <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Overdue" %>
-        </div>
-      </div>
-      <%= link_to "paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
-    <% end %>
-  </div>  
+    <div class="col-md-4">
+        <div class="due-card">
+            <% unless user_document.state %>
+              <div class="due-card__type">
+                <div class="due-card__title">
+                  Bill Type
+                </div>
+                <div class="due-card__subtitle">
+                  <%= user_document.document.company_name %> 
+                </div>
+              </div>
+              <div class="due-card__date">
+                <div class="due-card__title">
+                  Due Date
+                </div>
+                <div class="due-card__subtitle">
+                  <%= user_document.due_date.strftime("%b %d %Y") %>
+                </div>
+              </div>
+              <div class="due-card__remaining-days">
+                <div class="due-card__title">
+                Days Remaining
+              </div>
+              <div class="due-card__subtitle">
+                <%= (user_document.due_date - Date.today).positive? ? (user_document.due_date - Date.today).to_i : "Overdue" %>
+              </div>
+            </div>
+            <%= link_to "paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document" %>
+          <% end %>
+        </div>  
+    </div>
 <% end %>
