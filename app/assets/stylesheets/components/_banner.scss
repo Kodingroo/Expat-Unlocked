@@ -55,6 +55,13 @@
     width: 100%;
   }
 }
+.banner .row {
+  text-align: center;
+  margin-top: 50px;
+}
+.banner h1 {
+  color: white;
+}
 @media (max-width: 1000px) {
   .banner {
     height: 100%;
