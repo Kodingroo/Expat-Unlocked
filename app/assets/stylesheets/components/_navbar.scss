@@ -1,12 +1,14 @@
+@import "base";
 #navigation {
   margin: 0px;
-  background-color: $tertiary;
+  background-color: $nav;
   padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   & a {
-    color: #fff;
+    color: $primary;
+    font-weight: bold;
     transition: opacity 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     padding: 23px 5px;
     transition: background 0.2s ease;
