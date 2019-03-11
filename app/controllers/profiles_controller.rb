@@ -5,14 +5,17 @@ class ProfilesController < ApplicationController
   def show
     # authorize @user
     skip_authorization
-    @user_documents = UserDocument.where(user_id: current_user)
+    @user_documents = UserDocument.where(user_id: current_user.id)
     @user_document = UserDocument.new
     @documents = Document.all
-
 
     @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = ["all"]
     @collection_type = params[:sort_by]
+
+    unless params[:category]
+      params[:category] = "all"
+    end
 
     if @user_documents.exists?
       @user_documents.each do |doc|
@@ -37,6 +40,8 @@ class ProfilesController < ApplicationController
         else
           @user_documents
         end
+      else
+        @user_documents
       end
     end
   end
