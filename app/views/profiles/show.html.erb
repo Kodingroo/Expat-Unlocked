@@ -1,4 +1,5 @@
-<div class="primary-wrapper is-paddingless">
+<div class="primary-wrapper is-paddingless has-color">
+<div class="container">
     <div class="row profile">
 
       <div class="col-xs-12 col-md-3 is-marginless is-paddingless sticky-top">
@@ -38,44 +39,42 @@
           <div class="col-xs-12 margin-top-mobile due-cards">
             <%= render "due-cards" %>
           </div>
-    
           <div class="col-xs-12 box">
             <%= render "paid" %>
           </div>
 
           <div class="col-xs-12 margin-top-mobile general-stats box">
             <div class="general-stats__heading">
-              <h2>General Stats</h2>
+              <h2>Your billing stats</h2>
             </div>
             <div class="general-stats__body">
               <div class="general-stats__highest">
-                <div class="general-stats__title"> 
+                <div class="general-stats__title">
                   Highest Bill
                 </div>
                 <div class="general-stats__content">
                   <%= number_with_delimiter(@most_expensive_bill.current_due_amount) %>円
-                </div>  
+                </div>
               </div>
               <div class="general-stats__lowest">
-                <div class="general-stats__title"> 
+                <div class="general-stats__title">
                   Lowest Bill
                 </div>
                 <div class="general-stats__content">
                   <%= number_with_delimiter(@least_expensive_bill.current_due_amount) %>円
-                </div>  
+                </div>
               </div>
               <div class="general-stats_average">
-                <div class="general-stats__title"> 
+                <div class="general-stats__title">
                   Average
                 </div>
                 <div class="general-stats__content">
                   <%= number_with_delimiter(@average_all_time.to_i) %>円
-                </div>  
+                </div>
               </div>
             </div>
           </div>
 
-          
 
           <div class="col-xs-12">
             <div class="filter">
@@ -103,6 +102,7 @@
         </div>
       </div>
 
+    </div>
     </div>
 </div>
 

@@ -9,5 +9,5 @@ function addButton(buttonHTML) {
 }
 
 
-deleteButton();
+deleteButton("");
 addButton('<%= link_to 'paid', pay_user_document_path(@user_document), method: :patch, remote: true, id: "#{@user_document.id}-paid-document" %>');

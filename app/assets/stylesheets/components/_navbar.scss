@@ -8,7 +8,7 @@
   align-items: center;
   overflow: hidden;
   & a {
-    color: #fff;
+    color: $primary;
     font-weight: bold;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     padding: 15px 5px;
