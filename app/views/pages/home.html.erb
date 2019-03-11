@@ -4,7 +4,7 @@
     <div class="banner__header">
       <div class="col-xs-12 col-md-6">
         <h1 class="banner__heading">
-          <%= image_tag 'logo.png', class: "logo" %>bill JP
+          <%= image_tag 'logo.png', class: "logo" %>bills jp
         </h1>
         <div class="card">
           <div class="result">
@@ -44,24 +44,10 @@
     <div class="col-md-6 col-xs-10">
       <h2 class="center-content">Recognition</h2>
       <div class="card">
-        <% if current_or_guest_user.username == "guest" %> <%= link_to
-        scan_info_path do %>
+        <%= link_to scan_info_path do %>
         <div class="card-body scan">
-          <div class="card-icon">
-            <i class="material-icons">
-              linked_camera
-            </i>
-          </div>
         </div>
-        <% end %> <% else %> <%= link_to profile_path do %>
-        <div class="card-body scan">
-          <div class="card-icon">
-            <i class="material-icons">
-              linked_camera
-            </i>
-          </div>
-        </div>
-        <% end %> <% end %>
+        <% end %>
         <div class="card-footer">
           <p>
             Get all the information your need. Upload a photo of your Japanese
@@ -74,10 +60,8 @@
     <div class="col-md-6 col-xs-10">
       <h2 class="center-content">Tracking</h2>
       <div class="card">
-        <%= link_to user_documents_path do %>
+        <%= link_to profile_path(current_user) do %>
         <div class="card-body track">
-          <div class="card-icon">
-          </div>
         </div>
         <% end %>
         <div class="card-footer">
