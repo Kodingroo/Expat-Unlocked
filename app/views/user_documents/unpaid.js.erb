@@ -1,0 +1,13 @@
+function deleteButton(innerHTML) {
+  const button = document.getElementById('<%= @user_document.id %>-unpaid-document');
+  button.parentNode.innerHTML = innerHTML
+}
+
+function addButton(buttonHTML) {
+  const element = document.querySelector('.due-card-list');
+  element.insertAdjacentHTML('afterend', buttonHTML);
+}
+
+
+deleteButton();
+addButton('<%= link_to 'paid', pay_user_document_path(@user_document), method: :patch, remote: true, id: "#{@user_document.id}-paid-document" %>');

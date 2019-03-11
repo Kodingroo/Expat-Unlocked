@@ -1,11 +1,47 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_user_document, only: [:show, :update, :destroy]
+  before_action :set_user_document, only: [:show, :update, :pay, :unpaid]
   # before_action :authenticate_user!
 
   def index
     @user_documents = policy_scope(UserDocument).order(created_at: :desc)
     @user_document = UserDocument.new
+
+    @sort_by = ["due date", "most expensive", "least expensive"]
+    @categories = ["all"]
+    @collection_type = params[:sort_by]
+
+    unless params[:category]
+      params[:category] = "all"
+    end
+
+    if @user_documents.exists?
+      @user_documents.each do |doc|
+        @categories << doc.document.company_name
+      end
+
+
+      @categories.uniq!
+      @collection_type = params[:sort_by]
+
+      unless params[:category] == "all"
+        @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
+      end
+
+      @user_documents = if params[:category] == "all"
+        if params[:sort_by] == "due date"
+          @user_documents.sort_by { |doc| doc.due_date }
+        elsif params[:sort_by] == "most expensive"
+          @user_documents.sort_by { |doc| -doc.current_due_amount }
+        elsif params[:sort_by] == "least expensive"
+          @user_documents.sort_by { |doc| doc.current_due_amount }
+        else
+          @user_documents
+        end
+      else
+        @user_documents
+      end
+    end
   end
 
   def create
@@ -24,7 +60,7 @@ class UserDocumentsController < ApplicationController
         redirect_back fallback_location:
         @user_document.destroy
       else
-        UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
         api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
         @document = find_document(api_data[:words])
         assign_data(@user_document, api_data)
@@ -33,7 +69,7 @@ class UserDocumentsController < ApplicationController
         redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
       end
     else
-      flash[:alert] = "You haz errors!"
+      flash[:alert] = "You have errors!"
       render :index
     end
   end
@@ -47,16 +83,62 @@ class UserDocumentsController < ApplicationController
     # end
   end
 
+  def pay
+    authorize @user_document
+    @user_document.state = true
+
+    if @user_document.save
+      respond_to do |format|
+        format.html { redirect_to profile_path(@user) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render 'profiles/show' }
+        format.js  # <-- idem
+      end
+    end
+  end
+
+   def unpaid
+    authorize @user_document
+    @user_document.state = false
+
+    if @user_document.save
+      respond_to do |format|
+        format.html { redirect_to profile_path(@user) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render 'profiles/show' }
+        format.js  # <-- idem
+      end
+    end
+  end
+
+
   def update
     @old_date = @user_document.reminder_date
     @user_document.update(user_document_params)
     authorize @user_document
-    if @user_document.save && @old_date != @user_document.reminder_date
-      UserDocumentMailer.creation_confirmation(@user_document).deliver_now
-      redirect_back fallback_location: user_document_path(@user_document)
+    if @user_document.save
+      respond_to do |format|
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+        format.html { redirect_to profile_path(@user) }
+      end
     else
-      redirect_back fallback_location: user_document_path(@user_document)
+      respond_to do |format|
+        format.html { render 'profiles/show' }
+        format.js  # <-- idem
+      end
     end
+    # if @user_document.save && @old_date != @user_document.reminder_date
+    #   UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+    #   redirect_back fallback_location: user_document_path(@user_document)
+    # else
+    #   redirect_back fallback_location: user_document_path(@user_document)
+    # end
   end
 
   def destroy
@@ -98,6 +180,7 @@ class UserDocumentsController < ApplicationController
     params.require(:user_document).permit(
       :title,
       :photo,
+      :photo_cache,
       :doc_type,
       :due_date,
       :remaining_balance,

@@ -7,11 +7,7 @@
   <% sorted.first(5).each do |user_document| %>
     <% if user_document.state %>
       <%= user_document.title %> Bill: <%= user_document.due_date %>
-      <%= simple_form_for(user_document, remote: true)do |f| %>
-        <%= f.label "Paid" %>
-        <%= f.check_box :state, :input_html => {"data-remote" => true, "data-url" => "/update", "data-type" => :json}
-%>
-      <% end %>
+      <%= link_to "unpaid", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
     <% end %>
   <% end %>
 </div>
