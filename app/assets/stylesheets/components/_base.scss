@@ -72,12 +72,12 @@ a:focus {
   box-shadow: $box-shadow;
 }
 
-#is-marginless {
-  margin: 0;
+.is-marginless {
+  margin: 0 !important;
 }
 
 .is-paddingless {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .margin-top-bottom {
@@ -94,6 +94,13 @@ a:focus {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 90px;
+  z-index: 100;
+}
+
+.sticky-top {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
   z-index: 100;
 }
 
@@ -122,4 +129,8 @@ a:focus {
 
 .profile .col-xs-12 {
   margin: 20px 0;
+}
+
+.has-background-primary {
+  background: $primary;
 }
