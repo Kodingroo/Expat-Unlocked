@@ -20,7 +20,6 @@ class UserDocumentsController < ApplicationController
         @categories << doc.document.company_name
       end
 
-
       @categories.uniq!
       @collection_type = params[:sort_by]
 
@@ -75,7 +74,7 @@ class UserDocumentsController < ApplicationController
   end
 
   def show
-    # authorize @user_document
+    authorize @user_document
     # if current_or_guest_user.username == "guest"
     #   @user_document.user = guest_user
     # else
@@ -100,7 +99,7 @@ class UserDocumentsController < ApplicationController
     end
   end
 
-   def unpaid
+  def unpaid
     authorize @user_document
     @user_document.state = false
 
@@ -117,8 +116,13 @@ class UserDocumentsController < ApplicationController
     end
   end
 
-
   def update
+    if current_or_guest_user.username == "guest"
+      @user = guest_user
+    else
+      @user = current_user
+    end
+
     @old_date = @user_document.reminder_date
     @user_document.update(user_document_params)
     authorize @user_document
