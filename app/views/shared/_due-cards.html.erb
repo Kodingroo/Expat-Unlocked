@@ -7,7 +7,7 @@
             Bill Type
           </div>
           <div class="due-card__subtitle">
-            <%= user_document.document.company_name %> 
+            <%= user_document.document.company_name %>
           </div>
         </div>
         <div class="due-card__date">
@@ -23,7 +23,7 @@
           Days Remaining
         </div>
         <div class="due-card__subtitle">
-          <%= (user_document.due_date - Date.today).to_i %> 
+          <%= (user_document.due_date - Date.today).to_i %>
         </div>
       </div>
       <%= simple_form_for(user_document) do |f| %>
@@ -31,5 +31,5 @@
         <%= f.check_box :state, { onchange: 'this.form.submit()' } %>
       <% end %>
     <% end %>
-  </div>  
+  </div>
 <% end %>

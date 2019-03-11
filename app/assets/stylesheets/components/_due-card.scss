@@ -6,7 +6,7 @@
   background: #fff;
   position: relative;
   overflow: hidden;
-  padding: 5px;
+  flex-direction: column;
   &::after {
     content: '';
     position: absolute;
@@ -24,8 +24,32 @@
   & > * {
     flex: 100%;
   }
+  &__image img {
+    width: 100%;
+  }
+  &__title {
+    text-align: center;
+  }
 }
 
 .due-card:hover.due-card:after {
   transform: translateX(0);
+}
+  .result {
+    color: $primary;
+    border-top: 10px;
+  }
+.result-photo {
+  width: 100%;
+  & img {
+    position: relative;
+    border-bottom: 10px;
+    width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .banner {
+    height: 100%;
+    padding: 50px 0px;
+  }
 }
