@@ -24,35 +24,40 @@
     <div class="row">
       <% @user_documents.each do |doc| %>
       <div class="col-xs-12 col-md-4">
-          <div class="card card-max-height">
+        <div class="card card-max-height" style="position: relative;">
           <%= link_to "", user_document_path(doc), class: "document__link", method: :get %>
-            <div class="result">
-              <ul style="list-style: none;">
-                <li>
-                  <p class="center-content"><strong><%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
-              doc.document.company_name %></strong></p>
-                </li>
-                <li>
-                  <p class="center-content">
-                    Amount: <strong><%= doc.current_due_amount %></strong> 円
-                  </p>
-                </li>
-                <li>
-                  <p class="center-content">
-                    Due: <strong><%= doc.due_date %></strong>
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <div class="result-photo">
-              <%= cl_image_tag doc.photo.url, :width => 100, :crop => "fit" %>
-            </div>
+          <div style="position: absolute; top: -5px; right: -5px;">
+            <%= link_to user_document_path(doc), method: :delete, class: "btn btn-danger btn-circle", style: "border-radius: 0 0 0 20px;" do %>
+            <i class="fas fa-trash"></i>
+            <% end %>
+          </div>
+          <div class="result">
+            <ul style="list-style: none;">
+              <li>
+                <p class="center-content"><strong><%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
+                doc.document.company_name %></strong></p>
+              </li>
+              <li>
+                <p class="center-content">
+                  Amount: <strong><%= doc.current_due_amount %></strong> 円
+                </p>
+              </li>
+              <li>
+                <p class="center-content">
+                  Due: <strong><%= doc.due_date %></strong>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="result-photo">
+            <%= cl_image_tag doc.photo.url, :width => 100, :crop => "fit" %>
           </div>
         </div>
-      <% end %>
       </div>
+      <% end %>
     </div>
   </div>
+</div>
 
 
 <script>
