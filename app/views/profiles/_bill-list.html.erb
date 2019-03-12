@@ -1,12 +1,21 @@
-<div class="bill-list__item">
-  <%= link_to "", user_document_path(user_document), class: "bill-list__link", method: :get %>
-  <div class="bill-list__company">
+<div class="bills-list__item">
+  <%= link_to "", user_document_path(user_document), class: "bills-list__link", method: :get %>
+  <div class="bills-list__company">
     <%= user_document.document.company_name %>
   </div>
-  <div class="bill-list__due-date">
+  <div class="bills-list__due-date">
     <%= user_document.due_date.strftime("%b %d, %Y") %>
   </div>
-  <div class="bill-list__due">
+  <div class="bills-list__due">
     <%= user_document.current_due_amount %>円
+  </div>
+  <div class="bills-list__paid">
+    <% if user_document.state %>
+    <p class="tag">Paid</p>
+      <%= link_to "Wait, I haven't paid this...", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
+    <% else %>
+      <p class="tag">Not Paid</p>
+      <%= link_to "Mark as Paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document"  %>
+    <% end %>
   </div>
 </div>

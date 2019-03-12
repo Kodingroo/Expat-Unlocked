@@ -1,14 +1,15 @@
-function deleteButton(innerHTML) {
+function deleteButton() {
   const button = document.getElementById('<%= @user_document.id %>-paid-document');
-  console.log(button.parentNode.parentNode)
+  console.log(button.previousSibling)
   button.parentNode.parentNode.parentNode.removeChild(button.parentNode.parentNode)
 }
 
-function addButton(buttonHTML) {
-  const element = document.querySelector('.box');
-  element.insertAdjacentHTML('beforeend', buttonHTML);
+function addButton(partial) {
+  console.log("card")
+  const element = document.querySelector('.bills-list');
+  element.insertAdjacentHTML('beforeend', partial);
 }
 
 
-deleteButton("");
-addButton('<%= link_to 'unpaid', unpaid_user_document_path(@user_document), method: :patch, remote: true, id: "#{@user_document.id}-unpaid-document" %>');
+deleteButton('<%= j render "profiles/paid", user_document: @user_document %>');
+addButton('<%= j render "profiles/bill-list", user_document: @user_document %>');

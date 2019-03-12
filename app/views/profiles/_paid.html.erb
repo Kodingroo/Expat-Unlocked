@@ -1,13 +1,7 @@
-<% sorted = current_user.user_documents.order('due_date ASC')%>
-<div class="center-content">
-  <strong>Recently paid bills</strong>
-  <%if (current_user.user_documents.where(state: 1).count == 0)%>
-    <%= "You haven't paid any bills recently" %>
-  <% end %>
-  <% sorted.first(5).each do |user_document| %>
-    <% if user_document.state %>
-      <%= user_document.title %> Bill: <%= user_document.due_date %>
-      <%= link_to "Wait, I haven't paid this", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
-    <% end %>
-  <% end %>
-</div>
+<% if user_document.state %>
+  <p class="tag">Paid</p>
+  <%= link_to "Wait, I haven't paid this...", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
+<% else %>
+  <p class="tag">Not Paid</p>
+  <%= link_to "Mark as Paid", pay_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-paid-document"  %>
+<% end %>

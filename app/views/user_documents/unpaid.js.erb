@@ -1,13 +1,13 @@
-function deleteButton() {
+function deleteButton(partial) {
   const button = document.getElementById('<%= @user_document.id %>-unpaid-document');
-  button.parentNode.removeChild(button)
+  button.parentNode.parentNode.removeChild(button.parentNode)
 }
 
-function addButton(buttonHTML) {
+function addCard(partial) {
   const element = document.querySelector('.due-cards');
-  element.insertAdjacentHTML('beforeend', buttonHTML);
+  element.insertAdjacentHTML('beforeend', partial);
 }
 
 
-deleteButton();
-addButton('<%= j render "profiles/due-card", user_document: @user_document %>');
+deleteButton('<%= j render "profiles/paid", user_document: @user_document %>');
+addCard('<%= j render "profiles/due-card", user_document: @user_document %>');
