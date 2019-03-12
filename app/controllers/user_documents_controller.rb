@@ -1,5 +1,5 @@
 class UserDocumentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:create, :index, :show]
+  skip_before_action :authenticate_user!, only: [:create, :index, :show, :destroy]
   protect_from_forgery :except => :receive_guest
   before_action :set_user_document, only: [:show, :update, :pay, :unpaid, :destroy]
   # before_action :authenticate_user!
