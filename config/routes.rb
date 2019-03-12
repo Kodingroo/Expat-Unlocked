@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
   root to: 'pages#home'
   get "pages/scan_info", to: "pages#scan_info", as: :scan_info
   resources :user_documents, only: %i[index create show edit] do

@@ -1,8 +1,7 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
   before_action :set_user_document, only: [:show, :update, :pay, :unpaid]
-  # before_action :authenticate_user!
-
+  protect_from_forgery :except => :receive_guest
   def index
     @user_documents = policy_scope(UserDocument).order(created_at: :desc)
     @user_document = UserDocument.new
@@ -74,7 +73,7 @@ class UserDocumentsController < ApplicationController
   end
 
   def show
-    authorize @user_document
+    # authorize @user_document
     # if current_or_guest_user.username == "guest"
     #   @user_document.user = guest_user
     # else
@@ -117,12 +116,6 @@ class UserDocumentsController < ApplicationController
   end
 
   def update
-    if current_or_guest_user.username == "guest"
-      @user = guest_user
-    else
-      @user = current_user
-    end
-
     @old_date = @user_document.reminder_date
     @user_document.update(user_document_params)
     authorize @user_document
