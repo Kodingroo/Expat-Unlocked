@@ -42,6 +42,12 @@
       transform: translateY(4px);
     }
   }
+  &__text {
+    padding-top: 220px;
+  }
+  &__description {
+    padding-bottom: 10px;
+  }
   .result {
     color: $primary;
     border-top: 10px;
