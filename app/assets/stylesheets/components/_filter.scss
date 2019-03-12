@@ -11,12 +11,7 @@
   }
 }
 
-.bill-list {
-  display: flex;
-  justify-content: space-between;
-  background: #fff;
-  flex-direction: column;
-  background: #fff;
+.bills-list {
   &__item {
     display: flex;
     justify-content: center;
@@ -55,5 +50,10 @@
     &:hover {
       background: rgba(196, 196, 196, 0.096);
     }
+  }
+  &__paid {
+    display: flex;
+    align-items: center;
+    z-index: 200;
   }
 }

@@ -50,10 +50,12 @@
 }
 
 .tag {
+  background: $primary;
   padding: 5px;
   color: white;
   border-radius: 4px;
   font-size: 14px;
+  margin: 0;
 }
 
 .paid {
@@ -95,4 +97,3 @@
 .height-change {
   max-height: 100% !important;
 }
-
