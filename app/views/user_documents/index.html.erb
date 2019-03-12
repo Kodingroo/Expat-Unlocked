@@ -1,72 +1,58 @@
 
-    <div class="container">
-      <% unless current_user.first_name == "" %>
-      <h1>
-        <%= current_user.first_name %>'s Documents
-      </h1>
-      <% else %>
-      <h1>My Documents</h1>
-      <% end %>
-      <p>Browse through all your uploaded documents</p>
-    </div>
+<div class="container">
+  <% unless current_user.first_name == "" %>
+  <h1>
+    <%= current_user.first_name %>'s Documents
+  </h1>
+  <% else %>
+  <h1>My Documents</h1>
+  <% end %>
+  <p>Browse through all your uploaded documents</p>
+</div>
 
-  <div class="filter">
-    <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
-    <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
-    <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
-    <% end %>
-  </div>
+<div class="filter">
+  <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
+  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
+  <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
+  <% end %>
+</div>
+
+
 
 <div class="primary-wrapper">
   <div class="container">
     <div class="row">
       <% @user_documents.each do |doc| %>
       <div class="col-xs-12 col-md-4">
-        <div class="document">
-            <%= link_to user_document_path(doc), method: :delete, class: "delete-user-document center-content" do %>
-            <i class="fas fa-trash"></i>
-            <% end %>
-            <%= link_to "", user_document_path(doc), class: "document__link", method: :get %>
-            <div class="document__header">
-              <h4 class="document__title">
-                <%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
-                doc.document.company_name %>
-              </h4>
-              <p class="document__status">
-                <% if doc.state == true %>
-                <span class="tag paid"
-                ><i class="fas fa-check"></i> Paid</span
-                >
-                <% else %>
-                <span class=" tag unpaid"
-                ><i class="fas fa-exclamation"></i> Unpaid</span
-                >
-                <% end %>
-              </p>
+          <div class="card card-max-height">
+            <div class="result">
+              <ul style="list-style: none;">
+                <li>
+                  <p class="center-content"><strong><%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
+              doc.document.company_name %></strong></p>
+                </li>
+                <li>
+                  <p class="center-content">
+                    Amount: <strong><%= doc.current_due_amount %></strong> 円
+                  </p>
+                </li>
+                <li>
+                  <p class="center-content">
+                    Due: <strong><%= doc.due_date %></strong>
+                  </p>
+                </li>
+              </ul>
             </div>
-            <div class="document__image">
-              <%= cl_image_tag doc.photo.url, :width => 600, :crop => "fit" %>
+            <div class="result-photo">
+              <%= cl_image_tag doc.photo.url, :width => 100, :crop => "fit" %>
             </div>
-            <div class="document__body">
-              <div class="document__data">
-                <h5>Due On</h5>
-                <p><%= doc.due_date %></p>
-              </div>
-              <div class="document__data">
-                <h5>Amount Due</h5>
-                <p class="document__amount">
-                  <%= doc.current_due_amount %>円
-                </p>
-              </div>
-            </div>
+          </div>
         </div>
-      </div>
       <% end %>
-
-
+      </div>
     </div>
   </div>
-</div>
+
 
 <script>
   const sort_by_change = document.querySelector("#sort-by-select");
