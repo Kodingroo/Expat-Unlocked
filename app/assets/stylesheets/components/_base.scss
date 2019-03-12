@@ -26,11 +26,13 @@ $small-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
 h1 {
   font-family: 'Raleway';
   font-weight: bold;
+  color: $primary;
 }
 h2 {
   font-family: $body-font;
   font-size: 24px;
   font-weight: bold;
+  color: $primary;
 }
 body {
   font-family: $body-font;
@@ -158,4 +160,8 @@ a:focus {
 
 .has-background-primary {
   background: $primary;
+}
+
+.icon {
+  height: 20px;
 }
