@@ -1,7 +1,9 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_user_document, only: [:show, :update, :pay, :unpaid]
   protect_from_forgery :except => :receive_guest
+  before_action :set_user_document, only: [:show, :update, :pay, :unpaid, :destroy]
+  # before_action :authenticate_user!
+
   def index
     @user_documents = policy_scope(UserDocument).order(created_at: :desc)
     @user_document = UserDocument.new

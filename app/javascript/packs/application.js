@@ -1,10 +1,7 @@
 import 'bootstrap';
-import counting from './countup';
 
-console.log(counting());
-
-const nav = document.querySelector('#navigation');
-const dropdown = document.querySelector('#navigation__hamburger');
+const nav = document.querySelector('.navigation');
+const dropdown = document.querySelector('.navigation__hamburger');
 const mobileNav = document.querySelector('.navigation__drop');
 
 window.addEventListener('scroll', e => {

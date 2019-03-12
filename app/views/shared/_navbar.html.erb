@@ -1,12 +1,12 @@
-<nav id="navigation" class="">
+<nav class="navigation" class="">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar__left">
-      <a href="/" class="navbar-link" style="font-size: 36px; font-family: Audiowide;">
-        bjp
+    <div class="navigation__left">
+      <a href="/" class="navigation__logo">
+        jpb
       </a>
     </div>
 
-    <div id="navigation__right">
+    <div class="navigation__right">
       <% if user_signed_in? %>
         <div><%= link_to "Profile", profile_path %></div>
         <div><%= link_to "My Documents", user_documents_path(current_user)%></div>
@@ -15,18 +15,17 @@
         <%= link_to "Sign in", new_user_session_path %>
       <% end %>
     </div>
-    <div id="navigation__hamburger">
+    <div class="navigation__hamburger">
       <i class="fas fa-bars"></i>
-      <div class="navigation__drop">
-          <% if user_signed_in? %>
-            <div><%= link_to "Profile", profile_path(current_user)%></div>
-            <div><%= link_to "My Documents", user_documents_path(current_user)%></div>
-            <div><%= link_to "Log out", destroy_user_session_path, method: :delete %></div>
-          <% else %>
-            <%= link_to "Sign in", new_user_session_path %>
-          <% end %>
-        </div>
     </div>
-
+    <div class="navigation__drop">
+        <% if user_signed_in? %>
+          <div><%= link_to "Profile", profile_path(current_user)%></div>
+          <div><%= link_to "My Documents", user_documents_path(current_user)%></div>
+          <div><%= link_to "Log out", destroy_user_session_path, method: :delete %></div>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path %>
+        <% end %>
+      </div>
   </div>
 </nav>
