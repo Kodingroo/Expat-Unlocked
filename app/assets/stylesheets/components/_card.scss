@@ -20,6 +20,7 @@
   box-shadow: $box-shadow;
   transition: all 0.3s ease;
   overflow: hidden;
+  background: $secondary;
   &:hover {
     box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
     transform: translateY(4px);
@@ -113,4 +114,12 @@
   background-repeat: no-repeat;
   background-position: center;
   border-top: 10px;
+}
+
+.card-max-height {
+  max-height: 300px;
+}
+
+li.p {
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
+  protect_from_forgery :except => :receive_guest
   before_action :set_user_document, only: [:show, :update, :pay, :unpaid, :destroy]
   # before_action :authenticate_user!
 
@@ -19,7 +20,6 @@ class UserDocumentsController < ApplicationController
       @user_documents.each do |doc|
         @categories << doc.document.company_name
       end
-
 
       @categories.uniq!
       @collection_type = params[:sort_by]
@@ -100,7 +100,7 @@ class UserDocumentsController < ApplicationController
     end
   end
 
-   def unpaid
+  def unpaid
     authorize @user_document
     @user_document.state = false
 
@@ -116,7 +116,6 @@ class UserDocumentsController < ApplicationController
       end
     end
   end
-
 
   def update
     @old_date = @user_document.reminder_date

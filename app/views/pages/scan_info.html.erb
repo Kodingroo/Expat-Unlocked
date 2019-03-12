@@ -18,13 +18,13 @@
   </div>
 </div>
 
-  <div class="col-sm-6 col-sm-offset-3" >
+<!--   <div class="col-sm-6 col-sm-offset-3" >
     <video id = "video" ></video>
     <a href="#" id="capture" class= "button is-big" >Take Photo</a>
     <a href="#" id="submitOwn" class= "button is-big" >Photo is OK</a>
     <canvas id = "canvas" ></canvas>
-    <img id = "photo" src="" alt="">
-      <script>
+    <img id = "photo" src="" alt=""> -->
+      <!-- <script>
 
       const constraints = { audio: false, video: true };
       const canvas = document.getElementById('canvas'),
@@ -49,20 +49,6 @@
       function takePhoto(){
         context.drawImage(video, 0, 0);
         photo.setAttribute('src', canvas.toDataURL('image/png'));
-
-        // const formData = new FormData(photoForm);
-        // canvas.toBlob((blob) => {
-        //   formData.set("user_document[photo]", blob, 'image.png');
-        //   console.log(formData.get("user_document[photo]"));
-
-        //   const request = new XMLHttpRequest();
-        //   request.open("POST", photoForm.action);
-        //   request.send(formData);
-        //   request.onload = (event) => {
-        //     console.log(event);
-        //     window.location = event.currentTarget.responseURL;
-        //   };
-        // });
       }
 
       document.getElementById('capture').addEventListener('click', takePhoto);
@@ -83,7 +69,7 @@
         });
       });
 
-      </script>
+      </script> -->
   </div>
 </div>
 

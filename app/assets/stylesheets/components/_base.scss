@@ -1,6 +1,5 @@
 // COLORS
 
-
 $primary: #474f85;
 $secondary: #f3f9fb;
 
@@ -35,10 +34,14 @@ h2 {
   font-weight: bold;
   color: $primary;
 }
-body{
+body {
   font-family: $body-font;
   font-size: $default-font-size;
   background: $secondary;
+}
+
+ul {
+  padding: 0;
 }
 
 .site {
@@ -89,13 +92,16 @@ a:focus {
 .is-paddingless {
   padding: 0 !important;
 }
+.padding-top-bottom {
+  padding: 40px 0;
+}
 
 .margin-top-bottom {
   margin-top: 20px;
 }
 
 .primary-wrapper {
-  background: #eeeeee;
+  background: $primary;
   padding: 40px 0;
   flex: 1;
 }
@@ -119,11 +125,11 @@ a:focus {
 
 @media (max-width: 760px) {
   .sticky-top {
-  position: -webkit-sticky; /* Safari */
-  position: relative;
-  top: 0;
-  z-index: 100;
-}
+    position: -webkit-sticky; /* Safari */
+    position: relative;
+    top: 0;
+    z-index: 100;
+  }
 }
 .pink {
   background-color: $pink;
