@@ -5,12 +5,12 @@
       <div class="row">
         <div class="col-xs-12 col-md-6 is-paddingless">
           <h1 class="banner__heading">
-            <%= image_tag 'logo.png', class: "logo" %>jp bills
+            <%= image_tag 'logo.png', class: "logo" %>bills
           </h1>
           <div class="card">
             <div class="result">
               <ul style="list-style: none;">
-                <li><p><strong>Water bill</strong></p></li>
+                <li><p><%= image_tag 'Water.png', class: "icon" %> <strong>Water bill</strong></p></li>
                 <li>
                   <p><strong>16,026 yen</strong></p>
                 </li>
@@ -33,7 +33,7 @@
             Understand and keep track of your monthly bill spending with our
             easy bill recognition
           </p>
-          <button type="button" class="button">Try now</button>
+          <%= link_to 'Try now', new_user_registration_path, class: 'try-now' %>
         </div>
       </div>
     </div>
