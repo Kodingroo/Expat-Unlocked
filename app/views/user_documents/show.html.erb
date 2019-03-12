@@ -3,79 +3,65 @@
   <div class="col-sm-12 col-md-10 col-md-offset-1 margin-top-mobile">
     <div style="display: flex;">
       <div class="document">
- <!--      <%= link_to user_document_path(@user_document), method: :delete, class: "delete-user-document center-content" do %>
-      <i class="fas fa-trash"></i>
-      <% end %> -->
-      <%= link_to "", user_document_path(@user_document), class: "document__link", method: :get %>
-      <div class="document__header">
-        <h4 class="document__title">
-          <%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
-          @user_document.document.company_name %>
-        </h4>
-        <p class="document__status">
-          <% if @user_document.state == true %>
-          <span class="tag paid"
-          ><i class="fas fa-check"></i> Paid</span
-          >
-          <% else %>
-          <span class=" tag unpaid"
-          ><i class="fas fa-exclamation"></i> Unpaid</span
-          >
-          <% end %>
-        </p>
+        <%= link_to "", user_document_path(@user_document), class: "document__link", method: :get %>
+        <div class="document__header">
+          <h4 class="document__title">
+            <%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
+            @user_document.document.company_name %>
+          </h4>
+          <div class="document__header align-top">
+            <div class="document__data">
+              <p>Due On</p>
+              <p><%= @user_document.due_date %></p>
+            </div>
+            <div class="document__data">
+              <p>Amount Due</p>
+              <p class="document__amount">
+              <%= @user_document.current_due_amount %>円
+              </p>
+            </div>
+          </div>
+          <div class="document__image ">
+            <%= cl_image_tag @user_document.photo, :width => 1000, :crop => "fill", class: "height-change" %>
+          </div>
+        </div>
       </div>
-      <div class="document__image ">
-        <%= cl_image_tag @user_document.photo, :width => 1000, :crop => "fill", class: "height-change" %>
-      </div>
-    </div>
 
     <div class="document center-content">
-      <div class="document__header align-top">
-        <div class="document__data">
-          <h5>Due On</h5>
-          <p><%= @user_document.due_date %></p>
-        </div>
-        <div class="document__data">
-          <h5>Amount Due</h5>
-          <p class="document__amount">
-            <%= @user_document.current_due_amount %>円
-          </p>
-        </div>
-      </div>
-    <div style="padding: 20px;">
-      <%#= button_to "Save this document", profile_path, :class => "button", :method => :get %>
-      <div>
-          <%= simple_form_for @user_document do |f| %>
-            <%= f.submit "Save this document", class: "button"%>
-          <% end %>
-        </div>
-    </div>
-    <div style="padding: 20px;">
-      <%= button_to "Delete document", scan_info_path,  :class => "button", :method => :get %>
-    </div>
-      <div>
-        <p class="center-content">You will currently be remindered to pay your bill on:</p>
-        <h2 class="center-content"><%= @user_document.reminder_date %></h2>
-      </div>
+            <div>
+              <p class="center-content">You will currently be remindered to pay your bill on:</p>
+              <h2 class="center-content"><%= @user_document.reminder_date %></h2>
+            </div>
 
-      <div style="margin-bottom: 40px;">
-        <% if @user_document.reminder_date.nil? %>
-        <div>
+            <div style="margin-bottom: 40px;">
+              <% if @user_document.reminder_date.nil? %>
+              <div>
+                <%= simple_form_for @user_document do |f| %>
+                <%= f.input :reminder_date, label: false %>
+                <%= f.submit "Remind me!", class: "button is-inverted" %>
+                <% end %>
+              </div>
+              <% else %>
+              <div>
+                <p class="center-content">Would you like to change your reminder date?</p>
+                <%= simple_form_for @user_document do |f| %>
+                <%= f.input :reminder_date, label: false %>
+                <p class="center-content"><%= f.submit "Change reminder date", class: "button is-inverted" %></p>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+    <div style="padding: 20px;">
+      <div>
           <%= simple_form_for @user_document do |f| %>
-          <%= f.input :reminder_date, label: false %>
-          <%= f.submit "Remind me!", class: "button" %>
+            <%= f.submit "Save this document", class: "button is-inverted save"%>
           <% end %>
         </div>
-        <% else %>
-        <div>
-          <p class="center-content">Would you like to change your reminder date?</p>
-          <%= simple_form_for @user_document do |f| %>
-          <%= f.input :reminder_date, label: false %>
-          <p class="center-content"><%= f.submit "Change reminder date", class: "button" %></p>
-          <% end %>
-        </div>
-        <% end %>
-      </div>
+    </div>
+    <div style="padding: 20px;">
+      <%= button_to "Delete document", scan_info_path,  :class => "button is-inverted red", :method => :get %>
+    </div>
+
     </div>
 
   </div>

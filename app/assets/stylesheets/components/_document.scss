@@ -4,7 +4,7 @@
   box-shadow: $box-shadow;
   margin: 0 5px 40px 0;
   background: #fff;
-  border-radius: 3px;
+  border-radius: 10px;
   transition: all 0.2s ease-in;
   position: relative;
   &:hover {
@@ -18,11 +18,13 @@
   &__header {
     flex: 0 0 100%;
     text-align: center;
-    background: $tertiary;
+    background: $secondary;
     color: #fff;
   }
   &__title {
     font-size: 30px;
+    font-family: $body-font;
+    color: $primary;
   }
 
   &__body {
