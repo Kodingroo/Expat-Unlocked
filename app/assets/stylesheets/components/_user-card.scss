@@ -49,12 +49,12 @@
     color: rgb(75, 75, 75);
     font-size: 14px;
     font-weight: bold;
-    font-family: $title-font;
+    font-family: $body-font;
   }
   &__count {
     color: $primary;
     font-size: 26px;
-    font-family: $title-font;
+    font-family: $body-font;
     font-weight: 900;
   }
 }
