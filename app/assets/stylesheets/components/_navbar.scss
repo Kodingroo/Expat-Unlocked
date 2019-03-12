@@ -1,20 +1,18 @@
-@import 'base';
-#navigation {
+.navigation {
   margin: 0px;
   background-color: $nav;
   padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
   & a {
     color: #fff;
     font-weight: bold;
+    padding: 0 10px;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    padding: 15px 5px;
     &:hover {
       background: #fff;
-      color: $tertiary;
+      color: $primary;
     }
     &:active {
       background: #fff;
@@ -29,30 +27,24 @@
     & div:not(:last-of-type) {
       margin-right: 15px;
     }
+    & a {
+      padding: 15px 5px;
+    }
   }
 
   &__hamburger {
     display: none;
   }
+  &__logo {
+    font-size: 36px;
+    padding: 0;
+    font-family: Audiowide;
+  }
+  &__drop {
+    display: none;
+  }
 }
 
-#navigation__logo {
-  font-size: 36px;
-  padding: 0;
-  font-family: Audiowide;
-}
-
-.navigation__drop {
-  display: none;
-}
-
-.banner .row {
-  text-align: center;
-  margin-top: 50px;
-}
-.banner h1 {
-  color: white;
-}
 .logo {
   height: 65px;
   padding: 5px 0;
@@ -73,10 +65,10 @@
 }
 
 @media (max-width: 760px) {
-  #navigation {
+  .navigation {
     &__right {
       display: none;
-      position: relative;
+      cursor: pointer;
     }
     &__hamburger {
       display: block;
@@ -89,7 +81,7 @@
     background: rgba($primary, 0.9);
     width: 100%;
     padding: 10px 0;
-    top: 70px;
+    top: 50px;
     left: 0;
     z-index: 9999;
     animation: slidein 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;

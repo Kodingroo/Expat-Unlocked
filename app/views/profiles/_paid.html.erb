@@ -7,7 +7,7 @@
   <% sorted.first(5).each do |user_document| %>
     <% if user_document.state %>
       <%= user_document.title %> Bill: <%= user_document.due_date %>
-      <%= link_to "unpaid", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
+      <%= link_to "Wait, I haven't paid this", unpaid_user_document_path(user_document), method: :patch, remote: true, id: "#{user_document.id}-unpaid-document"  %>
     <% end %>
   <% end %>
 </div>

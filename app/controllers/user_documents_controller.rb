@@ -1,6 +1,6 @@
 class UserDocumentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_user_document, only: [:show, :update, :pay, :unpaid]
+  before_action :set_user_document, only: [:show, :update, :pay, :unpaid, :destroy]
   # before_action :authenticate_user!
 
   def index
