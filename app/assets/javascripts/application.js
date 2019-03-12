@@ -1,12 +1,12 @@
 //= require rails-ujs
 //= require_tree .
 function loader() {
-  const upload = document.querySelector('.upload-document');
+  var upload = document.querySelector('.upload-document');
   console.log(upload.form);
 
   // alert('submitting');
-  const loading = document.createElement('span');
-  const title = document.createElement('p');
+  var loading = document.createElement('span');
+  var title = document.createElement('p');
 
   title.innerText = 'Detecting Image';
   title.style.fontWeight = 'bold';
