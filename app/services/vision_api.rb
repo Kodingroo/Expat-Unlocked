@@ -28,23 +28,21 @@ class VisionApi
     end
     due_this_month = nil
     due_next_month = nil
-    already_paid = []
+    past_due = nil
  
     dates.each do |date|
-      if TODAY.mon == date.mon
+      if TODAY.mon == date.mon && (TODAY - date).to_i.negative?
         due_this_month = date
       elsif (TODAY.mon - date.mon).to_i < 30 && !TODAY.mon
         due_next_month = date
       else
-        already_paid << date
+        past_due = date
       end
     end
-    due_next_month || due_this_month || already_paid[0]
+    due_next_month || due_this_month || past_due
   end
 
   def self.create_amount_due(yen_array)
-    p "yarr"
-    p yen_array
     yen_array.flatten.map do |yen|
       yen.split(",").join("").gsub(/\s+/, "").to_i
     end.max
