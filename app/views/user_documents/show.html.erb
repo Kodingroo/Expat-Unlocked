@@ -1,4 +1,3 @@
-
 <div class="primary-wrapper">
   <div class="container">
     <div class="row">
@@ -6,8 +5,10 @@
         <div class="card">
           <div class="result center-content">
             <ul style="list-style: none;">
-              <li><p><strong><%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
-                @user_document.document.company_name %></strong></p></li>
+              <li>
+                <p><strong><%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
+                @user_document.document.company_name %></strong></p>
+              </li>
               <li>
                 <p><strong><%= number_with_delimiter @user_document.current_due_amount %></strong>yen</p>
               </li>
@@ -26,7 +27,7 @@
       <div class="col-xs-12 col-md-6 is-paddingless">
         <div class="document center-content show-page">
           <div style="margin-bottom: 40px;">
-              <p>Default reminder date: <%= @user_document.reminder_date %></p>
+            <p>Default reminder date: <%= @user_document.reminder_date %></p>
 
             <% if @user_document.reminder_date.nil? %>
             <div class="reminder-form center-content">
@@ -35,19 +36,18 @@
               <%= f.submit "Remind me!", class: "button is-inverted" %>
               <% end %>
             </div>
-              <% else %>
+            <% else %>
             <div>
               <%= simple_form_for @user_document do |f| %>
               <%= f.input :reminder_date, label: false %>
               <%= f.submit "Ok", class: "button is-inverted" %>
               <% end %>
             </div>
-              <% end %>
+            <% end %>
           </div>
-        </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
