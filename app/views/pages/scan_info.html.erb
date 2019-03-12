@@ -2,16 +2,7 @@
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
 
-      <h1 id = "title">Basic upload</h1>
-
-      <!--------------- classic form ----------------------------------------->
-        <%#= simple_form_for(@user_document) do |f| %>
-          <%#= f.input :photo, required: true%>
-          <%#= f.input :photo_cache, as: :hidden %>
-          <%#= f.submit "Check Document", id: "upload-button", class: "button is-inverted" %>
-       <%# end %>
-
-      <h1 id = "title">Take photo</h1>
+      <h2 class="center-content">Take a photo or upload one</h2>
        <%= simple_form_for(@user_document) do |f| %>
           <%= f.input :photo,
                        required: true,
