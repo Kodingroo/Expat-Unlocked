@@ -37,7 +37,7 @@
         <div class="row">
 
           <div class="col-xs-12 margin-top-mobile due-cards">
-            <% sorted = current_user.user_documents.order('due_date ASC')%> 
+            <% sorted = current_user.user_documents.order('due_date ASC')%>
             <% sorted.each do |user_document| %>
               <% if user_document.created_at.year == Date.today.year && user_document.state == false  %>
                 <%= render "due-cards", user_document: user_document %>
@@ -48,9 +48,8 @@
           <div class="col-xs-12">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
-                <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]) %>
-                <%= select_tag "category", options_for_select(@categories, params[:category]) %>
-                <%= submit_tag 'Filter', class: "button is-inverted is-small" %>
+  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
+  <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
               <% end %>
 
               <div class="bills-list">
@@ -69,7 +68,7 @@
             </div>
           </div>
         </div>
- 
+
 
       <div class="col-xs-12 margin-top-mobile general-stats box">
         <div class="general-stats__heading">
@@ -114,4 +113,16 @@
     </div>
   </div>
 </div>
+
+<script>
+  const sort_by_change = document.querySelector("#sort-by-select");
+  const category_change = document.querySelector("#category-select");
+
+  sort_by_change.addEventListener('change', (event) => {
+    document.querySelector(".filter__form").submit();
+  })
+  category_change.addEventListener('change', (event) => {
+    document.querySelector(".filter__form").submit();
+  })
+</script>
 
