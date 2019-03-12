@@ -1,9 +1,9 @@
 
 <div class="container">
-  <% unless current_user.first_name == "" %>
-  <h1>
-    <%= current_user.first_name %>'s Documents
-  </h1>
+  <% unless current_user.first_name.nil? %>
+    <h1>
+      <%= "#{current_user.first_name}'s" %> Documents
+    </h1>
   <% else %>
   <h1>My Documents</h1>
   <% end %>

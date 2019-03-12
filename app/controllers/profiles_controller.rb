@@ -9,8 +9,8 @@ class ProfilesController < ApplicationController
     @user_document = UserDocument.new
     @most_expensive_bill = UserDocument.most_expensive_bill(current_user)[0]
     @least_expensive_bill = UserDocument.least_expensive_bill(current_user)[0]
-    @average_all_time = UserDocument.average_current_year(current_user)
-  
+    @average_all_time = UserDocument.average_current_year(current_user).nan? ? 0 : UserDocument.average_current_year(current_user).to_i
+
     @documents = Document.all
 
     @sort_by = ["due date", "most expensive", "least expensive"]
