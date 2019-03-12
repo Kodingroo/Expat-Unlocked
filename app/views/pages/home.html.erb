@@ -5,14 +5,12 @@
       <div class="row">
         <div class="col-xs-12 col-md-6 is-paddingless">
           <h1 class="banner__heading">
-            <%= image_tag 'logo.png', class: "logo" %>jp bills
+            <%= image_tag 'logo.png', class: "logo" %>J bills
           </h1>
           <div class="card">
             <div class="result">
               <ul style="list-style: none;">
-                <li>
-                  <p><strong>Water bill</strong></p>
-                </li>
+                <li><p><%= image_tag 'Water.png', class: "icon" %> <strong>Water bill</strong></p></li>
                 <li>
                   <p><strong>16,026 yen</strong></p>
                 </li>
@@ -28,15 +26,11 @@
         </div>
 
         <div class="col-xs-12 col-md-6">
-          <h2 class="banner__slogan">
-            Take the guesswork out of Japanese bills
-          </h2>
           <p class="banner__description">
-            Understand and keep track of your monthly bill spending with our
-            easy bill recognition
+            Take the guesswork out of Japanese bills
           </p>
-          <button type="button" class="button">Try now</button>
         </div>
+          <%= link_to 'Try now', new_user_registration_path, class: 'try-now' %>
       </div>
     </div>
   </div>
@@ -44,9 +38,9 @@
 
 <div class="container">
   <div class="row padding-top-bottom">
-    <div class="col-xs-12">
+    <div class="col-xs-12 center-content">
       <h1>
-        Japanese bills can be hard to deal with. Let us help with:
+        We help with
       </h1>
     </div>
     <div class="col-xs-12 col-md-6">
@@ -57,9 +51,8 @@
         <% end %>
         <div class="card-footer">
           <p>
-            Get all the information your need. Upload a photo of your Japanese
-            bill and we'll translate it for you. We'll give you the most
-            relevant information such as how much and when it's due.
+            Simply take a photo, or upload one of your Japanese
+            bill and we'll get the most relevant information for you.
           </p>
         </div>
       </div>
@@ -74,8 +67,7 @@
         <div class="card-footer">
           <p>
             Keep up to date with when your next bill is due with our tracking
-            and notification system. Remembering to go to the convenience stores
-            every month is a pain. Let us remember for you.
+            and notification system. In addition, keep a detailed history of your past spending.
           </p>
         </div>
       </div>
