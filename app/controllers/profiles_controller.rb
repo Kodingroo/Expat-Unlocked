@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
     @user_document = UserDocument.new
     @most_expensive_bill = UserDocument.most_expensive_bill(current_user)[0]
     @least_expensive_bill = UserDocument.least_expensive_bill(current_user)[0]
-    @average_all_time = UserDocument.average_current_year(current_user)
+    @average_all_time = UserDocument.average_current_year(current_user) unless UserDocument.average_current_year(current_user).class == Float
   
     @documents = Document.all
 

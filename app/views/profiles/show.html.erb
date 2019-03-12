@@ -26,7 +26,7 @@
             </div>
           </div>
           <%= simple_form_for(@user_document) do |f| %>
-            <%= f.input :photo, required: true, label: 'Upload Bill', input_html: { class: "upload-document", onchange: "loader()" }%>
+            <%= f.input :photo, required: true, label: 'Upload Bill', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
 
@@ -81,7 +81,11 @@
               Highest Bill
             </div>
             <div class="general-stats__content">
-              <%= number_with_delimiter(@most_expensive_bill.current_due_amount) %>円
+              <% unless @most_expensive_bill.nil? %>
+                <%= number_with_delimiter(@most_expensive_bill.current_due_amount) %>円
+              <% else %>
+                0円
+              <% end %>
             </div>
           </div>
           <div class="general-stats__lowest">
@@ -89,7 +93,11 @@
               Lowest Bill
             </div>
             <div class="general-stats__content">
-              <%= number_with_delimiter(@least_expensive_bill.current_due_amount) %>円
+              <% unless @least_expensive_bill.nil? %>
+                <%= number_with_delimiter(@least_expensive_bill.current_due_amount) %>円
+              <% else %>
+                0円
+              <% end %>
             </div>
           </div>
           <div class="general-stats_average">
@@ -97,7 +105,7 @@
               Average
             </div>
             <div class="general-stats__content">
-              <%= number_with_delimiter(@average_all_time.to_i) %>円
+                <%= number_with_delimiter(@average_all_time.to_i) %>円
             </div>
           </div>
         </div>

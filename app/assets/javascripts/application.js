@@ -10,6 +10,7 @@ function loader() {
 
   title.innerText = 'Detecting Image';
   title.style.fontWeight = 'bold';
+  title.style.paddingBottom = '10px';
 
   loading.classList.add('pulse');
 
@@ -17,6 +18,6 @@ function loader() {
   upload.form.insertAdjacentElement('afterend', loading);
 
   upload.form.submit();
-  upload.style.display = 'none';
+  upload.parentNode.style.display = 'none';
   upload.disabled = true;
 }
