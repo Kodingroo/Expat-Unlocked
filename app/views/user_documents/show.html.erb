@@ -1,69 +1,53 @@
-<div class="primary-wrapper">
 
-  <div class="col-sm-12 col-md-10 col-md-offset-1 margin-top-mobile">
-    <div style="display: flex;">
-      <div class="document">
-        <%= link_to "", user_document_path(@user_document), class: "document__link", method: :get %>
-        <div class="document__header">
-          <h4 class="document__title">
-            <%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
-            @user_document.document.company_name %>
-          </h4>
-          <div class="document__header align-top">
-            <div class="document__data">
-              <p>Due On</p>
-              <p><%= @user_document.due_date %></p>
-            </div>
-            <div class="document__data">
-              <p>Amount Due</p>
-              <p class="document__amount">
-              <%= @user_document.current_due_amount %>円
-              </p>
-            </div>
+<div class="primary-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 is-paddingless">
+        <div class="card">
+          <div class="result center-content">
+            <ul style="list-style: none;">
+              <li><p><strong><%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
+                @user_document.document.company_name %></strong></p></li>
+              <li>
+                <p><strong><%= number_with_delimiter @user_document.current_due_amount %></strong>yen</p>
+              </li>
+              <li>
+                <p>Due: <strong><%= @user_document.due_date %></strong></p>
+              </li>
+            </ul>
           </div>
-          <div class="document__image ">
+          <div class="result-photo">
             <%= cl_image_tag @user_document.photo, :width => 1000, :crop => "fill", class: "height-change" %>
           </div>
         </div>
       </div>
 
-    <div class="document center-content">
-            <div>
-              <p class="center-content">You will currently be remindered to pay your bill on:</p>
-              <h2 class="center-content"><%= @user_document.reminder_date %></h2>
-            </div>
 
-            <div style="margin-bottom: 40px;">
-              <% if @user_document.reminder_date.nil? %>
-              <div>
-                <%= simple_form_for @user_document do |f| %>
-                <%= f.input :reminder_date, label: false %>
-                <%= f.submit "Remind me!", class: "button is-inverted" %>
-                <% end %>
-              </div>
-              <% else %>
-              <div>
-                <p class="center-content">Would you like to change your reminder date?</p>
-                <%= simple_form_for @user_document do |f| %>
-                <%= f.input :reminder_date, label: false %>
-                <p class="center-content"><%= f.submit "Change reminder date", class: "button is-inverted" %></p>
-                <% end %>
-              </div>
+      <div class="col-xs-12 col-md-6 is-paddingless">
+        <div class="document center-content show-page">
+          <div style="margin-bottom: 40px;">
+              <p>Default reminder date: <%= @user_document.reminder_date %></p>
+
+            <% if @user_document.reminder_date.nil? %>
+            <div class="reminder-form center-content">
+              <%= simple_form_for @user_document do |f| %>
+              <%= f.input :reminder_date, label: false %>
+              <%= f.submit "Remind me!", class: "button is-inverted" %>
               <% end %>
             </div>
-    <div style="padding: 20px;">
-      <div>
-          <%= simple_form_for @user_document do |f| %>
-            <%= f.submit "Save this document", class: "button is-inverted save"%>
-          <% end %>
+              <% else %>
+            <div>
+              <%= simple_form_for @user_document do |f| %>
+              <%= f.input :reminder_date, label: false %>
+              <%= f.submit "Ok", class: "button is-inverted" %>
+              <% end %>
+            </div>
+              <% end %>
+          </div>
         </div>
+        </div>
+      </div>
     </div>
-    <div style="padding: 20px;">
-      <%= button_to "Delete document", scan_info_path,  :class => "button is-inverted red", :method => :get %>
-    </div>
-
-    </div>
-
   </div>
 </div>
-</div>
+
