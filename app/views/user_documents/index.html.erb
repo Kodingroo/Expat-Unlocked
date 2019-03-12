@@ -28,16 +28,16 @@
             <div class="result">
               <ul style="list-style: none;">
                 <li>
-                  <p><strong><%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
+                  <p class="center-content"><strong><%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
               doc.document.company_name %></strong></p>
                 </li>
                 <li>
-                  <p>
+                  <p class="center-content">
                     Amount: <strong><%= doc.current_due_amount %></strong> 円
                   </p>
                 </li>
                 <li>
-                  <p>
+                  <p class="center-content">
                     Due: <strong><%= doc.due_date %></strong>
                   </p>
                 </li>
