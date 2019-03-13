@@ -1,5 +1,5 @@
 <div class="primary-wrapper is-paddingless has-color">
-<div class="container">
+<div class="container profile-page">
     <div class="row profile">
 
       <div class="col-xs-12 col-md-3 is-marginless is-paddingless sticky-top">
@@ -26,24 +26,34 @@
             </div>
           </div>
           <%= simple_form_for(@user_document) do |f| %>
-            <%= f.input :photo, required: true, label: 'Upload Bill', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
+            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
 
         </div>
       </div>
 
+      <div class="col-xs-12 col-md-9 is-marginless has-background-primary ">
+        <div class="row">
+          <div class="col-xs-12 upcoming-card">
+            <div class="upcoming-card__heading">
+              <h2> Your upcoming bills</h2>
+            </div>
+            <div class="upcoming-card__body">
+              <ul>
+                <% sorted = current_user.user_documents.order('due_date ASC')%>
+                <% sorted.each do |user_document| %>
+                <% if user_document.created_at.year == Date.today.year && user_document.state == false  %>
+                <li><%= render "due-bills", user_document: user_document %></li>
+                <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-xs-12 col-md-9 is-marginless has-background-primary">
         <div class="row">
-
-          <div class="col-xs-12 margin-top-mobile due-cards">
-            <% sorted = current_user.user_documents.order('due_date ASC')%>
-            <% sorted.each do |user_document| %>
-              <% if user_document.created_at.year == Date.today.year && user_document.state == false  %>
-                <%= render "due-cards", user_document: user_document %>
-              <% end %>
-            <% end %>
-          </div>
 
           <div class="col-xs-12">
             <div class="filter">
