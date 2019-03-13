@@ -38,8 +38,9 @@
               </div>
             <% else %>
               <div>
+                <p>Change reminder date?</p>
                 <%= simple_form_for @user_document do |f| %>
-                <%= f.input :reminder_date, as: :string, input_html: { class: 'datepicker' } %>
+                <%= f.input :reminder_date, as: :string, label: false, input_html: { class: 'datepicker' } %>
                 <%= f.submit "Ok", class: "button is-inverted" %>
                 <% end %>
               </div>
