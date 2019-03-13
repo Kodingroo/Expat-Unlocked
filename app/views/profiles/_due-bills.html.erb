@@ -1,0 +1,8 @@
+<% unless user_document.state %>
+<%= user_document.document.company_name %>
+Due:<strong> <%= user_document.due_date.strftime("%b %d %Y") %></strong>
+<%= link_to "paid", pay_user_document_path(user_document), method: :patch,
+remote: true, id: "#{user_document.id}-paid-document" %>
+<%= link_to "view", user_document_path(user_document), class: "button is-inverted", method: :get %>
+<% end %>
+
