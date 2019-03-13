@@ -6,8 +6,9 @@
         <div class="user-card">
           <div class="user-card__header">
             <% unless current_user.photo.url.nil? %>
-              <%= cl_image_tag current_user.photo, class: "avatar" %>
-            <% else %> <%= image_tag 'avatar.png', class: "avatar" %>
+            <%= cl_image_tag current_user.photo, class: "avatar" %>
+            <% else %>
+            <%= image_tag 'avatar.png', class: "avatar" %>
             <% end %>
           </div>
           <div class="user-card__body center-content">
@@ -30,6 +31,82 @@
             <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
+
+          <div class="profile-stats">
+            <h2>Financial Data for <%= Time.current.year %> </h2>
+            <div class="profile-stats__heading">
+                <h5>All Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+              <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= number_with_delimiter(@general_stats[:max]) %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= number_with_delimiter(@general_stats[:min]) %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= number_with_delimiter(@general_stats[:average]) %>¥</p>
+              </div>
+            </div>
+            <div class="profile-stats__heading">
+                <h5>Gas Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+              <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= number_with_delimiter(@gas_stats[:max]) %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= number_with_delimiter(@gas_stats[:min]) %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= number_with_delimiter(@gas_stats[:average]) %>¥</p>
+              </div>
+            </div>
+            <div class="profile-stats__heading">
+                <h5>Water Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+               <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= number_with_delimiter(@water_stats[:max]) %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= number_with_delimiter(@water_stats[:min]) %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= number_with_delimiter(@water_stats[:average]) %>¥</p>
+              </div>
+            </div>
+            <div class="profile-stats__heading">
+                <h5>Electricity Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+              <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= number_with_delimiter(@electricity_stats[:max]) %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= number_with_delimiter(@electricity_stats[:min]) %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= number_with_delimiter(@electricity_stats[:average]) %>¥</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -46,12 +123,14 @@
                 <%= render "due-bills", user_document: user_document %>
                 <% end %>
               <% end %>
+
           </div>
         </div>
 
         <div class="has-background-primary profile__bills">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
+
                 <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
                 <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
               <% end %>
@@ -82,6 +161,7 @@
                   <% else %>
                     <%= render "bill-list", user_document: user_document %>
                   <% end %>
+
                 <% end %>
               </div>
             </div>
