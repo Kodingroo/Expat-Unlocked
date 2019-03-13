@@ -62,12 +62,13 @@ class UserDocumentsController < ApplicationController
         redirect_back fallback_location:
         @user_document.destroy
       else
-        # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
         api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
         @document = find_document(api_data[:words])
         assign_data(@user_document, api_data)
         @user_document.save
-
+        if current_or_guest_user.username != "guest"
+          # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        end
         redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
       end
     else

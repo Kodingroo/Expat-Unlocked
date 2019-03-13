@@ -4,15 +4,9 @@
 
       <h2 class="center-content">Take a photo or upload one</h2>
        <%= simple_form_for(@user_document) do |f| %>
-          <%= f.input :photo,
-                       required: true,
-                       remote: true,
-                       input_html: {
-                                     accept: 'image/png,image/gif,image/jpeg, image/jpg'
-                                   }
-          %>
-          <%= f.input :photo_cache, as: :hidden%>
-          <%= f.submit "Check Document",as: :hidden, id: "upload-button", class: "button is-inverted" %>
+          <%= f.input :photo, required: true, label: 'Upload your bill', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
+            <%= f.input :photo_cache, as: :hidden %>
+          <%#= f.submit "Scan document",as: :hidden, id: "upload-button", class: "button is-inverted" %>
        <% end %>
     </div>
   </div>
