@@ -1,18 +1,19 @@
 <div class="primary-wrapper is-paddingless has-color">
-<div class="container profile-page">
-    <div class="row profile">
+    <div class="profile">
 
-      <div class="col-xs-12 col-md-3 is-marginless is-paddingless sticky-top">
+      <div class="sticky-top profile__left">
+
         <div class="user-card">
           <div class="user-card__header">
-            <% unless current_user.photo.url.nil? %>
-              <%= cl_image_tag current_user.photo, class: "avatar" %>
-            <% else %>
-              <%= image_tag 'avatar.png', class: "avatar" %>
+            <% unless current_user.photo.url.nil? %> 
+              <%= cl_image_tag current_user.photo, class: "avatar" %> 
+            <% else %> <%= image_tag 'avatar.png', class: "avatar" %> 
             <% end %>
           </div>
           <div class="user-card__body center-content">
-            <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
+            <%= link_to 'Edit profile',
+            edit_user_registration_path(current_user), class: "user-card__edit
+            tag" %>
             <div class="user-card__heading">
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
@@ -21,7 +22,7 @@
                 Total bills uploaded
               </div>
               <div class="user-card__count">
-                 <%= current_user.user_documents.count %>
+                <%= current_user.user_documents.count %>
               </div>
             </div>
           </div>
@@ -29,40 +30,48 @@
             <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
-
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-9 is-marginless has-background-primary ">
-        <div class="row">
-          <div class="col-xs-12 upcoming-card">
-            <div class="upcoming-card__heading">
-              <h2> Your upcoming bills</h2>
-            </div>
-            <div class="upcoming-card__body">
-              <ul>
-                <% sorted = current_user.user_documents.order('due_date ASC')%>
-                <% sorted.each do |user_document| %>
-                <% if user_document.created_at.year == Date.today.year && user_document.state == false  %>
-                <li><%= render "due-bills", user_document: user_document %></li>
+      <div class="has-background-primary profile__right">
+        
+        <div class="upcoming-card">
+          <div class="upcoming-card__heading">
+            <h2> Your upcoming bills</h2>
+          </div>
+          <div class="upcoming-card__body">
+              <% sorted = current_user.user_documents.order('due_date ASC').first(3) %>
+              <% sorted.each do |user_document| %>
+                <% if user_document.created_at.year == Date.today.year &&   user_document.state == false  %>
+                <%= render "due-bills", user_document: user_document %>
                 <% end %>
-                <% end %>
-              </ul>
-            </div>
+              <% end %>
           </div>
         </div>
-      </div>
-      <div class="col-xs-12 col-md-9 is-marginless has-background-primary">
-        <div class="row">
 
-          <div class="col-xs-12">
+        <div class="has-background-primary profile__bills">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
-  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
-  <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
+                <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
+                <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
               <% end %>
 
               <div class="bills-list">
+                <div class="bills-list__header">
+                 <div class="bills-list__company">
+                    Bill Type
+                  </div>
+                  <div class="bills-list__due-date">
+                    Due date
+                  </div>
+                  <div class="bills-list__due">
+                    Amount Due
+                  </div>
+                  <div class="bills-list__paid">
+                    State
+                  </div>
+                </div>
+                    
                 <% @user_documents.each do |user_document| %>
                   <% if @collection_type == 'due date' %>
                     <%= render "bill-list", user_document: user_document %>
@@ -76,63 +85,21 @@
                 <% end %>
               </div>
             </div>
-          </div>
-        </div>
-
-
-      <div class="col-xs-12 margin-top-mobile general-stats box">
-        <div class="general-stats__heading">
-          <h2> <%= Time.current.year %> billing stats</h2>
-        </div>
-        <div class="general-stats__body">
-          <div class="general-stats__highest">
-            <div class="general-stats__title">
-              Highest Bill
-            </div>
-            <div class="general-stats__content">
-              <% unless @most_expensive_bill.nil? %>
-                <%= number_with_delimiter(@most_expensive_bill.current_due_amount) %>円
-              <% else %>
-                0円
-              <% end %>
-            </div>
-          </div>
-          <div class="general-stats__lowest">
-            <div class="general-stats__title">
-              Lowest Bill
-            </div>
-            <div class="general-stats__content">
-              <% unless @least_expensive_bill.nil? %>
-                <%= number_with_delimiter(@least_expensive_bill.current_due_amount) %>円
-              <% else %>
-                0円
-              <% end %>
-            </div>
-          </div>
-          <div class="general-stats_average">
-            <div class="general-stats__title">
-              Average
-            </div>
-            <div class="general-stats__content">
-                <%= number_with_delimiter(@average_all_time) %>円
-            </div>
-          </div>
         </div>
       </div>
-    </div>
+      
     </div>
   </div>
 </div>
 
 <script>
-  const sort_by_change = document.querySelector("#sort-by-select");
-  const category_change = document.querySelector("#category-select");
+  const sort_by_change = document.querySelector('#sort-by-select');
+  const category_change = document.querySelector('#category-select');
 
-  sort_by_change.addEventListener('change', (event) => {
-    document.querySelector(".filter__form").submit();
-  })
-  category_change.addEventListener('change', (event) => {
-    document.querySelector(".filter__form").submit();
-  })
+  sort_by_change.addEventListener('change', event => {
+    document.querySelector('.filter__form').submit();
+  });
+  category_change.addEventListener('change', event => {
+    document.querySelector('.filter__form').submit();
+  });
 </script>
-

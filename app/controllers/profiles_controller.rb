@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
     @electricity_stats = UserDocument.search_stats("Tokyo Electricity", current_user)
     @water_stats = UserDocument.search_stats("Tokyo Water", current_user)
 
-    @sort_by = ["due date", "most expensive", "least expensive"]
+    @sort_by = ["Date Added", "Due Date", "Cost: High to Low", "Cost: Low to High"]
     @categories = ["all"]
     @collection_type = params[:sort_by]
 
@@ -35,12 +35,14 @@ class ProfilesController < ApplicationController
         @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
       end
 
-      @user_documents = if params[:category] == "all"
-        if params[:sort_by] == "due date"
+     @user_documents = if params[:category] == "all"
+        if params[:sort_by] == "Date Added"
           @user_documents.sort_by { |doc| doc.due_date }
-        elsif params[:sort_by] == "most expensive"
+        elsif params[:sort_by] == "Due Date"
+          @user_documents.sort_by { |doc| doc.due_date }
+        elsif params[:sort_by] == "Cost: High to Low"
           @user_documents.sort_by { |doc| -doc.current_due_amount }
-        elsif params[:sort_by] == "least expensive"
+        elsif params[:sort_by] == "Cost: Low to High"
           @user_documents.sort_by { |doc| doc.current_due_amount }
         else
           @user_documents
