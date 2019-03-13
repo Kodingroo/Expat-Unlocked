@@ -1,4 +1,4 @@
 <h1>UserDocument#creation_confirmation</h1>
 
-<p>Hi <%= @user_document.user.username%>, you've added <%= @user_document.title %> bill to your app</p>
-<p>we will remind you again on <%=@user_document.reminder_date%> to pay your bill </p>
+<p>Hi <%= @user_document.user.username%>, you've added <%= @user_document.title %> bill to your logs</p>
+<p>We will remind you to pay your bills 10 days before the due date which will be on  <%=@user_document.reminder_date.strftime("%B %e %Y")%></p>
