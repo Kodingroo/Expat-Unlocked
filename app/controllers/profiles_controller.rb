@@ -7,11 +7,13 @@ class ProfilesController < ApplicationController
     skip_authorization
     @user_documents = UserDocument.where(user_id: current_user.id)
     @user_document = UserDocument.new
-    @most_expensive_bill = UserDocument.most_expensive_bill(current_user)[0]
-    @least_expensive_bill = UserDocument.least_expensive_bill(current_user)[0]
-    @average_all_time = UserDocument.average_current_year(current_user).nan? ? 0 : UserDocument.average_current_year(current_user).to_i
 
     @documents = Document.all
+
+    @general_stats = UserDocument.general_bills(current_user)
+    @gas_stats = UserDocument.search_stats("Tokyo Gas", current_user)
+    @electricity_stats = UserDocument.search_stats("Tokyo Electricity", current_user)
+    @water_stats = UserDocument.search_stats("Tokyo Water", current_user)
 
     @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = ["all"]
