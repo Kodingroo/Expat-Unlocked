@@ -40,8 +40,8 @@ user_attributes = [
     last_name: 'Hartono',
     address: 'Shibuya, Tokyo',
     username: Faker::Internet.username,
-    email: Faker::Internet.email,
-    password: 'password'
+    email: sherly@hartono.info,
+    password: 'secret'
   },
     {
     first_name: 'Ivan',
