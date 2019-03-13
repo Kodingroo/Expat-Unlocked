@@ -8,6 +8,6 @@ class UserMailer < ApplicationMailer
 
     Email.create!(name: user.first_name)
     mail to: "sherly@hartono.info", subject: "Test mail"
-    This will render a view in `app/views/user_mailer`!
+    # This will render a view in `app/views/user_mailer`!
   end
 end
