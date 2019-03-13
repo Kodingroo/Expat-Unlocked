@@ -50,11 +50,11 @@ class UserDocumentsController < ApplicationController
     @user_document = UserDocument.new(user_document_params)
     authorize @user_document
 
-    # if current_or_guest_user.username == "guest"
-    #   @user_document.user = guest_user
-    # else
-    #   @user_document.user = current_user
-    # end
+    if current_or_guest_user.username == "guest"
+      @user_document.user = guest_user
+    else
+      @user_document.user = current_user
+    end
 
     if @user_document.save
       if @user_document.photo.metadata.nil?
