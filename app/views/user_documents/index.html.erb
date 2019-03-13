@@ -16,7 +16,7 @@
 <div class="primary-wrapper">
   <div class="container">
     <div class="row">
-    <% sorted = @user_documents.order('created_at ASC')%>
+    <% sorted = current_user.user_documents.order('created_at ASC')%>
       <% sorted.each do |doc| %>
       <div class="col-xs-12 col-md-4">
         <div class="card card-max-height" style="position: relative;">
