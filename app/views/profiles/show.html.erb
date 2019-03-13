@@ -2,6 +2,7 @@
     <div class="profile">
 
       <div class="sticky-top profile__left">
+
         <div class="user-card">
           <div class="user-card__header">
             <% unless current_user.photo.url.nil? %>
@@ -32,24 +33,22 @@
       </div>
 
       <div class="has-background-primary profile__right">
+        
         <div class="upcoming-card">
           <div class="upcoming-card__heading">
             <h2> Your upcoming bills</h2>
           </div>
           <div class="upcoming-card__body">
-            <ul>
               <% sorted = current_user.user_documents.order('due_date ASC').first(3) %>
               <% sorted.each do |user_document| %>
                 <% if user_document.created_at.year == Date.today.year &&   user_document.state == false  %>
                 <%= render "due-bills", user_document: user_document %>
                 <% end %>
               <% end %>
-            </ul>
           </div>
-      </div>
+        </div>
 
-       <div class="has-background-primary">
-          <div class="">
+        <div class="has-background-primary profile__bills">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
                 <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
@@ -57,6 +56,18 @@
               <% end %>
 
               <div class="bills-list">
+                  <div class="bills-list__company">
+                      Bill Type
+                    </div>
+                    <div class="bills-list__due-date">
+                      Due date
+                    </div>
+                    <div class="bills-list__due">
+                      Amount Due
+                    </div>
+                    <div class="bills-list__paid">
+                      State
+                    </div>
                 <% @user_documents.each do |user_document| %>
                   <% if @collection_type == 'due date' %>
                     <%= render "bill-list", user_document: user_document %>
@@ -70,7 +81,6 @@
                 <% end %>
               </div>
             </div>
-          </div>
         </div>
       </div>
       
