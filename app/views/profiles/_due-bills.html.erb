@@ -1,12 +1,16 @@
 <% unless user_document.state %>
-<div class="upcoming-card__title">
-  <%= user_document.document.company_name %>
-</div>
-<div class="upcoming-card__content">
-Due:<strong> <%= user_document.due_date.strftime("%b %d %Y") %></strong>
-</div>
-<%= link_to "paid", pay_user_document_path(user_document), method: :patch,
-remote: true, id: "#{user_document.id}-paid-document" %>
-<%= link_to "view", user_document_path(user_document), class: "button is-inverted", method: :get %>
+  <div class="upcoming-card__data">
+    <div class="upcoming-card__title">
+      <%= link_to user_document.document.company_name, user_document_path(user_document), class: "upcoming-card__link", method: :get %>
+    </div>
+    <div class="upcoming-card__content">
+      Due on 
+      <span class="upcoming-card__date">
+        <%= user_document.due_date.strftime("%b %d %Y") %>
+      </span>
+    </div>
+    <%= button_to "Mark As Paid", pay_user_document_path(user_document), method: :patch, class: "button is-small z-index",
+    remote: true, id: "#{user_document.id}-paid-document" %>
+  </div>
 <% end %>
 
