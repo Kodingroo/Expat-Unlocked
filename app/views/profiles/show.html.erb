@@ -30,6 +30,75 @@
             <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
+
+          <div class="profile-stats">
+            <h2>Financial Data for <%= Time.current.year %> </h2>
+            <div class="profile-stats__general">
+              <div class="profile-stats__highest">
+                
+              </div>
+              <div class="profile-stats__lowest">
+
+              </div>
+              <div class="profile-stats__average">
+
+              </div>
+            </div>
+            <div class="profile-stats__heading">
+                <h5>Gas Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+              <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= @water_stats[:max] %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= @water_stats[:min] %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= @water_stats[:average] %>¥</p>
+              </div>
+            </div>
+            <div class="profile-stats__heading">
+                <h5>Water Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+               <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= @water_stats[:max] %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= @water_stats[:min] %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= @water_stats[:average] %>¥</p>
+              </div>
+            </div>
+            <div class="profile-stats__heading">
+                <h5>Electricity Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
+              <div class="profile-stats__highest">
+                <h5>Highest</h5>
+                <p><%= @electricity_stats[:max] %>¥</p>
+              </div>
+              <div class="profile-stats__lowest">
+                <h5>Lowest</h5>
+                <p><%= @electricity_stats[:min] %>¥</p>
+              </div>
+              <div class="profile-stats__average">
+                <h5>Average</h5>
+                <p><%= @electricity_stats[:average] %>¥</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

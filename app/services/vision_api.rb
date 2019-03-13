@@ -43,6 +43,8 @@ class VisionApi
   end
 
   def self.create_amount_due(yen_array)
+    p "yen"
+    p yen_array
     yen_array.flatten.map do |yen|
       yen.split(",").join("").gsub(/\s+/, "").to_i
     end.max
@@ -73,7 +75,6 @@ class VisionApi
 
     all_text = words.shift
 
-    p extract_yen(all_text).to_i
     return {
       text: all_text,
       words: filter_words(words),
