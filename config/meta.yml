@@ -1,0 +1,5 @@
+meta_product_name: "Siji"
+meta_title: "Siji bills - No language barrier"
+meta_description: "Take the guesswork out of Japanese bills"
+meta_image: "bluelogo.png" # should exist in `app/assets/images/`
+twitter_account: "@sijibills"   # required for Twitter Cards
