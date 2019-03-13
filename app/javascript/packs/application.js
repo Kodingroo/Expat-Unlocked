@@ -29,5 +29,10 @@ showData.forEach(element => {
     e.target.parentNode.nextElementSibling.classList.toggle(
       'profile-stats__data'
     );
+    if (e.target.textContent == '+') {
+      e.target.textContent = '-';
+    } else {
+      e.target.textContent = '+';
+    }
   });
 });
