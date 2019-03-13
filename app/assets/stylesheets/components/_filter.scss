@@ -15,6 +15,7 @@
   &__item {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
     align-items: center;
     position: relative;
@@ -38,14 +39,8 @@
     padding: 10px 0;
     position: relative;
   }
-  &__item > *:not(:last-child)::after {
-    content: '';
-    width: 3px;
-    height: 100%;
-    background: rgba($primary, 0.8);
-    position: absolute;
-    right: -10px;
-    bottom: 0;
+  &__company {
+    flex: 1;
   }
   &__due {
     font-family: $body-font;
@@ -66,6 +61,7 @@
     display: flex;
     align-items: center;
     z-index: 200;
+    flex: 1;
     & > *:not(:last-child) {
       margin-right: 10px;
     }
