@@ -36,15 +36,22 @@
 
           <div class="profile-stats">
             <h2>Financial Data for <%= Time.current.year %> </h2>
-            <div class="profile-stats__general">
+            <div class="profile-stats__heading">
+                <h5>All Bills</h5>
+                <p class="profile-stats__display">+</p>
+            </div>
+            <div class="profile-stats__data">
               <div class="profile-stats__highest">
-                
+                <h5>Highest</h5>
+                <p><%= number_with_delimiter(@general_stats[:max]) %>¥</p>
               </div>
               <div class="profile-stats__lowest">
-
+                <h5>Lowest</h5>
+                <p><%= number_with_delimiter(@general_stats[:min]) %>¥</p>
               </div>
               <div class="profile-stats__average">
-
+                <h5>Average</h5>
+                <p><%= number_with_delimiter(@general_stats[:average]) %>¥</p>
               </div>
             </div>
             <div class="profile-stats__heading">
@@ -54,15 +61,15 @@
             <div class="profile-stats__data">
               <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= @gas_stats[:max] %>¥</p>
+                <p><%= number_with_delimiter(@gas_stats[:max]) %>¥</p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= @gas_stats[:min] %>¥</p>
+                <p><%= number_with_delimiter(@gas_stats[:min]) %>¥</p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= @gas_stats[:average] %>¥</p>
+                <p><%= number_with_delimiter(@gas_stats[:average]) %>¥</p>
               </div>
             </div>
             <div class="profile-stats__heading">
@@ -72,15 +79,15 @@
             <div class="profile-stats__data">
                <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= @water_stats[:max] %>¥</p>
+                <p><%= number_with_delimiter(@water_stats[:max]) %>¥</p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= @water_stats[:min] %>¥</p>
+                <p><%= number_with_delimiter(@water_stats[:min]) %>¥</p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= @water_stats[:average] %>¥</p>
+                <p><%= number_with_delimiter(@water_stats[:average]) %>¥</p>
               </div>
             </div>
             <div class="profile-stats__heading">
@@ -90,15 +97,15 @@
             <div class="profile-stats__data">
               <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= @electricity_stats[:max] %>¥</p>
+                <p><%= number_with_delimiter(@electricity_stats[:max]) %>¥</p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= @electricity_stats[:min] %>¥</p>
+                <p><%= number_with_delimiter(@electricity_stats[:min]) %>¥</p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= @electricity_stats[:average] %>¥</p>
+                <p><%= number_with_delimiter(@electricity_stats[:average]) %>¥</p>
               </div>
             </div>
           </div>

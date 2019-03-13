@@ -8,7 +8,7 @@
     <%= user_document.due_date.strftime("%b %d, %Y") %>
   </div>
   <div class="bills-list__due">
-    <%= number_with_delimiter user_document.current_due_amount %>円
+    <%= number_with_delimiter user_document.current_due_amount %>¥
   </div>
   <div class="bills-list__paid">
     <% if user_document.state %>
