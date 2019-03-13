@@ -130,7 +130,6 @@
         <div class="has-background-primary profile__bills">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
-
                 <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
                 <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
               <% end %>
