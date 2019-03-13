@@ -18,7 +18,7 @@
             </ul>
           </div>
           <div class="result-photo">
-            <%= cl_image_tag @user_document.photo, :width => 1000, :crop => "fill", class: "height-change" %>
+            <%= cl_image_tag @user_document.photo, :quality=>60, :width => 1000, :crop => "fill", class: "height-change" %>
           </div>
         </div>
       </div>
@@ -30,19 +30,20 @@
             <p>Default reminder date: <%= @user_document.reminder_date %></p>
 
             <% if @user_document.reminder_date.nil? %>
-            <div class="reminder-form center-content">
-              <%= simple_form_for @user_document do |f| %>
-              <%= f.input :reminder_date, label: false %>
-              <%= f.submit "Remind me!", class: "button is-inverted" %>
-              <% end %>
-            </div>
+              <div class="reminder-form center-content">
+                <%= simple_form_for @user_document do |f| %>
+                <%= f.input :reminder_date, label: false %>
+                <%= f.submit "Remind me!", class: "button is-inverted" %>
+                <% end %>
+              </div>
             <% else %>
-            <div>
-              <%= simple_form_for @user_document do |f| %>
-              <%= f.input :reminder_date, label: false %>
-              <%= f.submit "Ok", class: "button is-inverted" %>
-              <% end %>
-            </div>
+              <div>
+                <p>Change reminder date?</p>
+                <%= simple_form_for @user_document do |f| %>
+                <%= f.input :reminder_date, as: :string, label: false, input_html: { class: 'datepicker' } %>
+                <%= f.submit "Ok", class: "button is-inverted" %>
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>

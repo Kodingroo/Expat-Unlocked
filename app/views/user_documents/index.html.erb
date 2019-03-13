@@ -44,7 +44,7 @@
             </ul>
           </div>
           <div class="result-photo">
-            <%= cl_image_tag doc.photo.url, :width => 100, :crop => "fit" %>
+            <%= cl_image_tag doc.photo.url,:quality=>60, :width => 100, :crop => "fit" %>
           </div>
         </div>
       </div>
