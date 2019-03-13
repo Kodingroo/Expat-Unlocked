@@ -56,18 +56,21 @@
               <% end %>
 
               <div class="bills-list">
-                  <div class="bills-list__company">
-                      Bill Type
-                    </div>
-                    <div class="bills-list__due-date">
-                      Due date
-                    </div>
-                    <div class="bills-list__due">
-                      Amount Due
-                    </div>
-                    <div class="bills-list__paid">
-                      State
-                    </div>
+                <div class="bills-list__header">
+                 <div class="bills-list__company">
+                    Bill Type
+                  </div>
+                  <div class="bills-list__due-date">
+                    Due date
+                  </div>
+                  <div class="bills-list__due">
+                    Amount Due
+                  </div>
+                  <div class="bills-list__paid">
+                    State
+                  </div>
+                </div>
+                    
                 <% @user_documents.each do |user_document| %>
                   <% if @collection_type == 'due date' %>
                     <%= render "bill-list", user_document: user_document %>

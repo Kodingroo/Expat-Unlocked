@@ -1,5 +1,6 @@
 .bills-list {
-  &__item {
+  &__item,
+  &__header {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -20,11 +21,18 @@
     height: 2px;
     width: 100%;
   }
+  &__header > * {
+    font-weight: bold;
+  }
+  &__item > * {
+  }
+  &__header > *,
   &__item > * {
     margin-right: 15px;
     padding: 10px 0;
     position: relative;
     flex: 0 0 25%;
+    text-align: center;
   }
   &__item > *:not(:last-child)::after {
     content: '';
