@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
     @gas_stats = UserDocument.search_stats("Tokyo Gas", current_user)
     @electricity_stats = UserDocument.search_stats("Tokyo Electricity", current_user)
     @water_stats = UserDocument.search_stats("Tokyo Water", current_user)
-  
+
     @sort_by = ["due date", "most expensive", "least expensive"]
     @categories = ["all"]
     @collection_type = params[:sort_by]

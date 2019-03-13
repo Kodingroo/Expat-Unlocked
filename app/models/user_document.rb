@@ -32,5 +32,6 @@ class UserDocument < ApplicationRecord
     type = Document.find_by(company_name: document)
 
     bills = type.user_documents.where(user_id: current_user.id).pluck("current_due_amount")
+    bills_hash(bills)
   end
 end
