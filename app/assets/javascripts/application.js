@@ -1,5 +1,7 @@
 //= require rails-ujs
 //= require_tree .
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 function loader() {
   var upload = document.querySelector('.upload-document');
   console.log(upload.form);
