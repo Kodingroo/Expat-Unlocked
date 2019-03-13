@@ -50,11 +50,11 @@ class UserDocumentsController < ApplicationController
     @user_document = UserDocument.new(user_document_params)
     authorize @user_document
 
-    if current_or_guest_user.username == "guest"
-      @user_document.user = guest_user
-    else
-      @user_document.user = current_user
-    end
+    # if current_or_guest_user.username == "guest"
+    #   @user_document.user = guest_user
+    # else
+    #   @user_document.user = current_user
+    # end
 
     if @user_document.save
       if @user_document.photo.metadata.nil?
@@ -66,7 +66,9 @@ class UserDocumentsController < ApplicationController
         @document = find_document(api_data[:words])
         assign_data(@user_document, api_data)
         @user_document.save
-        UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        if current_or_guest_user.username != "guest"
+          UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        end
         redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
       end
     else
