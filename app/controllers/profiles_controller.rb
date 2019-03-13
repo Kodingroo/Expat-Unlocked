@@ -10,12 +10,12 @@ class ProfilesController < ApplicationController
 
     @documents = Document.all
 
-    @general_stats = UserDocument.general_bills(current_user)
-    @gas_stats = UserDocument.search_stats("Tokyo Gas", current_user)
-    @electricity_stats = UserDocument.search_stats("Tokyo Electricity", current_user)
-    @water_stats = UserDocument.search_stats("Tokyo Water", current_user)
+    # @general_stats = UserDocument.general_bills(current_user)
+    # @gas_stats = UserDocument.search_stats("Tokyo Gas", current_user)
+    # @electricity_stats = UserDocument.search_stats("Tokyo Electricity", current_user)
+    # @water_stats = UserDocument.search_stats("Tokyo Water", current_user)
 
-    @sort_by = ["due date", "most expensive", "least expensive"]
+    @sort_by = ["date added", "due date", "most expensive", "least expensive"]
     @categories = ["all"]
     @collection_type = params[:sort_by]
 
@@ -36,11 +36,13 @@ class ProfilesController < ApplicationController
       end
 
       @user_documents = if params[:category] == "all"
-        if params[:sort_by] == "due date"
+        if params[:sort_by] == "Date: added"
+          @user_documents.sort_by { |doc| doc.created_at }
+        elsif params[:sort_by] == "Date: due"
           @user_documents.sort_by { |doc| doc.due_date }
-        elsif params[:sort_by] == "most expensive"
+        elsif params[:sort_by] == "Cost: High to Low"
           @user_documents.sort_by { |doc| -doc.current_due_amount }
-        elsif params[:sort_by] == "least expensive"
+        elsif params[:sort_by] == "Cost: Low to High"
           @user_documents.sort_by { |doc| doc.current_due_amount }
         else
           @user_documents
