@@ -6,7 +6,7 @@
        <%= simple_form_for(@user_document) do |f| %>
           <%= f.input :photo, required: true, label: 'Upload your bill', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
-          <%= f.submit "Scan Document",as: :hidden, id: "upload-button", class: "button is-inverted" %>
+          <%#= f.submit "Scan document",as: :hidden, id: "upload-button", class: "button is-inverted" %>
        <% end %>
     </div>
   </div>
