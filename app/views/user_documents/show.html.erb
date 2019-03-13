@@ -39,11 +39,10 @@
             <% else %>
             <div>
               <%= simple_form_for @user_document do |f| %>
-              <%= f.input :reminder_date, label: false %>
+              <%= f.input :reminder_date, label: false, :input_html => { :data => {:datepicker => :datepicker} } %>
               <%= f.submit "Ok", class: "button is-inverted" %>
               <% end %>
             </div>
-            <input type="text" data-provide='datepicker' >
             <% end %>
           </div>
         </div>
