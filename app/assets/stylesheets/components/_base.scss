@@ -124,16 +124,19 @@ a:focus {
 .sticky-top {
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: 0;
+  top: 54px;
   z-index: 100;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
   .sticky-top {
     position: -webkit-sticky; /* Safari */
     position: relative;
     top: 0;
     z-index: 100;
+  }
+  .profile__left {
+    height: auto;
   }
 }
 .pink {
@@ -228,4 +231,8 @@ a:focus {
     -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
     box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
   }
+}
+
+.top-z {
+  z-index: 1000;
 }

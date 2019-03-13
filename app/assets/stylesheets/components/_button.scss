@@ -1,6 +1,6 @@
-@import "base";
+@import 'base';
 .button {
-  background: #FFE74C;
+  background: #ffe74c;
   border: none;
   border-radius: 5px;
   color: $primary;
@@ -51,7 +51,7 @@
 }
 
 .try-now {
-  background-color: #FFE74C;
+  background-color: #ffe74c;
   color: $primary;
   padding: 1em 1.5em;
   text-decoration: none;
@@ -69,4 +69,9 @@
 }
 .red {
   background-color: #ff5d9e;
+}
+
+.is-small {
+  height: 40px;
+  min-width: 80px;
 }
