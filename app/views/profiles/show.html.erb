@@ -5,9 +5,9 @@
 
         <div class="user-card">
           <div class="user-card__header">
-            <% unless current_user.photo.url.nil? %> 
-              <%= cl_image_tag current_user.photo, class: "avatar" %> 
-            <% else %> <%= image_tag 'avatar.png', class: "avatar" %> 
+            <% unless current_user.photo.url.nil? %>
+              <%= cl_image_tag current_user.photo, class: "avatar" %>
+            <% else %> <%= image_tag 'avatar.png', class: "avatar" %>
             <% end %>
           </div>
           <div class="user-card__body center-content">
@@ -34,7 +34,7 @@
       </div>
 
       <div class="has-background-primary profile__right">
-        
+
         <div class="upcoming-card">
           <div class="upcoming-card__heading">
             <h2> Your upcoming bills</h2>
@@ -71,7 +71,7 @@
                     State
                   </div>
                 </div>
-                    
+
                 <% @user_documents.each do |user_document| %>
                   <% if @collection_type == 'due date' %>
                     <%= render "bill-list", user_document: user_document %>
@@ -87,7 +87,7 @@
             </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
