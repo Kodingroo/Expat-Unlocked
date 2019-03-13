@@ -9,16 +9,16 @@
   & a {
     color: $primary;
     font-weight: bold;
+    margin-right: 10px;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     &:hover {
-      background: $secondary;
-      color: $primary;
+      color: $secondary;
     }
   }
 
+
   .active {
-      background: $secondary;
-      padding: 15px;
+      color: $secondary;
     }
 
   &__right {
