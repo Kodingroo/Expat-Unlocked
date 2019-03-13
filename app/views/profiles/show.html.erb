@@ -5,9 +5,12 @@
 
         <div class="user-card">
           <div class="user-card__header">
-            <% unless current_user.photo.url.nil? %> 
-              <%= cl_image_tag current_user.photo, class: "avatar" %> 
-            <% else %> <%= image_tag 'avatar.png', class: "avatar" %> 
+
+            <% unless current_user.photo.url.nil? %>
+            <%= cl_image_tag current_user.photo, class: "avatar" %>
+            <% else %>
+            <%= image_tag 'avatar.png', class: "avatar" %>
+
             <% end %>
           </div>
           <div class="user-card__body center-content">
@@ -115,12 +118,14 @@
                 <%= render "due-bills", user_document: user_document %>
                 <% end %>
               <% end %>
+ 
           </div>
         </div>
 
         <div class="has-background-primary profile__bills">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
+
                 <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
                 <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
               <% end %>
@@ -151,6 +156,7 @@
                   <% else %>
                     <%= render "bill-list", user_document: user_document %>
                   <% end %>
+
                 <% end %>
               </div>
             </div>
