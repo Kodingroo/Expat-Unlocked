@@ -30,19 +30,20 @@
             <p>Default reminder date: <%= @user_document.reminder_date %></p>
 
             <% if @user_document.reminder_date.nil? %>
-            <div class="reminder-form center-content">
-              <%= simple_form_for @user_document do |f| %>
-              <%= f.input :reminder_date, label: false %>
-              <%= f.submit "Remind me!", class: "button is-inverted" %>
-              <% end %>
-            </div>
+              <div class="reminder-form center-content">
+                <%= simple_form_for @user_document do |f| %>
+                <%= f.input :reminder_date, label: false %>
+                <%= f.submit "Remind me!", class: "button is-inverted" %>
+                <% end %>
+              </div>
             <% else %>
-            <div>
-              <%= simple_form_for @user_document do |f| %>
-              <%= f.input :reminder_date, label: false, :input_html => { :data => {:datepicker => :datepicker} } %>
-              <%= f.submit "Ok", class: "button is-inverted" %>
-              <% end %>
-            </div>
+              <div>
+                <%= simple_form_for @user_document do |f| %>
+                <%= f.input :reminder_date, as: :string, label: false,
+                            data: { controller: "flatpickr", flatpickr_format: "Y-m-d"} %>
+                <%= f.submit "Ok", class: "button is-inverted" %>
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>
