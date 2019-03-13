@@ -1,5 +1,8 @@
+//= require jquery
 //= require rails-ujs
 //= require_tree .
+//= require jquery-ui
+
 function loader() {
   var upload = document.querySelector('.upload-document');
   console.log(upload.form);
