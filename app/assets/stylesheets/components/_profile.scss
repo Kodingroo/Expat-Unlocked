@@ -65,6 +65,17 @@
   justify-content: space-between;
 }
 
-.profile-right {
-  padding: 0px 20px;
+.profile {
+  display: flex;
+  &__left {
+    flex: 25%;
+    height: 100%;
+  }
+  &__right {
+    display: flex;
+    flex-direction: column:
+    
+    flex: 75%;
+    padding: 10px 20px;
+  }
 }

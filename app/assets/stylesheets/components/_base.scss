@@ -44,6 +44,10 @@ ul {
   padding: 0;
 }
 
+.margin-auto {
+  margin: 0 auto;
+}
+
 .site {
   display: flex;
   min-height: 100vh;
@@ -124,7 +128,7 @@ a:focus {
 .sticky-top {
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: 0;
+  top: 54px;
   z-index: 100;
 }
 

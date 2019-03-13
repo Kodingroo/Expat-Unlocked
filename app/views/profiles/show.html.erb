@@ -1,8 +1,7 @@
 <div class="primary-wrapper is-paddingless has-color">
-<div class="container profile-page">
-    <div class="row profile">
+    <div class="profile">
 
-      <div class="col-xs-12 col-md-3 is-marginless is-paddingless sticky-top">
+      <div class="sticky-top profile__left">
         <div class="user-card">
           <div class="user-card__header">
             <% unless current_user.photo.url.nil? %>
@@ -29,37 +28,32 @@
             <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
-
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-9 is-marginless has-background-primary ">
-        <div class="row">
-          <div class="col-xs-12 upcoming-card">
-            <div class="upcoming-card__heading">
-              <h2> Your upcoming bills</h2>
-            </div>
-            <div class="upcoming-card__body">
-              <ul>
-                <% sorted = current_user.user_documents.order('due_date ASC')%>
-                <% sorted.each do |user_document| %>
-                <% if user_document.created_at.year == Date.today.year && user_document.state == false  %>
-                <li><%= render "due-bills", user_document: user_document %></li>
-                <% end %>
-                <% end %>
-              </ul>
-            </div>
+      <div class="has-background-primary profile__right">
+        <div class="upcoming-card">
+          <div class="upcoming-card__heading">
+            <h2> Your upcoming bills</h2>
           </div>
-        </div>
+          <div class="upcoming-card__body">
+            <ul>
+              <% sorted = current_user.user_documents.order('due_date ASC').first(3) %>
+              <% sorted.each do |user_document| %>
+                <% if user_document.created_at.year == Date.today.year &&   user_document.state == false  %>
+                <%= render "due-bills", user_document: user_document %>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
       </div>
-      <div class="col-xs-12 col-md-9 is-marginless has-background-primary">
-        <div class="row">
 
-          <div class="col-xs-12">
+       <div class="has-background-primary">
+          <div class="">
             <div class="filter">
               <%= form_tag profile_path, method: :get, class: "filter__form" do |f| %>
-  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
-  <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
+                <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
+                <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
               <% end %>
 
               <div class="bills-list">
@@ -78,48 +72,8 @@
             </div>
           </div>
         </div>
-
-
-      <div class="col-xs-12 margin-top-mobile general-stats box">
-        <div class="general-stats__heading">
-          <h2> <%= Time.current.year %> billing stats</h2>
-        </div>
-        <div class="general-stats__body">
-          <div class="general-stats__highest">
-            <div class="general-stats__title">
-              Highest Bill
-            </div>
-            <div class="general-stats__content">
-              <% unless @most_expensive_bill.nil? %>
-                <%= number_with_delimiter(@most_expensive_bill.current_due_amount) %>円
-              <% else %>
-                0円
-              <% end %>
-            </div>
-          </div>
-          <div class="general-stats__lowest">
-            <div class="general-stats__title">
-              Lowest Bill
-            </div>
-            <div class="general-stats__content">
-              <% unless @least_expensive_bill.nil? %>
-                <%= number_with_delimiter(@least_expensive_bill.current_due_amount) %>円
-              <% else %>
-                0円
-              <% end %>
-            </div>
-          </div>
-          <div class="general-stats_average">
-            <div class="general-stats__title">
-              Average
-            </div>
-            <div class="general-stats__content">
-                <%= number_with_delimiter(@average_all_time) %>円
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+      
     </div>
   </div>
 </div>
