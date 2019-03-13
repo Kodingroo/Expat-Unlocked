@@ -69,18 +69,6 @@ class ProfilesController < ApplicationController
 
   private
 
-  def gas_stats
-
-  end
-
-  def electricity_stats
-
-  end
-
-  def water_stats
-
-  end
-
   def user_params
     params.require(:user).permit(:username)
   end
