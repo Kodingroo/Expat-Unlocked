@@ -26,7 +26,7 @@
             </div>
           </div>
           <%= simple_form_for(@user_document) do |f| %>
-            <%= f.input :photo, required: true, label: 'Upload Bill', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
+            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
 
