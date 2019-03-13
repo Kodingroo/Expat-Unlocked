@@ -8,7 +8,7 @@ class UserDocumentsController < ApplicationController
     @user_documents = policy_scope(UserDocument).order(created_at: :desc)
     @user_document = UserDocument.new
 
-    @sort_by = ["due date", "most expensive", "least expensive"]
+    @sort_by = ["date added", "due date", "most expensive", "least expensive"]
     @categories = ["all"]
     @collection_type = params[:sort_by]
 
@@ -29,11 +29,13 @@ class UserDocumentsController < ApplicationController
       end
 
       @user_documents = if params[:category] == "all"
-        if params[:sort_by] == "due date"
+        if params[:sort_by] == "Date: added"
+          @user_documents.sort_by { |doc| doc.created_at }
+        elsif params[:sort_by] == "Date: due"
           @user_documents.sort_by { |doc| doc.due_date }
-        elsif params[:sort_by] == "most expensive"
+        elsif params[:sort_by] == "Cost: High to Low"
           @user_documents.sort_by { |doc| -doc.current_due_amount }
-        elsif params[:sort_by] == "least expensive"
+        elsif params[:sort_by] == "Cost: Low to High"
           @user_documents.sort_by { |doc| doc.current_due_amount }
         else
           @user_documents
