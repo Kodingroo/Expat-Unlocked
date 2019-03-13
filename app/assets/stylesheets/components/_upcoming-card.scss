@@ -1,6 +1,5 @@
-.upcoming-bills {
+.upcoming-card {
   background: $primary;
-  padding: 0;
   &__body {
     display: flex;
     justify-content: space-around;
@@ -19,18 +18,19 @@
     align-items: center;
     justify-content: center;
     & h2 {
-      font-size: 50px;
+      font-size: 36px;
       margin: 0;
+      font-weight: normal;
     }
   }
   &__title {
-    font-size: 25px;
-    font-weight: 100;
+    font-size: 24px;
+    font-weight: bold;
     padding: 15px 5px;
   }
   &__content {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: lighter;
     padding: 15px 5px;
   }
 }

@@ -33,21 +33,21 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-9 is-marginless has-background-primary center-content box">
+      <div class="col-xs-12 col-md-9 is-marginless has-background-primary ">
         <div class="row">
-          <div class="col-xs-12 margin-top-mobile upcoming-bills box">
-            <div class="upcoming-bills__heading">
+          <div class="col-xs-12 upcoming-card">
+            <div class="upcoming-card__heading">
               <h2> Your upcoming bills</h2>
             </div>
-            <div class="upcoming-bills__body">
-              <ol>
+            <div class="upcoming-card__body">
+              <ul>
                 <% sorted = current_user.user_documents.order('due_date ASC')%>
                 <% sorted.each do |user_document| %>
                 <% if user_document.created_at.year == Date.today.year && user_document.state == false  %>
                 <li><%= render "due-bills", user_document: user_document %></li>
                 <% end %>
                 <% end %>
-              </ol>
+              </ul>
             </div>
           </div>
         </div>

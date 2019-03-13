@@ -91,7 +91,9 @@ a:focus {
 .is-marginless {
   margin: 0 !important;
 }
-
+.is-marginless-top {
+  margin-top: 0px;
+}
 .is-paddingless {
   padding: 0 !important;
 }
@@ -155,10 +157,6 @@ a:focus {
   & div {
     width: 218px;
   }
-}
-
-.profile .col-xs-12 {
-  margin: 20px 0;
 }
 
 .has-background-primary {
