@@ -19,10 +19,6 @@
         Days Remaining: <%= (user_document.due_date - Date.today).positive? ?
         (user_document.due_date - Date.today).to_i : "Overdue" %>
       </div>
-      <div class="due-card__image">
-        <%= cl_image_tag user_document.photo.url, :width => 600, :crop => "fill"
-        %>
-      </div>
     </div>
 
     <%= link_to "paid", pay_user_document_path(user_document), method: :patch,
