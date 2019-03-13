@@ -2,26 +2,28 @@ class UserDocument < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   belongs_to :user
   belongs_to :document, optional: true
-  # validates :photo, presence: true
-  # validates :doc_type, presence: true
-  # FILTER = %w(due_date doc_type state)
-  def self.most_expensive_bill(current_user)
-    max_bill = current_user.user_documents.pluck("current_due_amount").max
-    current_user.user_documents.where("created_at > ?", Date.new(Time.now.year, 1, 1)).where(current_due_amount: max_bill)
+
+  def self.current_year_user_bills(current_user)
+    current_user.user_documents.where("created_at > ?", Date.new(Time.now.year, 1, 1)).pluck("current_due_amount")
   end
 
-  def self.least_expensive_bill(current_user)
-    min_bill = current_user.user_documents.pluck("current_due_amount").min
-    current_user.user_documents.where("created_at > ?", Date.new(Time.now.year, 1, 1)).where(current_due_amount: min_bill)
+  def self.bills_hash(bills)
+    {
+      max: bills.max,
+      min: bills.min,
+      average: (bills.inject(0.0) { |sum, el| sum + el } / bills.size).to_i
+    }
   end
 
-  def self.average_current_year(current_user)
-    current_user_docs = current_user.user_documents.where("created_at > ?", Date.new(Time.now.year, 1, 1))
-    due_array = current_user_docs.pluck("current_due_amount")
-    due_array.inject(0.0) { |sum, el| sum + el } / due_array.size
+  def self.general_bills(current_user)
+    bills = current_year_user_bills(current_user)
+    bills_hash(bills)
   end
 
-  def self.average_this_month
-    average(:current_due_amount).where(user_id: current_user)
+  def self.search_stats(document, current_user)
+    type = Document.find_by(company_name: document)
+
+    bills = type.user_documents.where(user_id: current_user.id).pluck("current_due_amount")
+    bills_hash(bills)
   end
 end
