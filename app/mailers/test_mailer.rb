@@ -3,7 +3,7 @@ class TestMailer < ActionMailer::Base
     mail(
       :subject => 'Hello from Postmark',
       :to  => 'sherly@hartono.info',
-      :from => 'sherly@hartono.info',
+      :from => 'admin@sijibills.com',
       :html_body => '<strong>Hello</strong> dear Postmark user.',
       :track_opens => 'true')
   end
