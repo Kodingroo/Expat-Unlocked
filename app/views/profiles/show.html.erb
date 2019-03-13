@@ -5,14 +5,15 @@
 
         <div class="user-card">
           <div class="user-card__header">
-            <% unless current_user.photo.url.nil? %>
-              <%= cl_image_tag current_user.photo, class: "avatar" %>
-            <% else %>
-              <%= image_tag 'avatar.png', class: "avatar" %>
+            <% unless current_user.photo.url.nil? %> 
+              <%= cl_image_tag current_user.photo, class: "avatar" %> 
+            <% else %> <%= image_tag 'avatar.png', class: "avatar" %> 
             <% end %>
           </div>
           <div class="user-card__body center-content">
-            <%= link_to 'Edit profile', edit_user_registration_path(current_user), class: "user-card__edit tag" %>
+            <%= link_to 'Edit profile',
+            edit_user_registration_path(current_user), class: "user-card__edit
+            tag" %>
             <div class="user-card__heading">
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
@@ -21,7 +22,7 @@
                 Total bills uploaded
               </div>
               <div class="user-card__count">
-                 <%= current_user.user_documents.count %>
+                <%= current_user.user_documents.count %>
               </div>
             </div>
           </div>
@@ -92,14 +93,13 @@
 </div>
 
 <script>
-  const sort_by_change = document.querySelector("#sort-by-select");
-  const category_change = document.querySelector("#category-select");
+  const sort_by_change = document.querySelector('#sort-by-select');
+  const category_change = document.querySelector('#category-select');
 
-  sort_by_change.addEventListener('change', (event) => {
-    document.querySelector(".filter__form").submit();
-  })
-  category_change.addEventListener('change', (event) => {
-    document.querySelector(".filter__form").submit();
-  })
+  sort_by_change.addEventListener('change', event => {
+    document.querySelector('.filter__form').submit();
+  });
+  category_change.addEventListener('change', event => {
+    document.querySelector('.filter__form').submit();
+  });
 </script>
-

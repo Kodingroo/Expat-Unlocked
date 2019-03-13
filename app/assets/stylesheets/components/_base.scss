@@ -128,12 +128,15 @@ a:focus {
   z-index: 100;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
   .sticky-top {
     position: -webkit-sticky; /* Safari */
     position: relative;
     top: 0;
     z-index: 100;
+  }
+  .profile__left {
+    height: auto;
   }
 }
 .pink {

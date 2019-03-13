@@ -8,11 +8,19 @@ class UserDocument < ApplicationRecord
   end
 
   def self.bills_hash(bills)
-    {
-      max: bills.max,
-      min: bills.min,
-      average: (bills.inject(0.0) { |sum, el| sum + el } / bills.size).to_i
-    }
+    if bills.size.zero?
+      {
+        max: 0,
+        min: 0,
+        average: 0
+      }
+    else
+      {
+        max: bills.max,
+        min: bills.min,
+        average: (bills.inject(0.0) { |sum, el| sum + el } / bills.size).to_i
+      }
+    end
   end
 
   def self.general_bills(current_user)
