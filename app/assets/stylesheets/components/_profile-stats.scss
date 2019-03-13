@@ -1,0 +1,56 @@
+.profile-stats {
+  & h5 {
+    font-family: $body-font;
+    color: $primary;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    & > * {
+      margin: 0;
+    }
+    & h5 {
+      color: rgba($primary, 0.7);
+    }
+    & p {
+      font-size: 25px;
+      background: $primary;
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+      &:hover {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  &__data {
+    display: flex;
+    justify-content: space-between;
+    visibility: hidden;
+    transform: scale(0);
+    height: 0px;
+    & h5 {
+      font-style: italic;
+    }
+  }
+}
+
+.show-data {
+  visibility: visible;
+  transform: scale(1);
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}

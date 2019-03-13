@@ -1,13 +1,10 @@
 import 'bootstrap';
-import "../plugins/flatpickr"
-
-
+import '../plugins/flatpickr';
 
 const nav = document.querySelector('.navigation');
 const dropdown = document.querySelector('.navigation__hamburger');
 const mobileNav = document.querySelector('.navigation__drop');
-// const uploadButton = document.querySelector('#upload-button');
-
+const showData = document.querySelectorAll('.profile-stats__display');
 
 window.addEventListener('scroll', e => {
   if (window.scrollY > 100) {
@@ -26,4 +23,11 @@ dropdown.addEventListener('click', e => {
   mobileNav.classList.toggle('dropdown');
 });
 
-
+showData.forEach(element => {
+  element.addEventListener('click', e => {
+    e.target.parentNode.nextElementSibling.classList.toggle('show-data');
+    e.target.parentNode.nextElementSibling.classList.toggle(
+      'profile-stats__data'
+    );
+  });
+});
