@@ -67,7 +67,7 @@ class UserDocumentsController < ApplicationController
         assign_data(@user_document, api_data)
         @user_document.save
         if current_or_guest_user.username != "guest"
-          UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+          # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
         end
         redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
       end
