@@ -8,11 +8,19 @@ class UserDocument < ApplicationRecord
   end
 
   def self.bills_hash(bills)
-    {
-      max: bills.max,
-      min: bills.min,
-      average: (bills.inject(0.0) { |sum, el| sum + el } / bills.size).to_i
-    }
+    if bills.size.zero?
+      {
+        max: 0,
+        min: 0,
+        average: 0
+      }
+    else
+      {
+        max: bills.max,
+        min: bills.min,
+        average: (bills.inject(0.0) { |sum, el| sum + el } / bills.size).to_i
+      }
+    end
   end
 
   def self.general_bills(current_user)
@@ -24,6 +32,5 @@ class UserDocument < ApplicationRecord
     type = Document.find_by(company_name: document)
 
     bills = type.user_documents.where(user_id: current_user.id).pluck("current_due_amount")
-    bills_hash(bills)
   end
 end
