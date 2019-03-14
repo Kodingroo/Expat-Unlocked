@@ -1,16 +1,18 @@
 <% unless user_document.state %>
 <div class="upcoming-card__data">
   <div class="upcoming-card__title">
-    <%= link_to user_document.document.company_name,
-    user_document_path(user_document), class: "upcoming-card__link", method:
-    :get %>
+      <% unless user_document.document.nil? %>
+        <%= link_to user_document.document.company_name,
+        user_document_path(user_document), class: "upcoming-card__link", method:
+        :get %>
+      <% end %>
   </div>
   <div class="upcoming-card__content">
     <div class="upcoming-card__label">
       Due on
     </div>
     <div class="upcoming-card__info">
-      <%= user_document.due_date.strftime("%b %d %Y") %>
+      <%= user_document.due_date.strftime("%b %d %Y") unless user_document.due_date.nil? %>
     </div>
   </div>
   <div class="upcoming-card__content">

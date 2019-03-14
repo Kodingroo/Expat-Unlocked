@@ -2,7 +2,11 @@
   <%= link_to "", user_document_path(user_document), class: "bills-list__link",
   method: :get %>
   <div class="bills-list__company">
-    <%= user_document.document.company_name %>
+    <% if user_document.document.company_name %>
+       <%= user_document.document.company_name %> 
+    <% else %>
+        "Unrecognizable Bill, Sorry"
+    <% end %>
   </div>
   <div class="bills-list__due-date">
     <%= user_document.due_date.strftime("%b %d, %Y") %>

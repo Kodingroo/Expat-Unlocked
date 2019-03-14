@@ -19,13 +19,14 @@
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
             <div class="user-card__info">
+
               <%= render "total-stats", title: "Uploaded", count: current_user.user_documents.count, modifier: "" %>
 
               <%= render "total-stats", title: "Paid", count: current_user.user_documents.select { |doc| doc.state == true }.count, modifier: "" %>
 
               <%= render "total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count, modifier: "" %>
               
-              <%= render "total-stats", title: "Overdue", count: current_user.user_documents.select { |doc| (doc.due_date - Date.today).positive? && doc.state == false }.count, modifier: "user-card__count--red" %>
+              <%= render "total-stats", title: "Overdue", count: current_user.user_documents.select { |doc| doc.document.nil? ? "Unrecognized" : (doc.due_date - Date.today).positive? && doc.state == false }.count, modifier: "user-card__count--red" %>
 
             </div>
           </div>
