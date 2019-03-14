@@ -46,7 +46,7 @@
                 Due On
               </div>
               <div class="card__info">
-                <%= doc.due_date.strftime("%b %d") %>
+                <%= doc.due_date.strftime("%b %d") unless doc.due_date.nil? %>
               </div>
             </div>
             <div class="card__content padding-small">
