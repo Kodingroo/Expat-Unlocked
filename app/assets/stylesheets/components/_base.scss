@@ -88,6 +88,15 @@ a:focus {
   box-shadow: $box-shadow;
 }
 
+.button-container {
+  height: 125px;
+  display: flex;
+  justify-content: flex-end;
+  & form {
+    margin-top: 36px;
+  }
+}
+
 .is-marginless {
   margin: 0 !important;
 }
@@ -101,6 +110,10 @@ a:focus {
   padding: 40px 0;
 }
 
+.padding-small {
+  padding: 10px 15px !important;
+}
+
 .margin-top-bottom {
   margin-top: 20px;
 }
@@ -110,8 +123,8 @@ a:focus {
   padding: 40px 0;
   flex: 1;
 }
-.has-color {
-  background: $primary;
+.has-text-color-primary {
+  color: $primary !important;
 }
 
 .sticky {
@@ -166,24 +179,29 @@ a:focus {
   background: $primary;
 }
 
+.has-background-white {
+  background: #fff !important;
+}
+
 .icon {
   height: 20px;
 }
 
 .store-icons {
   display: flex;
-  padding: 10px;
-  padding-bottom: 20px;
-  & img {
-    max-width: 20%;
-    height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  &__image {
+    width: 14%;
   }
 }
 
 .store-text {
-    margin-top: 30px;
-    width: 100%;
-    text-align: center;
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
 }
 
 .loader {
@@ -218,6 +236,10 @@ a:focus {
 }
 .text-pulse {
   animation: pulse 2s infinite;
+}
+
+.select2-selection.select2-selection--single {
+  border-radius: 0;
 }
 .pulse:hover {
   animation: none;

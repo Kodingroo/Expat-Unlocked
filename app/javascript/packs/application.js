@@ -19,7 +19,6 @@ window.addEventListener('scroll', e => {
 });
 
 dropdown.addEventListener('click', e => {
-  console.log('clicked');
   mobileNav.classList.toggle('navigation__drop');
   mobileNav.classList.toggle('dropdown');
 });
@@ -30,10 +29,5 @@ showData.forEach(element => {
     e.target.parentNode.nextElementSibling.classList.toggle(
       'profile-stats__data'
     );
-    if (e.target.textContent == '+') {
-      e.target.textContent = '-';
-    } else {
-      e.target.textContent = '+';
-    }
   });
 });
