@@ -6,8 +6,8 @@
 
 <div class="filter">
   <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
-  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
-  <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
+  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), include_blank: '', id: "sort-by-select" %>
+  <%= select_tag "category", options_for_select(@categories, params[:category]), include_blank: '', id: "category-select" %>
   <% end %>
 </div>
 
@@ -61,7 +61,7 @@
   });
   $( "#category-select").select2({
     theme: "bootstrap",
-    placeholder: "Select a category"
+    placeholder: "Category"
   });
   $( "#category-select").on('select2:select', (e) => {
     document.querySelector(".filter__form").submit();
