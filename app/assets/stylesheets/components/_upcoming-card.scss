@@ -74,3 +74,80 @@
     text-transform: uppercase;
   }
 }
+
+.card {
+  min-width: 60%;
+  margin-bottom: 20px;
+  &__body {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    text-align: center;
+    background: #fff;
+  }
+  &__data {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 50%;
+      margin: auto;
+      height: 1px;
+      background: rgba($primary, 0.3);
+    }
+  }
+  &__link {
+    color: #fff;
+    font-size: 24px;
+    &:hover {
+      color: rgba(#fff, 0.8);
+      background: rgba($primary, 0.2);
+    }
+  }
+  &__heading {
+    flex: 1 1 100%;
+    background: $secondary;
+    color: #fff;
+    padding: 15px 5px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & h2 {
+      font-size: 36px;
+      margin: 0;
+      font-weight: normal;
+    }
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 8px 5px;
+    background: $primary;
+    border-radius: 50px;
+    color: #fff;
+    max-width: 60%;
+    margin: 10px auto 0;
+    text-align: center;
+  }
+  &__info {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &__content {
+    font-size: 18px;
+    font-weight: lighter;
+    padding: 20px 90px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__label {
+    text-transform: uppercase;
+  }
+}

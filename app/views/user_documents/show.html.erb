@@ -3,26 +3,31 @@
     <div class="row">
       <div class="col-xs-12 col-md-6 is-paddingless">
         <div class="card">
-          <div class="result center-content">
-            <ul style="list-style: none;">
-              <li>
-                <p><strong><%= @user_document.document.nil? ? "Unrecognizable Bill, Sorry" :
-                @user_document.document.company_name %></strong></p>
-              </li>
-              <li>
-                <p><strong><%= number_with_delimiter @user_document.current_due_amount %></strong>¥</p>
-              </li>
-              <li>
-                <p>Due: <strong><%= @user_document.due_date %></strong></p>
-              </li>
-            </ul>
+          <div class="card__title">
+            <%= @user_document.document.company_name %>
+          </div>
+          <div class="card__content">
+            <div class="card__label">
+              Due on
+            </div>
+            <div class="card__info">
+              <%= @user_document.due_date.strftime("%b %d %Y") %>
+            </div>
+          </div>
+          <div class="card__content">
+            <div class="card__label">
+              Amount due
+            </div>
+            <div class="card__info">
+              ¥<%= number_with_delimiter(@user_document.current_due_amount) %>
+            </div>
           </div>
           <div class="result-photo">
-            <%= cl_image_tag @user_document.photo, :quality=>60, :width => 1000, :crop => "fill", class: "height-change" %>
+            <%= cl_image_tag @user_document.photo, :quality=>60, :width => 1000,
+            :crop => "fill", class: "height-change" %>
           </div>
         </div>
       </div>
-
 
       <div class="col-xs-12 col-md-6 is-paddingless">
         <div class="document center-content show-page">
@@ -30,36 +35,32 @@
             <p>We will email you on: <%= @user_document.reminder_date %></p>
 
             <% if @user_document.reminder_date.nil? %>
-              <div class="reminder-form center-content">
-                <%= simple_form_for @user_document do |f| %>
-                <%= f.input :reminder_date, label: false %>
-                <%= f.submit "Remind me!", class: "button is-inverted" %>
-                <% end %>
-              </div>
+            <div class="reminder-form center-content">
+              <%= simple_form_for @user_document do |f| %> 
+              <%= f.input :reminder_date, label: false %> <%= f.submit "Remind me!", class: "button is-inverted" %> <% end %>
+            </div>
             <% else %>
-              <div>
-                <p>Change reminder date?</p>
-                <%= simple_form_for @user_document do |f| %>
-                <%= f.input :reminder_date, as: :string, label: false, input_html: { class: 'datepicker' } %>
-                <div style="display: flex; justify-content: center;">
-                  <%= f.submit "Ok", class: "button is-inverted" %>
-                </div>
-                <% end %>
+            <div>
+              <p>Change reminder date?</p>
+              <%= simple_form_for @user_document do |f| %> 
+              <%= f.input :reminder_date, as: :string, label: false, input_html: { class: 'datepicker' } %>
+              <div style="display: flex; justify-content: center;">
+                <%= f.submit "Ok", class: "button is-inverted" %>
               </div>
+              <% end %>
+            </div>
             <% end %>
           </div>
           <div class="store-text">
             <p>You can pay at...</p>
           </div>
           <div class="store-icons">
-            <%= image_tag 'lawson.png'%>
-            <%= image_tag 'seven_eleven.png'%>
-            <%= image_tag 'family_mart.JPG'%>
-            <%= image_tag 'sunkus.png'%>
-            <%= image_tag 'mini_stop.png'%>
+            <%= image_tag 'lawson.png'%> <%= image_tag 'seven_eleven.png'%> <%=
+            image_tag 'family_mart.JPG'%> <%= image_tag 'sunkus.png'%> <%=
+            image_tag 'mini_stop.png'%>
           </div>
         </div>
       </div>
+    </div>
   </div>
-</div>
 </div>
