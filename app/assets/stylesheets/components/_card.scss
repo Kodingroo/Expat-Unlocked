@@ -12,6 +12,12 @@
 
 .card-icon {
   margin-bottom: -20px;
+  font-size: 50px;
+  &:hover {
+      font-size: 100px;
+      transition: .3s ease-out;
+
+    }
 }
 .card {
   flex: 1 1 auto;
@@ -111,6 +117,20 @@
     ),
     asset-url('calendar-min.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-top: 10px;
+}
+
+.record {
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0)
+    ),
+    asset-url('records.jpeg');
+  background-size: cover;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
   background-repeat: no-repeat;
   background-position: center;
   border-top: 10px;
