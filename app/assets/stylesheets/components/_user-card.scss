@@ -17,9 +17,9 @@
     height: 90px;
     margin: auto;
     position: absolute;
-    top: 0;
+    top: 20px;
     left: 0;
-    bottom: -90px;
+    bottom: 0;
     right: 0;
     border: solid 4px #fff;
   }
@@ -33,16 +33,22 @@
   }
   &__body {
     flex-direction: column;
-    padding-top: 60px;
     width: 100%;
+    min-height: 200px;
   }
   &__info {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex-direction: column;
     width: 100%;
     padding: 10px;
   }
+  &__data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
   &__heading {
     color: rgb(44, 44, 44);
     font-size: 22px;

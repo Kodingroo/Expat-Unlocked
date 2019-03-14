@@ -82,4 +82,11 @@
   &__bills {
     min-width: 60%;
   }
+  &__stats {
+    flex: 1;
+  }
+}
+
+#new_user_document.simple_form.new_user_document {
+  padding: 0;
 }

@@ -31,7 +31,7 @@
     margin-right: 15px;
     padding: 10px 0;
     position: relative;
-    flex: 0 0 25%;
+    flex: 0 0 20%;
     text-align: center;
   }
   &__item > *:not(:last-child)::after {
@@ -42,6 +42,12 @@
     position: absolute;
     right: -10px;
     bottom: 0;
+  }
+  &__company {
+    flex: 30%;
+  }
+  &__due-date {
+    flex: 30%;
   }
   &__due {
     font-family: $body-font;
@@ -57,13 +63,11 @@
     &:hover {
       background: rgba(196, 196, 196, 0.096);
     }
+    &__status {
+      font-weight: bold;
+      color: $primary;
+    }
   }
   &__paid {
-    display: flex;
-    align-items: center;
-    z-index: 200;
-    & > *:not(:last-child) {
-      margin-right: 10px;
-    }
   }
 }

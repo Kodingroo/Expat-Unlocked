@@ -58,13 +58,15 @@
     max-width: 50%;
     margin: 0 auto;
   }
-  &__date {
+  &__info {
     font-weight: bold;
     text-transform: uppercase;
   }
   &__content {
     font-size: 18px;
     font-weight: lighter;
-    padding: 10px 0px 15px 0px;
+    padding: 20px 90px;
+    display: flex;
+    justify-content: space-between;
   }
 }

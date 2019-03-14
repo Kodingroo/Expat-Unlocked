@@ -19,16 +19,37 @@
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
             <div class="user-card__info">
-              <div class="user-card__title">
-                Total bills uploaded
+              <div class="user-card__data">
+                <div class="user-card__title">
+                  Total Bills Uploaded
+                </div>
+                <div class="user-card__count">
+                  <%= current_user.user_documents.count %>
+                </div>
               </div>
-              <div class="user-card__count">
-                <%= current_user.user_documents.count %>
+              <div class="user-card__data">
+                <div class="user-card__title">
+                  Total Bills Paid
+                </div>
+                <div class="user-card__count">
+                  <%= current_user.user_documents.select { |doc| doc.state == true }.count %>
+                </div>
+              </div>
+              <div class="user-card__data">
+                <div class="user-card__title">
+                  Total Bills Unpaid
+                </div>
+                <div class="user-card__count">
+                  <%= current_user.user_documents.select { |doc| doc.state == false }.count %>
+                </div>
+              </div>
+              <div class="user-card__data">
+             
               </div>
             </div>
           </div>
           <%= simple_form_for(@user_document) do |f| %>
-            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
+            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document hidden", onchange: "loader()" }, label_html: { class: 'upload-photo' }, label: '📷 Upload a photo' %>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
 
@@ -41,15 +62,15 @@
             <div class="profile-stats__data">
               <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= number_with_delimiter(@general_stats[:max]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@general_stats[:max]) %></p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@general_stats[:min]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@general_stats[:min]) %></p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= number_with_delimiter(@general_stats[:average]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@general_stats[:average]) %></p>
               </div>
             </div>
             <div class="profile-stats__heading">
@@ -59,15 +80,15 @@
             <div class="profile-stats__data">
               <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= number_with_delimiter(@gas_stats[:max]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@gas_stats[:max]) %></p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@gas_stats[:min]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@gas_stats[:min]) %></p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= number_with_delimiter(@gas_stats[:average]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@gas_stats[:average]) %></p>
               </div>
             </div>
             <div class="profile-stats__heading">
@@ -77,15 +98,15 @@
             <div class="profile-stats__data">
                <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= number_with_delimiter(@water_stats[:max]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@water_stats[:max]) %></p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@water_stats[:min]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@water_stats[:min]) %></p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= number_with_delimiter(@water_stats[:average]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@water_stats[:average]) %></p>
               </div>
             </div>
             <div class="profile-stats__heading">
@@ -95,15 +116,15 @@
             <div class="profile-stats__data">
               <div class="profile-stats__highest">
                 <h5>Highest</h5>
-                <p><%= number_with_delimiter(@electricity_stats[:max]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@electricity_stats[:max]) %></p>
               </div>
               <div class="profile-stats__lowest">
                 <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@electricity_stats[:min]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@electricity_stats[:min]) %></p>
               </div>
               <div class="profile-stats__average">
                 <h5>Average</h5>
-                <p><%= number_with_delimiter(@electricity_stats[:average]) %>¥</p>
+                <p>¥<%= number_with_delimiter(@electricity_stats[:average]) %></p>
               </div>
             </div>
           </div>
