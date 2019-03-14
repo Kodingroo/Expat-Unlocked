@@ -44,6 +44,11 @@
               <p>Change reminder date?</p>
               <%= simple_form_for @user_document do |f| %>
               <%= f.input :reminder_date, as: :string, label: false, input_html: { class: 'datepicker' } %>
+              <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                  initPicker('<%= @user_document.due_date %>');
+                });
+              </script>
               <div style="display: flex; justify-content: center;">
                 <%= f.submit "Ok", class: "button is-inverted" %>
               </div>

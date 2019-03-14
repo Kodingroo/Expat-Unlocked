@@ -1,5 +1,6 @@
 import 'bootstrap';
-import '../plugins/flatpickr';
+import { initPicker } from '../plugins/flatpickr';
+window.initPicker = initPicker;
 
 const nav = document.querySelector('.navigation');
 const dropdown = document.querySelector('.navigation__hamburger');
