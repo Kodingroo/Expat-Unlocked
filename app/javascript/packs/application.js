@@ -7,7 +7,7 @@ const mobileNav = document.querySelector('.navigation__drop');
 const showData = document.querySelectorAll('.profile-stats__display');
 
 window.addEventListener('scroll', e => {
-  if (window.scrollY > 70) {
+  if (window.scrollY > 20) {
     nav.classList.add('sticky-nav');
     nav.classList.remove('fadeout');
   } else {
