@@ -70,16 +70,23 @@
   flex-wrap: wrap;
   &__left {
     flex: 25%;
-    height: 100%;
+    min-height: 100vh;
   }
   &__right {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 75%;
-    padding: 10px 20px;
+    padding: 30px 20px;
   }
   &__bills {
     min-width: 60%;
   }
+  &__stats {
+    flex: 1;
+  }
+}
+
+#new_user_document.simple_form.new_user_document {
+  padding: 0;
 }

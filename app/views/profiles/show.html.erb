@@ -19,93 +19,35 @@
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
             <div class="user-card__info">
-              <div class="user-card__title">
-                Total bills uploaded
-              </div>
-              <div class="user-card__count">
-                <%= current_user.user_documents.count %>
+              <%= render "total-stats", title: "Uploaded", count: current_user.user_documents.count %>
+
+              <%= render "total-stats", title: "Paid", count: current_user.user_documents.select { |doc| doc.state == true }.count %>
+
+              <%= render "total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count %>
+
+              <div class="user-card__data">
+                <div class="user-card__title">
+                  Total Bills Overdue
+                </div>
+                <div class="user-card__count user-card__count--red">
+                  <%= current_user.user_documents.select { |doc| (doc.due_date - Date.today).positive? && doc.state == false }.count %>
+                </div>
               </div>
             </div>
           </div>
           <%= simple_form_for(@user_document) do |f| %>
-            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document", onchange: "loader()" }%>
+            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document hidden", onchange: "loader()" }, label_html: { class: 'upload-photo' }, label: '📷 Upload a photo' %>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
 
           <div class="profile-stats">
             <h2>Financial Data for <%= Time.current.year %> </h2>
-            <div class="profile-stats__heading">
-                <h5>All Bills</h5>
-                <p class="profile-stats__display">+</p>
-            </div>
-            <div class="profile-stats__data">
-              <div class="profile-stats__highest">
-                <h5>Highest</h5>
-                <p><%= number_with_delimiter(@general_stats[:max]) %>¥</p>
-              </div>
-              <div class="profile-stats__lowest">
-                <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@general_stats[:min]) %>¥</p>
-              </div>
-              <div class="profile-stats__average">
-                <h5>Average</h5>
-                <p><%= number_with_delimiter(@general_stats[:average]) %>¥</p>
-              </div>
-            </div>
-            <div class="profile-stats__heading">
-                <h5>Gas Bills</h5>
-                <p class="profile-stats__display">+</p>
-            </div>
-            <div class="profile-stats__data">
-              <div class="profile-stats__highest">
-                <h5>Highest</h5>
-                <p><%= number_with_delimiter(@gas_stats[:max]) %>¥</p>
-              </div>
-              <div class="profile-stats__lowest">
-                <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@gas_stats[:min]) %>¥</p>
-              </div>
-              <div class="profile-stats__average">
-                <h5>Average</h5>
-                <p><%= number_with_delimiter(@gas_stats[:average]) %>¥</p>
-              </div>
-            </div>
-            <div class="profile-stats__heading">
-                <h5>Water Bills</h5>
-                <p class="profile-stats__display">+</p>
-            </div>
-            <div class="profile-stats__data">
-               <div class="profile-stats__highest">
-                <h5>Highest</h5>
-                <p><%= number_with_delimiter(@water_stats[:max]) %>¥</p>
-              </div>
-              <div class="profile-stats__lowest">
-                <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@water_stats[:min]) %>¥</p>
-              </div>
-              <div class="profile-stats__average">
-                <h5>Average</h5>
-                <p><%= number_with_delimiter(@water_stats[:average]) %>¥</p>
-              </div>
-            </div>
-            <div class="profile-stats__heading">
-                <h5>Electricity Bills</h5>
-                <p class="profile-stats__display">+</p>
-            </div>
-            <div class="profile-stats__data">
-              <div class="profile-stats__highest">
-                <h5>Highest</h5>
-                <p><%= number_with_delimiter(@electricity_stats[:max]) %>¥</p>
-              </div>
-              <div class="profile-stats__lowest">
-                <h5>Lowest</h5>
-                <p><%= number_with_delimiter(@electricity_stats[:min]) %>¥</p>
-              </div>
-              <div class="profile-stats__average">
-                <h5>Average</h5>
-                <p><%= number_with_delimiter(@electricity_stats[:average]) %>¥</p>
-              </div>
-            </div>
+            <%= render "stats", title: "All", stats: @general_stats  %>
+            <%= render "stats", title: "Gas", stats: @gas_stats  %>
+            <%= render "stats", title: "Water", stats: @water_stats  %>
+            <%= render "stats", title: "Electricity", stats: @electricity_stats  %>
+            <%= render "stats", title: "Tax", stats: @tax_stats  %>
+            <%= render "stats", title: "Insurance", stats: @insurance_stats  %>
           </div>
         </div>
       </div>
@@ -117,9 +59,10 @@
             <h2> Your upcoming bills</h2>
           </div>
           <div class="upcoming-card__body">
-              <% sorted = current_user.user_documents.order('due_date ASC').first(3) %>
+              <% sorted = current_user.user_documents.where(state: false).order('due_date ASC').first(3) %>
+              <% p sorted %>
               <% sorted.each do |user_document| %>
-                <% if user_document.created_at.year == Date.today.year &&   user_document.state == false  %>
+                <% if user_document.created_at.year == Date.today.year %>
                 <%= render "due-bills", user_document: user_document %>
                 <% end %>
               <% end %>
@@ -150,17 +93,18 @@
                   </div>
                 </div>
 
-                <% @user_documents.each do |user_document| %>
-                  <% if @collection_type == 'due date' %>
-                    <%= render "bill-list", user_document: user_document %>
-                  <% elsif @collection_type == 'most expensive' %>
-                    <%= render "bill-list", user_document: user_document %>
-                  <% elsif @collection_type == 'least expensive' %>
-                    <%= render "bill-list", user_document: user_document %>
-                  <% else %>
-                    <%= render "bill-list", user_document: user_document %>
+                <% @user_documents.select do |user_document| %>
+                  <% if user_document.state == true %>
+                    <% if @collection_type == 'due date' %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% elsif @collection_type == 'most expensive' %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% elsif @collection_type == 'least expensive' %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% else %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% end %>
                   <% end %>
-
                 <% end %>
               </div>
             </div>

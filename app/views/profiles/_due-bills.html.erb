@@ -6,16 +6,20 @@
     :get %>
   </div>
   <div class="upcoming-card__content">
-    Due on
-    <span class="upcoming-card__date">
+    <div class="upcoming-card__label">
+      Due on
+    </div>
+    <div class="upcoming-card__info">
       <%= user_document.due_date.strftime("%b %d %Y") %>
-    </span>
+    </div>
   </div>
   <div class="upcoming-card__content">
-    Amount due
-    <span class="upcoming-card__date">
-      <%= number_with_delimiter(user_document.current_due_amount) %>¥
-    </span>
+    <div class="upcoming-card__label">
+      Amount due
+    </div>
+    <div class="upcoming-card__info">
+      ¥<%= number_with_delimiter(user_document.current_due_amount) %>
+    </div>
   </div>
   <%= button_to "Mark As Paid", pay_user_document_path(user_document), method:
   :patch, class: "button is-small z-index", remote: true, id:
