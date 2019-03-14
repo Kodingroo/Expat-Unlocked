@@ -12,6 +12,7 @@ gem 'redis'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem "select2-rails"
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'

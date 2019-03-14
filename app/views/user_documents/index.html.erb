@@ -10,6 +10,11 @@
   <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
   <% end %>
 </div>
+<script>
+  $( ".filter" ).select2({
+    theme: "bootstrap"
+  });
+</script>
 
 
 
