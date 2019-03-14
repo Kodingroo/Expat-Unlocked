@@ -5,7 +5,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  height: calc(100vh - 55px);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -16,7 +16,6 @@
     font-family: $title-font;
     font-size: 48px;
     font-weight: bold;
-    margin-top: -50px;
   }
   & h2 {
     font-family: $body-font;
@@ -52,6 +51,9 @@
     color: $primary;
     border-top: 10px;
   }
+}
+.down-arrow{
+  padding-top: 80px;
 }
 .result-photo {
   // width: 100%;
