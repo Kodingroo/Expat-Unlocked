@@ -6,13 +6,22 @@
 
 <div class="filter">
   <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
-  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select" %>
+  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), id: "sort-by-select", data: { placeholder: "Sort by" } %>
   <%= select_tag "category", options_for_select(@categories, params[:category]), id: "category-select" %>
   <% end %>
 </div>
 <script>
-  $( ".filter" ).select2({
+  $( "#sort-by-select" ).select2({
+    theme: "bootstrap",
+  });
+  $( "#sort-by-select").on('select2:select', (e) => {
+    document.querySelector(".filter__form").submit();
+  });
+  $( "#category-select").select2({
     theme: "bootstrap"
+  });
+  $( "#category-select").on('select2:select', (e) => {
+    document.querySelector(".filter__form").submit();
   });
 </script>
 
@@ -58,16 +67,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-  const sort_by_change = document.querySelector("#sort-by-select");
-  const category_change = document.querySelector("#category-select");
-
-  sort_by_change.addEventListener('change', (event) => {
-    document.querySelector(".filter__form").submit();
-  })
-  category_change.addEventListener('change', (event) => {
-    document.querySelector(".filter__form").submit();
-  })
-</script>
