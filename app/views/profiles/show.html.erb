@@ -19,32 +19,19 @@
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
             <div class="user-card__info">
+              <%= render "total-stats", title: "Uploaded", count: current_user.user_documents.count %>
+
+              <%= render "total-stats", title: "Paid", count: current_user.user_documents.select { |doc| doc.state == true }.count %>
+
+              <%= render "total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count %>
+
               <div class="user-card__data">
                 <div class="user-card__title">
-                  Total Bills Uploaded
+                  Total Bills Overdue
                 </div>
-                <div class="user-card__count">
-                  <%= current_user.user_documents.count %>
+                <div class="user-card__count user-card__count--red">
+                  <%= current_user.user_documents.select { |doc| (doc.due_date - Date.today).positive? && doc.state == false }.count %>
                 </div>
-              </div>
-              <div class="user-card__data">
-                <div class="user-card__title">
-                  Total Bills Paid
-                </div>
-                <div class="user-card__count">
-                  <%= current_user.user_documents.select { |doc| doc.state == true }.count %>
-                </div>
-              </div>
-              <div class="user-card__data">
-                <div class="user-card__title">
-                  Total Bills Unpaid
-                </div>
-                <div class="user-card__count">
-                  <%= current_user.user_documents.select { |doc| doc.state == false }.count %>
-                </div>
-              </div>
-              <div class="user-card__data">
-             
               </div>
             </div>
           </div>
@@ -72,9 +59,10 @@
             <h2> Your upcoming bills</h2>
           </div>
           <div class="upcoming-card__body">
-              <% sorted = current_user.user_documents.order('due_date ASC').first(3) %>
+              <% sorted = current_user.user_documents.where(state: false).order('due_date ASC').first(3) %>
+              <% p sorted %>
               <% sorted.each do |user_document| %>
-                <% if user_document.created_at.year == Date.today.year &&   user_document.state == false  %>
+                <% if user_document.created_at.year == Date.today.year %>
                 <%= render "due-bills", user_document: user_document %>
                 <% end %>
               <% end %>
@@ -105,17 +93,18 @@
                   </div>
                 </div>
 
-                <% @user_documents.each do |user_document| %>
-                  <% if @collection_type == 'due date' %>
-                    <%= render "bill-list", user_document: user_document %>
-                  <% elsif @collection_type == 'most expensive' %>
-                    <%= render "bill-list", user_document: user_document %>
-                  <% elsif @collection_type == 'least expensive' %>
-                    <%= render "bill-list", user_document: user_document %>
-                  <% else %>
-                    <%= render "bill-list", user_document: user_document %>
+                <% @user_documents.select do |user_document| %>
+                  <% if user_document.state == true %>
+                    <% if @collection_type == 'due date' %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% elsif @collection_type == 'most expensive' %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% elsif @collection_type == 'least expensive' %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% else %>
+                      <%= render "bill-list", user_document: user_document %>
+                    <% end %>
                   <% end %>
-
                 <% end %>
               </div>
             </div>

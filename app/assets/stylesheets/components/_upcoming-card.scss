@@ -28,6 +28,7 @@
   }
   &__link {
     color: #fff;
+    font-size: 24px;
     &:hover {
       color: rgba(#fff, 0.8);
       background: rgba($primary, 0.2);
@@ -55,7 +56,7 @@
     background: $primary;
     border-radius: 50px;
     color: #fff;
-    max-width: 50%;
+    max-width: 60%;
     margin: 0 auto;
   }
   &__info {
@@ -68,5 +69,8 @@
     padding: 20px 90px;
     display: flex;
     justify-content: space-between;
+  }
+  &__label {
+    text-transform: uppercase;
   }
 }
