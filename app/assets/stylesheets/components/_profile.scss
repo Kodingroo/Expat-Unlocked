@@ -90,3 +90,34 @@
 #new_user_document.simple_form.new_user_document {
   padding: 0;
 }
+
+@media only screen and (max-width: 600px) {
+  .profile {
+    &__right {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      & .upcoming-card {
+        width: 98%;
+        &__heading h2 {
+          font-size: 26px;
+        }
+        &__content {
+          padding: 20px;
+        }
+      }
+    }
+
+    &__bills {
+      width: 98%;
+    }
+  }
+  .bills-list {
+    &__paid {
+      display: none;
+    }
+    &__item > * {
+      flex: 0 0 30%;
+    }
+  }
+}
