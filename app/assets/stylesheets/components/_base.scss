@@ -88,6 +88,15 @@ a:focus {
   box-shadow: $box-shadow;
 }
 
+.button-container {
+  height: 125px;
+  display: flex;
+  justify-content: flex-end;
+  & form {
+    margin-top: 36px;
+  }
+}
+
 .is-marginless {
   margin: 0 !important;
 }
@@ -227,6 +236,10 @@ a:focus {
 }
 .text-pulse {
   animation: pulse 2s infinite;
+}
+
+.select2-selection.select2-selection--single {
+  border-radius: 0;
 }
 .pulse:hover {
   animation: none;
