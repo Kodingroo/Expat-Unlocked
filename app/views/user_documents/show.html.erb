@@ -4,14 +4,14 @@
       <div class="col-xs-12 col-md-6 is-paddingless">
         <div class="card">
           <div class="card__title">
-            <%= @user_document.document.company_name %>
+            <%= @user_document.document.company_name unless @user_document.document.nil? %>
           </div>
           <div class="card__content">
             <div class="card__label">
               Due
             </div>
             <div class="card__info">
-              <%= @user_document.due_date.strftime("%b %d") %>
+              <%= @user_document.due_date.strftime("%b %d") unless @user_document.due_date.nil? %>
             </div>
           </div>
           <div class="card__content">
@@ -57,7 +57,7 @@
             <% end %>
           </div>
           <div class="store-text">
-            <h2>Pay Your <%= @user_document.document.company_name %> Bill At</h2>
+            <h2>Pay Your <%= @user_document.document.company_name unless @user_document.document.nil?%> Bill At</h2>
           </div>
           <div class="store-icons">
             <div class="store-icons__image"><%= image_tag 'lawson.png'%></div>
