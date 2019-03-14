@@ -1,14 +1,45 @@
-function deleteButton() {
-  const button = document.getElementById('<%= @user_document.id %>-paid-document');
-  console.log(button.previousSibling)
-  button.parentNode.parentNode.parentNode.removeChild(button.parentNode.parentNode)
-}
+var usePartial = () => {
+  return {
+    uploaded:
+      '<%= j render "profiles/total-stats", title: "Uploaded", count: current_user.user_documents.count, modifier: "" %>',
+    paid:
+      '<%= j render "profiles/total-stats", title: "Paid", count: current_user.user_documents.select { |doc| doc.state == true }.count, modifier: "" %>',
+    unpaid:
+      '<%= j render "profiles/total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count, modifier: "" %>',
+    overdue:
+      '<%= j render "profiles/total-stats", title: "Overdue", count: current_user.user_documents.select { |doc| (doc.due_date - Date.today).positive? && doc.state == false }.count, modifier: "user-card__count--red" %>'
+  };
+};
 
-function addButton(partial) {
+var deleteButton = () => {
+  const button = document.getElementById(
+    '<%= @user_document.id %>-paid-document'
+  );
+  console.log(button.previousSibling);
+  button.parentNode.parentNode.parentNode.removeChild(
+    button.parentNode.parentNode
+  );
+};
+
+var addButton = partial => {
+  const info = document.querySelector('.user-card__info');
   const element = document.querySelector('.bills-list');
-  element.insertAdjacentHTML('beforeend', partial);
-}
+  const data = document.querySelector('.user-card__data');
 
+  const partials = usePartial();
+
+  while (info.firstChild) {
+    info.removeChild(info.firstChild);
+  }
+
+  Object.values(partials).forEach(partial => {
+    info.insertAdjacentHTML('beforeend', partial);
+  });
+
+  element.insertAdjacentHTML('beforeend', partial);
+};
 
 deleteButton('<%= j render "profiles/paid", user_document: @user_document %>');
-addButton('<%= j render "profiles/bill-list", user_document: @user_document %>');
+addButton(
+  '<%= j render "profiles/bill-list", user_document: @user_document %>'
+);
