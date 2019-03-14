@@ -30,14 +30,7 @@ class UserDocumentsController < ApplicationController
 
       @user_documents = if params[:category] == "all"
         if params[:sort_by] == "Date Added"
-          @due_date = @user_documents.sort_by { |doc| doc.due_date }
-
-          respond_to do |format|
-            format.html { redirect_to profile_path(@due_date) }
-            format.js
-            respond_with @due_date
-          end
-
+          @user_documents.sort_by { |doc| doc.due_date }
         elsif params[:sort_by] == "Due Date"
           @user_documents.sort_by { |doc| doc.due_date }
         elsif params[:sort_by] == "Cost: High to Low"
