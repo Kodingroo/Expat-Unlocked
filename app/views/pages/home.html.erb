@@ -8,13 +8,13 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-6 is-paddingless">
-          <h1 class="banner__heading">
+          <h1 class="banner__heading" style="margin-top: -100px;" >
            siji
           </h1>
           <div class="card">
             <div class="result">
               <ul style="list-style: none;">
-                <li><p><%= image_tag 'Water.png', class: "icon" %> <strong>Water bill</strong></p></li>
+                <li><p style="font-size: 32px;"><strong>Water bill</strong></p></li>
                 <li>
                   <p><strong>16,026 ¥</strong></p>
                 </li>
@@ -44,14 +44,20 @@
   <div class="row padding-top-bottom">
     <div class="col-xs-12 center-content">
       <h1>
-        What we offer
+        What we offer...
       </h1>
     </div>
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-4">
       <h2 class="center-content">Recognition</h2>
       <div class="card">
         <%= link_to scan_info_path do %>
-        <div class="card-body scan"></div>
+        <div class="card-body scan">
+          <div class="card-icon">
+            <i class="material-icons">
+              linked_camera
+            </i>
+          </div>
+        </div>
         <% end %>
         <div class="card-footer">
           <p>
@@ -62,16 +68,42 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-md-6">
-      <h2 class="center-content">Tracking</h2>
+    <div class="col-xs-12 col-md-4">
+      <h2 class="center-content">Records</h2>
       <div class="card">
         <%= link_to profile_path(current_user) do %>
-        <div class="card-body track"></div>
+        <div class="card-body record">
+          <div class="card-icon">
+          <i class="material-icons">
+            insert_chart
+          </i>
+        </div>
+        </div>
+        <% end %>
+        <div class="card-footer">
+          <p>
+            Have statistics on your past payments readily available at the click of a button. Know how much you spend each month.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <h2 class="center-content">Reminders</h2>
+      <div class="card">
+        <%= link_to user_documents_path(current_user) do %>
+        <div class="card-body track">
+          <div class="card-icon">
+          <i class="material-icons">
+            email
+          </i>
+          </div>
+        </div>
         <% end %>
         <div class="card-footer">
           <p>
             Keep up to date with when your next bill is due with our tracking
-            and notification system. In addition, keep a detailed history of your past spending.
+            and notification system.
           </p>
         </div>
       </div>
