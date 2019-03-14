@@ -19,24 +19,18 @@
               <%= current_user.first_name %> <%= current_user.last_name %>
             </div>
             <div class="user-card__info">
-              <%= render "total-stats", title: "Uploaded", count: current_user.user_documents.count %>
+              <%= render "total-stats", title: "Uploaded", count: current_user.user_documents.count, modifier: "" %>
 
-              <%= render "total-stats", title: "Paid", count: current_user.user_documents.select { |doc| doc.state == true }.count %>
+              <%= render "total-stats", title: "Paid", count: current_user.user_documents.select { |doc| doc.state == true }.count, modifier: "" %>
 
-              <%= render "total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count %>
+              <%= render "total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count, modifier: "" %>
+              
+              <%= render "total-stats", title: "Overdue", count: current_user.user_documents.select { |doc| (doc.due_date - Date.today).positive? && doc.state == false }.count, modifier: "user-card__count--red" %>
 
-              <div class="user-card__data">
-                <div class="user-card__title">
-                  Total Bills Overdue
-                </div>
-                <div class="user-card__count user-card__count--red">
-                  <%= current_user.user_documents.select { |doc| (doc.due_date - Date.today).positive? && doc.state == false }.count %>
-                </div>
-              </div>
             </div>
           </div>
           <%= simple_form_for(@user_document) do |f| %>
-            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document hidden", onchange: "loader()" }, label_html: { class: 'upload-photo' }, label: '📷 Upload a photo' %>
+            <%= f.input :photo, required: true, label: 'Bill upload/snap', required: false, input_html: { class: "upload-document hidden", onchange: "loader()" }, label_html: { class: 'upload-photo' }, label: '📷 Upload a Bill' %>
             <%= f.input :photo_cache, as: :hidden %>
           <% end %>
 
