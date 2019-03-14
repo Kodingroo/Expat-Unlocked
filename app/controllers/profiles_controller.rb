@@ -14,6 +14,8 @@ class ProfilesController < ApplicationController
     @gas_stats = UserDocument.search_stats("Tokyo Gas", current_user)
     @electricity_stats = UserDocument.search_stats("Tokyo Electricity", current_user)
     @water_stats = UserDocument.search_stats("Tokyo Water", current_user)
+    @insurance_stats = UserDocument.search_stats("National Health Insurance", current_user)
+    @tax_stats = UserDocument.search_stats("National Health Insurance", current_user)
 
     @sort_by = ["Date Added", "Due Date", "Cost: High to Low", "Cost: Low to High"]
     @categories = ["all"]
