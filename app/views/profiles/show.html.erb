@@ -116,13 +116,16 @@
 </div>
 
 <script>
-  const sort_by_change = document.querySelector('#sort-by-select');
-  const category_change = document.querySelector('#category-select');
-
-  sort_by_change.addEventListener('change', event => {
-    document.querySelector('.filter__form').submit();
+  $( "#sort-by-select" ).select2({
+    theme: "bootstrap",
   });
-  category_change.addEventListener('change', event => {
-    document.querySelector('.filter__form').submit();
+  $( "#sort-by-select").on('select2:select', (e) => {
+    document.querySelector(".filter__form").submit();
+  });
+  $( "#category-select").select2({
+    theme: "bootstrap"
+  });
+  $( "#category-select").on('select2:select', (e) => {
+    document.querySelector(".filter__form").submit();
   });
 </script>

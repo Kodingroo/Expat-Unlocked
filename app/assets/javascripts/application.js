@@ -2,6 +2,7 @@
 //= require rails-ujs
 //= require_tree .
 //= require jquery-ui
+//= require select2-full
 
 function loader() {
   var upload = document.querySelector('.upload-document');
