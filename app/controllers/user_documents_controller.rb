@@ -58,11 +58,12 @@ class UserDocumentsController < ApplicationController
         api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
         p api_data
         @document = find_document(api_data[:words])
-        # if @document.nil?
-        #   flash[:alert] = "Sorry, but we don't recognize that bill yet"
-        #   redirect_back fallback_location:
-        #   @user_document.destroy
-        # end
+        if @document.nil?
+          flash[:alert] = "Sorry, but we don't recognize that bill yet"
+          redirect_back fallback_location:
+          @user_document.destroy
+          return
+        end
         assign_data(@user_document, api_data)
         @user_document.save
         # if current_or_guest_user.username != "guest"
