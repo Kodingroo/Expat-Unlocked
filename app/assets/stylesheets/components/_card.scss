@@ -14,10 +14,9 @@
   margin-bottom: -20px;
   font-size: 50px;
   &:hover {
-      font-size: 100px;
-      transition: .3s ease-out;
-
-    }
+    font-size: 100px;
+    transition: 0.3s ease-out;
+  }
 }
 .card {
   flex: 1 1 auto;
@@ -27,9 +26,15 @@
   transition: all 0.3s ease;
   overflow: hidden;
   background: $secondary;
+  position: relative;
   &:hover {
     box-shadow: 0 4px 4px rgba(63, 63, 63, 0.3);
     transform: translateY(4px);
+  }
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }
 
