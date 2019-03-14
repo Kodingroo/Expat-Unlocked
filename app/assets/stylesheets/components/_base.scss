@@ -101,6 +101,10 @@ a:focus {
   padding: 40px 0;
 }
 
+.padding-small {
+  padding: 10px 15px !important;
+}
+
 .margin-top-bottom {
   margin-top: 20px;
 }
@@ -110,8 +114,8 @@ a:focus {
   padding: 40px 0;
   flex: 1;
 }
-.has-color {
-  background: $primary;
+.has-text-color-primary {
+  color: $primary !important;
 }
 
 .sticky {
@@ -166,6 +170,10 @@ a:focus {
   background: $primary;
 }
 
+.has-background-white {
+  background: #fff !important;
+}
+
 .icon {
   height: 20px;
 }
@@ -175,8 +183,9 @@ a:focus {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  padding: 10px 0;
   &__image {
-    width: 10%;
+    width: 14%;
   }
 }
 

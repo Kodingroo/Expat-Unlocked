@@ -11,7 +11,7 @@
               Due
             </div>
             <div class="card__info">
-              <%= @user_document.due_date.strftime("%b %d %Y") %>
+              <%= @user_document.due_date.strftime("%b %d") %>
             </div>
           </div>
           <div class="card__content">
@@ -52,7 +52,7 @@
             <% end %>
           </div>
           <div class="store-text">
-            <h2>Pay At</h2>
+            <h2>Pay Your <%= @user_document.document.company_name %> Bill At</h2>
           </div>
           <div class="store-icons">
             <div class="store-icons__image"><%= image_tag 'lawson.png'%></div>

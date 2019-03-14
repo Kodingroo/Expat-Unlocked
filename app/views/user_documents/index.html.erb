@@ -1,49 +1,56 @@
-
 <div class="container">
   <h1>My Bills</h1>
   <p>Browse through all your uploaded bills</p>
 </div>
 
 <div class="filter">
-  <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f| %>
-  <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]), include_blank:'', id: "sort-by-select" %>
-  <%= select_tag "category", options_for_select(@categories, params[:category]), include_blank:'', id: "category-select" %>
-  <% end %>
+  <%= form_tag user_documents_path, method: :get, class: "filter__form" do |f|
+  %> <%= select_tag "sort_by", options_for_select(@sort_by, params[:sort_by]),
+  include_blank:'', id: "sort-by-select" %> <%= select_tag "category",
+  options_for_select(@categories, params[:category]), include_blank:'', id:
+  "category-select" %> <% end %>
 </div>
 
 <div class="primary-wrapper">
   <div class="container">
     <div class="row">
-    <%# sorted = current_user.user_documents.order('created_at ASC')%>
-      <% @user_documents.each do |doc| %>
+      <%# sorted = current_user.user_documents.order('created_at ASC')%> <%
+      @user_documents.each do |doc| %>
       <div class="col-xs-12 col-md-4">
         <div class="card card-max-height" style="position: relative;">
-          <%= link_to "", user_document_path(doc), class: "document__link", method: :get %>
-          <div style="position: absolute; top: -5px; right: -5px;">
-            <%= link_to user_document_path(doc), method: :delete, class: "btn btn-secondary btn-circle", style: "border-radius: 0 0 0 20px;" do %>
+          <%= link_to "", user_document_path(doc), class: "document__link",
+          method: :get %>
+          <div class="card__close">
+            <%= link_to user_document_path(doc), method: :delete, class: "btn
+            btn-secondary btn-circle", style: "border-radius: 0 0 0 20px;" do %>
             <i class="fas fa-times"></i>
             <% end %>
           </div>
           <div class="result">
-            <ul style="list-style: none;">
-              <li>
-                <p class="card__title" style="font-size: 16px"><strong><%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
-                doc.document.company_name %></strong></p>
-              </li>
-              <li>
-                <p class="center-content">
-                  <strong>¥  <%= number_with_delimiter doc.current_due_amount %></strong>
-                </p>
-              </li>
-              <li>
-                <p class="center-content">
-                  Due:<strong><%= doc.due_date %></strong>
-                </p>
-              </li>
-            </ul>
+            <h2 class="card__title has-background-white has-text-color-primary">
+              <%= doc.document.nil? ? "Unrecognizable Bill, Sorry" :
+              doc.document.company_name %>
+            </h2>
+            <div class="card__content padding-small">
+              <div class="card__label">
+                Due On
+              </div>
+              <div class="card__info">
+                <%= doc.due_date.strftime("%b %d") %>
+              </div>
+            </div>
+            <div class="card__content padding-small">
+              <div class="card__label">
+                Amount due
+              </div>
+              <div class="card__info">
+                ¥<%= number_with_delimiter(doc.current_due_amount) %>
+              </div>
+            </div>
           </div>
           <div class="result-photo">
-            <%= cl_image_tag doc.photo.url,:quality=>60, :width => 100, :crop => "fit" %>
+            <%= cl_image_tag doc.photo.url,:quality=>60, :width => 100, :crop =>
+            "fit" %>
           </div>
         </div>
       </div>
@@ -52,18 +59,18 @@
   </div>
 </div>
 <script>
-  $( "#sort-by-select" ).select2({
-    theme: "bootstrap",
-    placeholder: "Sort by"
+  $('#sort-by-select').select2({
+    theme: 'bootstrap',
+    placeholder: 'Sort by'
   });
-  $( "#sort-by-select").on('select2:select', (e) => {
-    document.querySelector(".filter__form").submit();
+  $('#sort-by-select').on('select2:select', e => {
+    document.querySelector('.filter__form').submit();
   });
-  $( "#category-select").select2({
-    theme: "bootstrap",
-    placeholder: "Select category"
+  $('#category-select').select2({
+    theme: 'bootstrap',
+    placeholder: 'Select category'
   });
-  $( "#category-select").on('select2:select', (e) => {
-    document.querySelector(".filter__form").submit();
+  $('#category-select').on('select2:select', e => {
+    document.querySelector('.filter__form').submit();
   });
 </script>
