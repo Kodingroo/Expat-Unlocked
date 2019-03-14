@@ -10,11 +10,11 @@ class UserDocumentsController < ApplicationController
 
     @sort_by = ["Date Added", "Due Date", "Cost: High to Low", "Cost: Low to High"]
     @categories = ["All"]
-    @collection_type = params[:sort_by]
+    @collection_type = params[:sort_by] unless
 
     if @user_documents.exists?
       @user_documents.each do |doc|
-        @categories << doc.document.company_name unless doc.document.company_name.nil?
+        @categories << doc.document.company_name unless doc.document.nil?
       end
 
       @categories.uniq!
@@ -54,13 +54,20 @@ class UserDocumentsController < ApplicationController
         redirect_back fallback_location:
         @user_document.destroy
       else
+        
         api_data = VisionApi.detect_user_image(@user_document.photo.metadata["secure_url"])
+        p api_data
         @document = find_document(api_data[:words])
+        # if @document.nil?
+        #   flash[:alert] = "Sorry, but we don't recognize that bill yet"
+        #   redirect_back fallback_location:
+        #   @user_document.destroy
+        # end
         assign_data(@user_document, api_data)
         @user_document.save
-        if current_or_guest_user.username != "guest"
-          # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
-        end
+        # if current_or_guest_user.username != "guest"
+        #   # UserDocumentMailer.creation_confirmation(@user_document).deliver_now
+        # end
         redirect_to user_document_path(@user_document), notice: 'Document was successfully created.'
       end
     else

@@ -8,7 +8,7 @@ class UserDocument < ApplicationRecord
   end
 
   def self.bills_hash(bills)
-    if bills.size.zero?
+    if bills.size.zero? || bills.include?(nil)
       {
         max: 0,
         min: 0,

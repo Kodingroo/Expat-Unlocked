@@ -3,7 +3,11 @@
     <% unless @user_document.state %>
     <div class="due-card__type">
       <div class="due-card__subtitle">
-        <%= @user_document.document.company_name %>
+       <% if user_document.document.company_name %>
+          <%= user_document.document.company_name %>
+       <% else %>
+           "Unrecognizable Bill, Sorry"
+       <% end %>
       </div>
     </div>
     <div class="due-card__price">
