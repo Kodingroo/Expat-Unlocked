@@ -8,7 +8,7 @@
           </div>
           <div class="card__content">
             <div class="card__label">
-              Due on
+              Due
             </div>
             <div class="card__info">
               <%= @user_document.due_date.strftime("%b %d %Y") %>
@@ -36,13 +36,13 @@
 
             <% if @user_document.reminder_date.nil? %>
             <div class="reminder-form center-content">
-              <%= simple_form_for @user_document do |f| %> 
+              <%= simple_form_for @user_document do |f| %>
               <%= f.input :reminder_date, label: false %> <%= f.submit "Remind me!", class: "button is-inverted" %> <% end %>
             </div>
             <% else %>
             <div>
               <p>Change reminder date?</p>
-              <%= simple_form_for @user_document do |f| %> 
+              <%= simple_form_for @user_document do |f| %>
               <%= f.input :reminder_date, as: :string, label: false, input_html: { class: 'datepicker' } %>
               <div style="display: flex; justify-content: center;">
                 <%= f.submit "Ok", class: "button is-inverted" %>

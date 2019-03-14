@@ -9,7 +9,7 @@
     <div class="navigation__right">
       <% if user_signed_in? %>
         <div class="nav-element"><%= link_to "Profile", profile_path, class: "#{'active' if current_page?(profile_path)}" %></div>
-        <div class="nav-element"><%= link_to "Documents", user_documents_path(current_user), class: "#{'active' if current_page?(user_documents_path(current_user))}" %></div>
+        <div class="nav-element"><%= link_to "Bills", user_documents_path(current_user), class: "#{'active' if current_page?(user_documents_path(current_user))}" %></div>
         <div class="nav-element"><%= link_to "Log out", destroy_user_session_path, method: :delete %></div>
       <% else %>
         <%= link_to "Sign in", new_user_session_path %>
