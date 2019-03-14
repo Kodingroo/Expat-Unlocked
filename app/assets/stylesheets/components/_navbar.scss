@@ -16,7 +16,11 @@
     }
   }
 
-
+  .home-link {
+    font-family: $title-font;
+    font-size: 22px;
+    margin-left: 10px;
+  }
   .active {
       color: $secondary;
     }
