@@ -8,13 +8,9 @@ class UserDocumentsController < ApplicationController
     @user_documents = policy_scope(UserDocument).order(created_at: :desc)
     @user_document = UserDocument.new
 
-    @sort_by = [ "Date Added", "Due Date", "Cost: High to Low", "Cost: Low to High"]
-    @categories = ["all"]
+    @sort_by = ["Date Added", "Due Date", "Cost: High to Low", "Cost: Low to High"]
+    @categories = ["All"]
     @collection_type = params[:sort_by]
-
-    unless params[:category]
-      params[:category] = "all"
-    end
 
     if @user_documents.exists?
       @user_documents.each do |doc|
@@ -24,24 +20,20 @@ class UserDocumentsController < ApplicationController
       @categories.uniq!
       @collection_type = params[:sort_by]
 
-      unless params[:category] == "all"
+      if params[:category].nil? || params[:category].empty? || params[:category] == "All"
+        @user_documents
+      elsif params[:category] != "All"
         @user_documents = @user_documents.reject { |doc| doc.document.company_name != params[:category] }
       end
 
-      @user_documents = if params[:category] == "all"
-        if params[:sort_by] == "Date Added"
-          @user_documents.sort_by { |doc| doc.due_date }
-        elsif params[:sort_by] == "Due Date"
-          @user_documents.sort_by { |doc| doc.due_date }
-        elsif params[:sort_by] == "Cost: High to Low"
-          @user_documents.sort_by { |doc| -doc.current_due_amount }
-        elsif params[:sort_by] == "Cost: Low to High"
-          @user_documents.sort_by { |doc| doc.current_due_amount }
-        else
-          @user_documents
-        end
-      else
-        @user_documents
+      if params[:sort_by] == "Date Added"
+        @user_documents = @user_documents.sort_by { |doc| doc.due_date }
+      elsif params[:sort_by] == "Due Date"
+        @user_documents = @user_documents.sort_by { |doc| doc.due_date }
+      elsif params[:sort_by] == "Cost: High to Low"
+        @user_documents = @user_documents.sort_by { |doc| -doc.current_due_amount }
+      elsif params[:sort_by] == "Cost: Low to High"
+        @user_documents = @user_documents.sort_by { |doc| doc.current_due_amount }
       end
     end
   end
