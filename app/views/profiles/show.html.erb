@@ -26,7 +26,7 @@
 
               <%= render "total-stats", title: "Unpaid", count: current_user.user_documents.select { |doc| doc.state == false }.count, modifier: "" %>
               
-              <%= render "total-stats", title: "Overdue", count: current_user.user_documents.select { |doc| doc.document.nil? ? "Unrecognized" : (doc.due_date - Date.today).positive? && doc.state == false }.count, modifier: "user-card__count--red" %>
+              <%= render "total-stats", title: "Overdue", count: current_user.user_documents.select { |doc| doc.document.nil? ? "Unrecognized" : (doc.due_date - Date.today).negative? && doc.state == false }.count, modifier: "user-card__count--red" %>
 
             </div>
           </div>
